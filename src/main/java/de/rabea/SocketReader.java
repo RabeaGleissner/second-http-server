@@ -11,20 +11,16 @@ public class SocketReader {
         this.socket = socket;
     }
 
-    public BufferedReader createReader() {
-        try {
-            return new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (IOException e) {
-            throw new SocketException("Could not get InputStream " + e.getMessage());
-        }
-    }
-
     public String read(){
-        System.out.println("hello");
         try {
             return createReader().readLine();
         } catch (IOException e) {
             throw new SocketException("Could not read " + e.getMessage());
         }
     }
+
+    private BufferedReader createReader() throws IOException {
+        return new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    }
+
 }

@@ -5,16 +5,15 @@ import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
 
 public class HttpServer {
-
     private final ServerSocket serverSocket;
     private final ExecutorService executorService;
     private final String directory;
     private final int POOL_SIZE = 20;
 
-    public HttpServer(ThreadPoolExecutorServiceFactory threadPoolExecutorServiceFactory, ServerSocket serverSocket,
+    public HttpServer(ExecutorServiceFactory executorServiceFactory, ServerSocket serverSocket,
                       String directory) {
+        this.executorService = executorServiceFactory.create(POOL_SIZE);
         this.serverSocket = serverSocket;
-        this.executorService = threadPoolExecutorServiceFactory.create(POOL_SIZE);
         this.directory = directory;
     }
 
@@ -39,7 +38,7 @@ public class HttpServer {
 
     private void executeServerRunnerInThread() throws IOException {
         executorService.execute(new HttpServerRunner(
-                new WorkerFactory(
+                new ServerWorkerFactory(
                         new SocketReader(serverSocket.accept()), directory)));
     }
 }
