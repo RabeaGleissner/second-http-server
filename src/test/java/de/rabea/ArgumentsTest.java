@@ -1,5 +1,6 @@
 package de.rabea;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -8,9 +9,15 @@ import static org.junit.Assert.*;
 
 public class ArgumentsTest {
 
+    Arguments arguments;
+
+    @Before
+    public void setup() {
+        arguments = new Arguments();
+    }
+
     @Test
     public void returnsDefaultArguments() {
-        Arguments arguments = new Arguments();
         String[] commandLineArguments = {};
         HashMap<String, String> parsedArguments = arguments.parse(commandLineArguments);
         assertEquals(parsedArguments.get("port"), "5000");
@@ -19,10 +26,25 @@ public class ArgumentsTest {
 
     @Test
     public void returnsPortAsSpecifiedAndDefaultDirectory() {
-        Arguments arguments = new Arguments();
         String[] commandLineArguments = {"-p", "1234"};
         HashMap<String, String> parsedArguments = arguments.parse(commandLineArguments);
         assertEquals("1234", parsedArguments.get("port"));
         assertEquals( "PUBLIC_DIR", parsedArguments.get("directory"));
+    }
+
+    @Test
+    public void returnsDirAsSpecifiedAndDefaultPort() {
+        String[] commandLineArguments = {"-d", "NEW_DIR"};
+        HashMap<String, String> parsedArguments = arguments.parse(commandLineArguments);
+        assertEquals("5000", parsedArguments.get("port"));
+        assertEquals("NEW_DIR", parsedArguments.get("directory"));
+    }
+
+    @Test
+    public void returnsGivenPortAndDirectory() {
+        String[] commandLineArguments = {"-d", "NEW_DIR", "-p", "1234"};
+        HashMap<String, String> parsedArguments = arguments.parse(commandLineArguments);
+        assertEquals("1234", parsedArguments.get("port"));
+        assertEquals("NEW_DIR", parsedArguments.get("directory"));
     }
 }
