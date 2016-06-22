@@ -8,7 +8,7 @@ public class WorkerFactoryTest {
 
     @Test
     public void createsNewServerWorker() {
-        ServerWorkerFactory factory = new ServerWorkerFactory(new SocketReader(new SocketStub("")), "DIR");
+        ServerWorkerFactory factory = new ServerWorkerFactory(new SocketReader(new SocketStub("")), new SocketWriter(new SocketStub("")), "DIR");
         assertTrue(factory.create() instanceof ServerWorker);
     }
 }

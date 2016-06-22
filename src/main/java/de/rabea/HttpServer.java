@@ -2,6 +2,7 @@ package de.rabea;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
 public class HttpServer {
@@ -37,8 +38,11 @@ public class HttpServer {
     }
 
     private void executeServerRunnerInThread() throws IOException {
+        Socket socket = serverSocket.accept();
         executorService.execute(new HttpServerRunner(
                 new ServerWorkerFactory(
-                        new SocketReader(serverSocket.accept()), directory)));
+                        new SocketReader(socket),
+                        new SocketWriter(socket),
+                        directory)));
     }
 }
