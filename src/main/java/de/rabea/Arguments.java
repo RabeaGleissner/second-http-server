@@ -6,47 +6,55 @@ public class Arguments {
 
     public HashMap<String, String> parse(String[] commandLineArguments) {
         HashMap<String, String> parsedArguments = new HashMap<>();
+        int argumentNumber = commandLineArguments.length;
 
-        if (commandLineArguments.length == 0){
-            parsedArguments = addDefaults(parsedArguments);
+        if (argumentNumber == 0){
+            parsedArguments = addDefaultDirectory(parsedArguments);
+            parsedArguments = addDefaultPort(parsedArguments);
         }
 
-        if (commandLineArguments.length >= 2) {
+        if (argumentNumber >= 2) {
             parsedArguments = parseFirstArgument(commandLineArguments, parsedArguments);
         }
 
-        if (commandLineArguments.length == 4) {
+        if (argumentNumber == 4) {
             parsedArguments = parseSecondArgument(commandLineArguments, parsedArguments);
         }
         return parsedArguments;
     }
 
-    private HashMap<String, String> parseSecondArgument(String[] commandLineArguments, HashMap<String, String> parsedArguments) {
-        if (commandLineArguments[2].equals("-d")) {
+    private HashMap<String, String> parseFirstArgument(String[] commandLineArguments, HashMap<String, String> parsedArguments) {
+        String firstArgument = commandLineArguments[0];
+        if (firstArgument.equals("-p")) {
+            parsedArguments.put("port", commandLineArguments[1]);
+            parsedArguments = addDefaultDirectory(parsedArguments);
+        }
+
+        if (firstArgument.equals("-d")) {
             parsedArguments.put("directory", commandLineArguments[1]);
-        } else {
+            parsedArguments = addDefaultPort(parsedArguments);
+        }
+        return parsedArguments;
+    }
+
+    private HashMap<String, String> parseSecondArgument(String[] commandLineArguments, HashMap<String, String> parsedArguments) {
+        String secondArgument = commandLineArguments[2];
+        if (secondArgument.equals("-d")) {
+            parsedArguments.put("directory", commandLineArguments[3]);
+        }
+
+        if (secondArgument.equals("-p")) {
             parsedArguments.put("port", commandLineArguments[3]);
         }
         return parsedArguments;
     }
 
-    private HashMap<String, String> parseFirstArgument(String[] commandLineArguments, HashMap<String, String> parsedArguments) {
-        if (commandLineArguments[0].equals("-p")) {
-            parsedArguments.put("port", commandLineArguments[1]);
-        } else {
-            parsedArguments.put("port", "5000");
-        }
-
-        if (commandLineArguments[0].equals("-d")) {
-            parsedArguments.put("directory", commandLineArguments[1]);
-        } else {
-            parsedArguments.put("directory", "PUBLIC_DIR");
-        }
+    private HashMap<String, String> addDefaultPort(HashMap<String, String> parsedArguments) {
+        parsedArguments.put("port", "5000");
         return parsedArguments;
     }
 
-    private HashMap<String, String> addDefaults(HashMap<String, String> parsedArguments) {
-        parsedArguments.put("port", "5000");
+    private HashMap<String, String> addDefaultDirectory(HashMap<String, String> parsedArguments) {
         parsedArguments.put("directory", "PUBLIC_DIR");
         return parsedArguments;
     }

@@ -41,10 +41,18 @@ public class ArgumentsTest {
     }
 
     @Test
-    public void returnsGivenPortAndDirectory() {
+    public void returnsGivenDirectoryAndPort() {
         String[] commandLineArguments = {"-d", "NEW_DIR", "-p", "1234"};
         HashMap<String, String> parsedArguments = arguments.parse(commandLineArguments);
         assertEquals("1234", parsedArguments.get("port"));
         assertEquals("NEW_DIR", parsedArguments.get("directory"));
+    }
+
+    @Test
+    public void returnsGivenPortAndDirectory() {
+        String[] commandLineArguments = {"-p", "1111", "-d", "DIR"};
+        HashMap<String, String> parsedArguments = arguments.parse(commandLineArguments);
+        assertEquals("1111", parsedArguments.get("port"));
+        assertEquals("DIR", parsedArguments.get("directory"));
     }
 }
