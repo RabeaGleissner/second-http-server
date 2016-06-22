@@ -5,7 +5,7 @@
 !path target/Fixtures-1.0.jar
 
 !3 User-Defined Variables
-!define SERVER_START_COMMAND { java -jar ../../target/http-server-1.0-SNAPSHOT.jar }
+!define SERVER_START_COMMAND { java -jar ../../target/second-http-server-1.0-SNAPSHOT.jar }
 !define PUBLIC_DIR {public/}
 
 !contents -R2 -g -p -f -h
