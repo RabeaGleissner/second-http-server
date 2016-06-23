@@ -1,6 +1,10 @@
-package de.rabea;
+package de.rabea.communication;
 
-import java.io.*;
+import de.rabea.exceptions.SocketException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class SocketReader {

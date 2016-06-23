@@ -1,5 +1,7 @@
-package de.rabea;
+package de.rabea.communication;
 
+import de.rabea.SocketStub;
+import de.rabea.exceptions.SocketException;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -8,7 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SocketWriterTest {
 

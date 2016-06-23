@@ -1,5 +1,8 @@
 package de.rabea;
 
+import de.rabea.communication.SocketReader;
+import de.rabea.communication.SocketWriter;
+
 public class ServerWorkerFactory implements WorkerFactory {
 
     private final SocketReader socketReader;

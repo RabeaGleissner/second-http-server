@@ -1,4 +1,6 @@
-package de.rabea;
+package de.rabea.communication;
+
+import de.rabea.exceptions.SocketException;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

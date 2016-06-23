@@ -1,8 +1,10 @@
 package de.rabea;
 
+import de.rabea.communication.SocketReader;
+import de.rabea.communication.SocketWriter;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class WorkerFactoryTest {
 

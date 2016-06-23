@@ -1,5 +1,9 @@
 package de.rabea;
 
+import de.rabea.communication.SocketReader;
+import de.rabea.communication.SocketWriter;
+import de.rabea.exceptions.ServerSocketException;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
