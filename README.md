@@ -1,4 +1,5 @@
 # Second HTTP Server
+[![Build Status](https://travis-ci.org/RabeaGleissner/second-http-server.svg?branch=master)](https://travis-ci.org/RabeaGleissner/second-http-server)
 
 This server is following the specifications of the [8th Light cob spec test suite](https://github.com/8thlight/cob_spec).
 
