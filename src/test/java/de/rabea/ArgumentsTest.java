@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ArgumentsTest {
 
-    Arguments arguments;
+    private Arguments arguments;
 
     @Before
     public void setup() {

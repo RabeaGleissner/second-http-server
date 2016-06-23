@@ -2,11 +2,12 @@ package de.rabea;
 
 import de.rabea.communication.SocketReader;
 import de.rabea.communication.SocketWriter;
+import de.rabea.request.HttpRequest;
 
 public class ServerWorker {
 
     private final SocketReader socketReader;
-    private SocketWriter socketWriter;
+    private final SocketWriter socketWriter;
 
     public ServerWorker(SocketReader socketReader, SocketWriter socketWriter, String directory) {
         this.socketReader = socketReader;
@@ -14,8 +15,7 @@ public class ServerWorker {
     }
 
     public void start() {
-        String request = socketReader.read();
-        System.out.println(request);
+        HttpRequest request = socketReader.read();
         socketWriter.write("HTTP/1.1 200 OK\n");
     }
 }

@@ -30,8 +30,16 @@ public class RequestParser {
     }
 
     public String getBody(String rawRequest) {
-        String[] headAndBody = rawRequest.split("\n\n");
-        return headAndBody[1];
+        if (hasBody(rawRequest)) {
+            String[] headAndBody = rawRequest.split("\n\n");
+            return headAndBody[1].replaceAll("\uFFFF", "");
+        } else {
+            return "";
+        }
+    }
+
+    public boolean hasBody(String request) {
+        return contentLength(request) > 0;
     }
 
     public int contentLength(String request) {

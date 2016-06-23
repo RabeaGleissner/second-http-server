@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class RequestParserTest {
     private RequestParser parser;
@@ -29,7 +29,12 @@ public class RequestParserTest {
 
     @Test
     public void getsRequestBody() {
-        assertEquals("My=Data", parser.getBody(requestLine + otherRequestDetails + "\nMy=Data"));
+        assertEquals("My=Data", parser.getBody(requestLine +  "Content-Length: 11\n" + otherRequestDetails + "\nMy=Data"));
+    }
+
+    @Test
+    public void returnsEmptyStringIfRequestHasNoBody() {
+        assertEquals("", parser.getBody(requestLine + otherRequestDetails));
     }
 
     @Test

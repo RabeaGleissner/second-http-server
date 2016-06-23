@@ -2,7 +2,7 @@ package de.rabea.request;
 
 public class RequestLine {
 
-    private String firstLine;
+    private final String firstLine;
 
     public RequestLine(String rawRequest) {
         this.firstLine = getFirstLine(rawRequest);
