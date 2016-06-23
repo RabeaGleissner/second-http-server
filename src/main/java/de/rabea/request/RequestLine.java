@@ -23,5 +23,4 @@ public class RequestLine {
     private String getFirstLine(String rawRequest) {
         return rawRequest.split("\n")[0];
     }
-
 }

@@ -4,10 +4,7 @@ import de.rabea.SocketStub;
 import de.rabea.exceptions.SocketException;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 
 import static org.junit.Assert.assertEquals;
@@ -26,8 +23,15 @@ public class SocketWriterTest {
     @Test(expected = SocketException.class)
     public void throwsSocketExceptionWhenItCannotGetOutputStream() {
         SocketWithOutputStreamException socket = new SocketWithOutputStreamException();
-        SocketWriter network = new SocketWriter(socket);
-        network.write("hey");
+        SocketWriter writer = new SocketWriter(socket);
+        writer.write("hey");
+    }
+
+    @Test(expected = SocketException.class)
+    public void throwsSocketExceptionWhenItCannotClose() {
+        SocketWithCloseException socket = new SocketWithCloseException();
+        SocketWriter writer = new SocketWriter(socket);
+        writer.write("");
     }
 
     public class SocketWithOutputStreamException extends Socket {
@@ -45,5 +49,24 @@ public class SocketWriterTest {
         public OutputStream getOutputStream() throws IOException {
             throw new IOException();
         }
+    }
+
+    public class SocketWithCloseException extends Socket {
+        @Override
+        public void close() throws IOException {
+            throw new IOException();
+        }
+
+        @Override
+        public InputStream getInputStream() throws IOException {
+            return new ByteArrayInputStream("".getBytes()) {
+            };
+        }
+
+        @Override
+        public OutputStream getOutputStream() throws IOException {
+            return new ByteArrayOutputStream();
+        }
+
     }
 }

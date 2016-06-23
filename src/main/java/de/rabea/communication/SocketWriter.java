@@ -24,7 +24,7 @@ public class SocketWriter {
         try {
             socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new SocketException("Could not close socket " + e.getMessage());
         }
     }
 

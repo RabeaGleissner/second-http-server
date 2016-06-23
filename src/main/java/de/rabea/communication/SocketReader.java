@@ -1,24 +1,20 @@
 package de.rabea.communication;
 
-import de.rabea.exceptions.SocketException;
+import de.rabea.exceptions.BufferedReaderException;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.RequestLine;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
 import java.util.Map;
 
 public class SocketReader {
 
-    private final Socket socket;
     private final BufferedReader reader;
     private final RequestParser requestParser;
 
-    public SocketReader(Socket socket) {
-        this.socket = socket;
-        this.reader = createReader();
+    public SocketReader(BufferedReader bufferedReader) {
+        this.reader = bufferedReader;
         this.requestParser = new RequestParser();
     }
 
@@ -32,13 +28,11 @@ public class SocketReader {
     }
 
     private String readRequest() {
-        String request = "";
         try {
-            request = readLines();
+            return readLines();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new BufferedReaderException("BufferedReader could not read " + e.getMessage());
         }
-        return request;
     }
 
     private String readLines() throws IOException {
@@ -66,13 +60,5 @@ public class SocketReader {
 
     private boolean isEmptyLine(String line) {
         return line.equals("");
-    }
-
-    private BufferedReader createReader() {
-        try {
-            return new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (IOException e) {
-            throw new SocketException("Could not get InputStream" + e.getMessage());
-        }
     }
 }
