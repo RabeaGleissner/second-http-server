@@ -21,9 +21,11 @@ public class SocketReader {
     public HttpRequest read() {
         String rawRequest = readRequest();
         System.out.println("rawRequest = " + rawRequest);
+
         RequestLine requestLine = new RequestLine(rawRequest);
         Map<String, String> requestHeader = requestParser.parseHeaders(rawRequest);
         String requestBody = requestParser.getBody(rawRequest);
+
         return new HttpRequest(requestLine, requestHeader, requestBody);
     }
 

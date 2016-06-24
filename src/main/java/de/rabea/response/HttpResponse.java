@@ -11,4 +11,8 @@ public class HttpResponse {
     public byte[] asBytes() {
         return response.getBytes();
     }
+
+    public String asString() {
+       return response;
+    }
 }

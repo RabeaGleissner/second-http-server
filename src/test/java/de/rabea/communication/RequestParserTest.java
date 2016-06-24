@@ -1,5 +1,6 @@
 package de.rabea.communication;
 
+import de.rabea.request.HttpRequest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,6 +27,11 @@ public class RequestParserTest {
     public void returnsContentLength() {
         assertEquals(11, parser.contentLength(requestLine + "Content-Length: 11\n" + otherRequestDetails));
     }
+
+//    @Test
+//    public void felipe() {
+//        HttpRequest request = parser.parse(...);
+//    }
 
     @Test
     public void getsRequestBody() {

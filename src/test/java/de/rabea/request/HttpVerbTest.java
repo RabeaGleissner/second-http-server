@@ -14,8 +14,8 @@ public class HttpVerbTest {
         }
     }
 
-    @Test
+    @Test(expected = HttpVerb.UnknownHttpVerbException.class)
     public void returnsNullIfCannotConvertToVerb() {
-        assertEquals(null, HttpVerb.convert("hello!"));
+        HttpVerb.convert("hello!");
     }
 }

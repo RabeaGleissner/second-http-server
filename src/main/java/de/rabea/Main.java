@@ -5,11 +5,12 @@ import de.rabea.controller.RootController;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         Arguments arguments = new Arguments();
-        HashMap<String, String> parsedArguments = arguments.parse(args);
+        Map<String, String> parsedArguments = arguments.parse(args);
         String port = parsedArguments.get("port");
         String directory = parsedArguments.get("directory");
 
