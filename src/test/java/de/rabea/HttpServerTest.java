@@ -15,12 +15,12 @@ public class HttpServerTest {
     @Before
     public void setup() throws IOException {
         executorServiceSpy = new ExecutorServiceSpy();
-        server = new HttpServer(new ExecutorServiceSpyFactory(executorServiceSpy), new ServerSocketStub(), "PUBLIC_DIR");
+        server = new HttpServer(new ExecutorServiceSpyFactory(executorServiceSpy), new ServerSocketStub());
     }
 
     @Test
     public void executesHttpServerRunner() {
-        server.execute();
+        server.execute(new Router());
         assertTrue(executorServiceSpy.executesHttpServerRunner);
     }
 
@@ -33,7 +33,7 @@ public class HttpServerTest {
     @Test(expected = ServerSocketException.class)
     public void throwsExceptionWhenServerSocketCannotCreateSocket() throws IOException {
         HttpServer server = new HttpServer(new ExecutorServiceSpyFactory(executorServiceSpy),
-                ServerSocketStub.throwsException(), "PUBLIC_DIR");
-        server.execute();
+                ServerSocketStub.throwsException());
+        server.execute(new Router());
     }
 }

@@ -1,5 +1,7 @@
 package de.rabea;
 
+import de.rabea.controller.RootController;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.HashMap;
@@ -13,7 +15,9 @@ public class Main {
 
         System.out.println("Server started at port " + port + " and directory " + directory);
         ServerSocket serverSocket = new ServerSocket(Integer.parseInt(port));
-        HttpServer httpServer = new HttpServer(new ThreadPoolExecutorServiceFactory(), serverSocket, directory);
-        httpServer.start();
+        HttpServer httpServer = new HttpServer(new ThreadPoolExecutorServiceFactory(), serverSocket);
+        Router router = new Router();
+        router.configure("/", new RootController());
+        httpServer.start(router);
     }
 }

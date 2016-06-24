@@ -8,13 +8,7 @@ import static de.rabea.request.HttpVerb.GET;
 
 public class RootController implements Controller {
 
-    private HttpRequest request;
-
-    public RootController(HttpRequest request) {
-        this.request = request;
-    }
-
-    public HttpResponse getResponse() {
+    public HttpResponse getResponse(HttpRequest request) {
         if (request.requestLine().method() == GET) {
             return ok200();
         } else {

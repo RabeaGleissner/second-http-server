@@ -20,8 +20,7 @@ public class ServerWorker {
     public void start() {
         HttpRequest request = socketReader.read();
         Controller controller = router.getController(request);
-        HttpResponse httpResponse = controller.getResponse();
-        System.out.println(httpResponse.asBytes().toString());
+        HttpResponse httpResponse = controller.getResponse(request);
         socketWriter.write(httpResponse.asBytes());
     }
 }
