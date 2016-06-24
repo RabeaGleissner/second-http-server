@@ -48,7 +48,7 @@ public class HttpServer {
         executorService.execute(new HttpServerRunner(
                 new ServerWorkerFactory(
                         new SocketReader(new BufferedReader(new InputStreamReader(socket.getInputStream()))),
-                        new SocketWriter(socket),
-                        directory)));
+                        new SocketWriter(socket)
+                )));
     }
 }

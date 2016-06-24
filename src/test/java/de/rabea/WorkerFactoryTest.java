@@ -11,7 +11,7 @@ public class WorkerFactoryTest {
     @Test
     public void createsNewServerWorker() {
         ServerWorkerFactory factory = new ServerWorkerFactory(new SocketReader(new BufferedReaderStub()),
-                new SocketWriter(new SocketStub("")), "DIR");
+                new SocketWriter(new SocketStub("")));
         assertTrue(factory.create() instanceof ServerWorker);
     }
 }

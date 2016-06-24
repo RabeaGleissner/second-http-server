@@ -10,7 +10,7 @@ public class HttpServerRunnerTest {
     @Test
     public void createsAndStartsServerWorker() {
         ServerWorkerSpy workerSpy = new ServerWorkerSpy(new SocketReader(new BufferedReaderStub()),
-                new SocketWriter(new SocketStub()), "");
+                new SocketWriter(new SocketStub()), new Router());
         ServerWorkerSpyFactory spyFactory = new ServerWorkerSpyFactory(workerSpy);
         HttpServerRunner runner = new HttpServerRunner(spyFactory);
         runner.run();

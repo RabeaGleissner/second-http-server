@@ -16,7 +16,7 @@ public class SocketWriterTest {
         SocketStub socketStub = new SocketStub();
         SocketWriter socketWriter = new SocketWriter(socketStub);
         String message = "hello!";
-        socketWriter.write(message);
+        socketWriter.write(message.getBytes());
         assertEquals("hello!", socketStub.messageSent());
     }
 
@@ -24,14 +24,14 @@ public class SocketWriterTest {
     public void throwsSocketExceptionWhenItCannotGetOutputStream() {
         SocketWithOutputStreamException socket = new SocketWithOutputStreamException();
         SocketWriter writer = new SocketWriter(socket);
-        writer.write("hey");
+        writer.write("hey".getBytes());
     }
 
     @Test(expected = SocketException.class)
     public void throwsSocketExceptionWhenItCannotClose() {
         SocketWithCloseException socket = new SocketWithCloseException();
         SocketWriter writer = new SocketWriter(socket);
-        writer.write("");
+        writer.write("".getBytes());
     }
 
     public class SocketWithOutputStreamException extends Socket {
