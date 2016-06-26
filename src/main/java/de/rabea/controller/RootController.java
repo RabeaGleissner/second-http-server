@@ -5,15 +5,19 @@ import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
 import static de.rabea.request.HttpVerb.GET;
+import static de.rabea.request.HttpVerb.HEAD;
 
 public class RootController implements Controller {
 
     public HttpResponse getResponse(HttpRequest request) {
         if (request.requestLine().method() == GET) {
             return ok200();
-        } else {
-            return methodNotAllowed();
         }
+
+        if (request.requestLine().method() == HEAD) {
+            return ok200();
+        }
+        return methodNotAllowed();
     }
 
     private HttpResponse methodNotAllowed() {

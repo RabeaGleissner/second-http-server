@@ -4,7 +4,7 @@ import de.rabea.request.HttpRequest;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.request.HttpVerb.*;
+import static de.rabea.request.HttpVerb.POST;
 import static org.junit.Assert.assertEquals;
 
 public class RequestParserTest {
