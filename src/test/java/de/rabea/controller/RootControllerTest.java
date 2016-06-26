@@ -1,7 +1,5 @@
 package de.rabea.controller;
 
-import de.rabea.request.HttpRequest;
-import de.rabea.request.RequestLine;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,17 +38,4 @@ public class RootControllerTest {
         assertEquals("HTTP/1.1 200 OK\n", controller.getResponse(fakeHttpRequest).asString());
     }
 
-    public class FakeHttpRequest extends HttpRequest {
-
-        private String request_line;
-
-        public FakeHttpRequest(String request_line) {
-            super(null, null, null);
-            this.request_line = request_line;
-        }
-
-        public RequestLine requestLine() {
-            return new RequestLine(request_line);
-        }
-    }
 }

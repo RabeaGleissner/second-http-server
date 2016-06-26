@@ -1,6 +1,6 @@
 package de.rabea;
 
-import de.rabea.controller.ServerError;
+import de.rabea.controller.NotFoundController;
 import de.rabea.request.HttpRequest;
 
 import java.util.HashMap;
@@ -13,7 +13,7 @@ public class Router {
         if (configuredRoutes.containsKey(request.requestLine().uri())) {
             return configuredRoutes.get(request.requestLine().uri());
         }
-        return new ServerError();
+        return new NotFoundController();
     }
 
     public void configure(String route, Controller controller) {
