@@ -2,11 +2,9 @@ package de.rabea.communication;
 
 import de.rabea.exceptions.BufferedReaderException;
 import de.rabea.request.HttpRequest;
-import de.rabea.request.RequestLine;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Map;
 
 public class SocketReader {
 
@@ -22,11 +20,7 @@ public class SocketReader {
         String rawRequest = readRequest();
         System.out.println("rawRequest = " + rawRequest);
 
-        RequestLine requestLine = new RequestLine(rawRequest);
-        Map<String, String> requestHeader = requestParser.parseHeaders(rawRequest);
-        String requestBody = requestParser.getBody(rawRequest);
-
-        return new HttpRequest(requestLine, requestHeader, requestBody);
+        return requestParser.parse(rawRequest);
     }
 
     private String readRequest() {

@@ -1,10 +1,29 @@
 package de.rabea.communication;
 
+import de.rabea.request.HttpRequest;
+import de.rabea.request.RequestLine;
+
 import java.util.*;
 
 public class RequestParser {
 
-    public Map<String, String> parseHeaders(String request) {
+    public HttpRequest parse(String rawRequest) {
+        return new HttpRequest(
+                new RequestLine(rawRequest),
+                parseHeaders(rawRequest),
+                getBody(rawRequest));
+    }
+
+    public int contentLength(String request) {
+        String[] lines = request.trim().split("\n");
+        for (String line : lines) {
+            Integer length = length(line);
+            if (length != null) return length;
+        }
+        return 0;
+    }
+
+    private Map<String, String> parseHeaders(String request) {
         List<String> headers = getHeaders(request.split("\n|: "));
         Map<String, String> parsedHeaders = new HashMap<>();
 
@@ -13,6 +32,19 @@ public class RequestParser {
         }
 
         return parsedHeaders;
+    }
+
+    private String getBody(String rawRequest) {
+        if (hasBody(rawRequest)) {
+            String[] headAndBody = rawRequest.split("\n\n");
+            return headAndBody[1].replaceAll("\uFFFF", "");
+        } else {
+            return "";
+        }
+    }
+
+    private boolean hasBody(String request) {
+        return contentLength(request) > 0;
     }
 
     private List<String> getHeaders(String[] requestLines) {
@@ -29,28 +61,6 @@ public class RequestParser {
         return lines;
     }
 
-    public String getBody(String rawRequest) {
-        if (hasBody(rawRequest)) {
-            String[] headAndBody = rawRequest.split("\n\n");
-            return headAndBody[1].replaceAll("\uFFFF", "");
-        } else {
-            return "";
-        }
-    }
-
-    public boolean hasBody(String request) {
-        return contentLength(request) > 0;
-    }
-
-    public int contentLength(String request) {
-        String[] lines = request.trim().split("\n");
-        for (String line : lines) {
-            Integer length = length(line);
-            if (length != null) return length;
-        }
-        return 0;
-    }
-
     private Integer length(String line) {
         String[] words = line.split(" ");
         if (words[0].equals("Content-Length:")) {
@@ -58,5 +68,4 @@ public class RequestParser {
         }
         return null;
     }
-
 }
