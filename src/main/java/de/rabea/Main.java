@@ -16,6 +16,7 @@ public class Main {
         HttpServer httpServer = new HttpServer(new ThreadPoolExecutorServiceFactory(), serverSocket);
         Router router = new Router();
         router.configure("/", new RootController());
+        router.configure("/form", new FormController());
         httpServer.start(router);
     }
 }
