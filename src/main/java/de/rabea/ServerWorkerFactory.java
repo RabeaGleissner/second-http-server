@@ -6,7 +6,7 @@ import de.rabea.communication.SocketWriter;
 public class ServerWorkerFactory implements WorkerFactory {
 
     private final SocketReader socketReader;
-    private SocketWriter socketWriter;
+    private final SocketWriter socketWriter;
     private final String directory;
 
     public ServerWorkerFactory(SocketReader socketReader, SocketWriter socketWriter, String directory) {

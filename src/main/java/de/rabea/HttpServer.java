@@ -4,7 +4,9 @@ import de.rabea.communication.SocketReader;
 import de.rabea.communication.SocketWriter;
 import de.rabea.exceptions.ServerSocketException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -45,7 +47,7 @@ public class HttpServer {
         Socket socket = serverSocket.accept();
         executorService.execute(new HttpServerRunner(
                 new ServerWorkerFactory(
-                        new SocketReader(socket),
+                        new SocketReader(new BufferedReader(new InputStreamReader(socket.getInputStream()))),
                         new SocketWriter(socket),
                         directory)));
     }

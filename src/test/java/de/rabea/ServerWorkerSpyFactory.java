@@ -2,7 +2,7 @@ package de.rabea;
 
 public class ServerWorkerSpyFactory implements WorkerFactory {
 
-    private ServerWorkerSpy workerSpy;
+    private final ServerWorkerSpy workerSpy;
 
     public ServerWorkerSpyFactory(ServerWorkerSpy workerSpy) {
         this.workerSpy = workerSpy;

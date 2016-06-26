@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class SocketWriter {
 
-    private Socket socket;
+    private final Socket socket;
 
     public SocketWriter(Socket socket) {
         this.socket = socket;
@@ -17,7 +17,6 @@ public class SocketWriter {
 
     public void write(String responseHead) {
         try {
-            System.out.println("writes");
             createWriter().write(responseHead.getBytes());
         } catch (IOException e) {
             throw new SocketException("Could not write" + e.getMessage());
@@ -25,12 +24,11 @@ public class SocketWriter {
         try {
             socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new SocketException("Could not close socket " + e.getMessage());
         }
     }
 
     private OutputStream createWriter() throws IOException {
-        System.out.println("creates writer");
         return new DataOutputStream(socket.getOutputStream());
     }
 }
