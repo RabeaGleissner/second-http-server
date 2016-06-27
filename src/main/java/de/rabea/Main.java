@@ -1,5 +1,6 @@
 package de.rabea;
 
+import de.rabea.controller.MethodOptionsController;
 import de.rabea.controller.RootController;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class Main {
         Router router = new Router();
         router.configure("/", new RootController());
         router.configure("/form", new FormController());
+        router.configure("/method_options", new MethodOptionsController());
         HttpServer httpServer = new HttpServer(Executors.newFixedThreadPool(20), serverSocket, router);
         httpServer.start();
     }
