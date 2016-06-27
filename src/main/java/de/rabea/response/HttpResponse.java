@@ -5,11 +5,11 @@ public class HttpResponse {
     private String response;
 
     public HttpResponse(StatusLine statusLine) {
-        this.response = new ResponseCreator(statusLine, new EmptyResponseHeader()).create();
+        this.response = new ResponseBuilder(statusLine, new EmptyResponseHeader()).create();
     }
 
     public HttpResponse(StatusLine statusLine, ResponseHeader responseHeader) {
-        this.response = new ResponseCreator(statusLine, responseHeader).create();
+        this.response = new ResponseBuilder(statusLine, responseHeader).create();
     }
 
     public HttpResponse() {

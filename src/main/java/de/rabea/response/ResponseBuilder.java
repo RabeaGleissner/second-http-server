@@ -1,12 +1,12 @@
 package de.rabea.response;
 
-public class ResponseCreator {
+public class ResponseBuilder {
 
     private final StatusLine statusLine;
     private final ResponseHeader responseHeader;
     private final String PROTOCOL = "HTTP/1.1";
 
-    public ResponseCreator(StatusLine statusLine, ResponseHeader responseHeader) {
+    public ResponseBuilder(StatusLine statusLine, ResponseHeader responseHeader) {
         this.statusLine = statusLine;
         this.responseHeader = responseHeader;
     }
