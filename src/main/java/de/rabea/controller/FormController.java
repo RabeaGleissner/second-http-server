@@ -5,6 +5,10 @@ import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
 import de.rabea.response.*;
+import de.rabea.response.creator.DeleteResponseCreator;
+import de.rabea.response.creator.GetResponseCreator;
+import de.rabea.response.creator.PostResponseCreator;
+import de.rabea.response.creator.PutResponseCreator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,15 +31,15 @@ public class FormController extends Controller {
     public HttpResponse getResponse(HttpRequest request) {
         return responsesForMethods.getOrDefault(
                 request.requestLine().method(),
-                new GetResponse(NOT_ALLOWED, contentStorage, this))
+                new GetResponseCreator(NOT_ALLOWED, contentStorage, this))
                 .create(request.body());
     }
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {
-        responsesForMethods.put(PUT, new PutResponse(OK, contentStorage, this));
-        responsesForMethods.put(GET, new GetResponse(OK, contentStorage, this));
-        responsesForMethods.put(POST, new PostResponse(OK, contentStorage, this));
-        responsesForMethods.put(DELETE, new DeleteResponse(OK, contentStorage, this));
+        responsesForMethods.put(PUT, new PutResponseCreator(OK, contentStorage, this));
+        responsesForMethods.put(GET, new GetResponseCreator(OK, contentStorage, this));
+        responsesForMethods.put(POST, new PostResponseCreator(OK, contentStorage, this));
+        responsesForMethods.put(DELETE, new DeleteResponseCreator(OK, contentStorage, this));
         return responsesForMethods;
     }
 }

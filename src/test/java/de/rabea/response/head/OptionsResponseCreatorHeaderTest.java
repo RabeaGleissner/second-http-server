@@ -12,7 +12,7 @@ import static de.rabea.request.HttpVerb.GET;
 import static de.rabea.request.HttpVerb.POST;
 import static org.junit.Assert.*;
 
-public class OptionsResponseHeaderTest {
+public class OptionsResponseCreatorHeaderTest {
 
     @Test
     public void returnsResponseWithAllowedMethods() {
@@ -26,7 +26,7 @@ public class OptionsResponseHeaderTest {
         assertTrue(allowHeader.contains("Allow:"));
     }
 
-    private class FakeResponseCreator extends ResponseCreator {
+    private class FakeResponseCreator implements ResponseCreator {
         public FakeResponseCreator() {
             super();
         }

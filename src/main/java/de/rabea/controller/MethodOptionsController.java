@@ -5,6 +5,7 @@ import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
 import de.rabea.response.*;
+import de.rabea.response.creator.*;
 import de.rabea.response.head.OptionsResponseHeader;
 
 import java.util.HashMap;
@@ -27,16 +28,16 @@ public class MethodOptionsController extends Controller {
     public HttpResponse getResponse(HttpRequest request) {
         return responsesForMethods.getOrDefault(
                 request.requestLine().method(),
-                new GetResponse(NOT_ALLOWED))
+                new GetResponseCreator(NOT_ALLOWED))
                 .create(request.body());
     }
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {
-        responsesForMethods.put(GET, new GetResponse(OK));
-        responsesForMethods.put(PUT, new PutResponse(OK, contentStorage, this));
-        responsesForMethods.put(POST, new PostResponse(OK, contentStorage, this));
-        responsesForMethods.put(HEAD, new HeadResponse(OK));
-        responsesForMethods.put(OPTIONS, new OptionsResponse(OK, new OptionsResponseHeader(responsesForMethods)));
+        responsesForMethods.put(GET, new GetResponseCreator(OK));
+        responsesForMethods.put(PUT, new PutResponseCreator(OK, contentStorage, this));
+        responsesForMethods.put(POST, new PostResponseCreator(OK, contentStorage, this));
+        responsesForMethods.put(HEAD, new HeadResponseCreator(OK));
+        responsesForMethods.put(OPTIONS, new OptionsResponseCreator(OK, new OptionsResponseHeader(responsesForMethods)));
         return responsesForMethods;
     }
 

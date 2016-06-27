@@ -1,16 +1,18 @@
-package de.rabea.response;
+package de.rabea.response.creator;
 
 import de.rabea.ContentStorage;
 import de.rabea.Controller;
+import de.rabea.response.HttpResponse;
+import de.rabea.response.ResponseCreator;
 import de.rabea.response.head.StatusLine;
 
-public class PostResponse extends ResponseCreator {
+public class PostResponseCreator implements ResponseCreator {
 
     private StatusLine statusLine;
     private ContentStorage contentStorage;
     private Controller controller;
 
-    public PostResponse(StatusLine statusLine, ContentStorage contentStorage, Controller controller) {
+    public PostResponseCreator(StatusLine statusLine, ContentStorage contentStorage, Controller controller) {
         this.statusLine = statusLine;
         this.contentStorage = contentStorage;
         this.controller = controller;

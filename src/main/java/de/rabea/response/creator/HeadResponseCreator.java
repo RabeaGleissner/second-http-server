@@ -1,12 +1,14 @@
-package de.rabea.response;
+package de.rabea.response.creator;
 
+import de.rabea.response.HttpResponse;
+import de.rabea.response.ResponseCreator;
 import de.rabea.response.head.StatusLine;
 
-public class HeadResponse extends ResponseCreator {
+public class HeadResponseCreator implements ResponseCreator {
 
     private StatusLine statusLine;
 
-    public HeadResponse(StatusLine statusLine) {
+    public HeadResponseCreator(StatusLine statusLine) {
         this.statusLine = statusLine;
     }
 

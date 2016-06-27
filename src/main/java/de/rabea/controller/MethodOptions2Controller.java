@@ -3,9 +3,9 @@ package de.rabea.controller;
 import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
-import de.rabea.response.GetResponse;
+import de.rabea.response.creator.GetResponseCreator;
 import de.rabea.response.HttpResponse;
-import de.rabea.response.OptionsResponse;
+import de.rabea.response.creator.OptionsResponseCreator;
 import de.rabea.response.ResponseCreator;
 import de.rabea.response.head.OptionsResponseHeader;
 
@@ -32,13 +32,13 @@ public class MethodOptions2Controller extends Controller {
         this.request = httpRequest;
         return responsesForMethods.getOrDefault(
                 request.requestLine().method(),
-                new GetResponse(NOT_ALLOWED))
+                new GetResponseCreator(NOT_ALLOWED))
                 .create(httpRequest.body());
     }
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {
-        responsesForMethods.put(GET, new GetResponse(OK));
-        responsesForMethods.put(OPTIONS, new OptionsResponse(OK, new OptionsResponseHeader(responsesForMethods)));
+        responsesForMethods.put(GET, new GetResponseCreator(OK));
+        responsesForMethods.put(OPTIONS, new OptionsResponseCreator(OK, new OptionsResponseHeader(responsesForMethods)));
         return responsesForMethods;
     }
 }
