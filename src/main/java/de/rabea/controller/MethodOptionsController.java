@@ -15,7 +15,7 @@ import static de.rabea.request.HttpVerb.*;
 import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
 import static de.rabea.response.head.StatusLine.OK;
 
-public class MethodOptionsController extends Controller {
+public class MethodOptionsController implements Controller {
     private Map<HttpVerb, ResponseCreator> responsesForMethods = new HashMap<>();
     private ContentStorage contentStorage;
 
