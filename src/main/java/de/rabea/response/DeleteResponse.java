@@ -1,21 +1,25 @@
 package de.rabea.response;
 
 import de.rabea.ContentStorage;
-import de.rabea.controller.FormController;
-import de.rabea.response.HttpResponse;
+import de.rabea.Controller;
 
 public class DeleteResponse extends ResponseCreator {
 
+    private StatusLine statusLine;
     private final ContentStorage contentStorage;
-    private final FormController formController;
+    private final Controller controller;
 
-    public DeleteResponse(ContentStorage contentStorage, FormController formController) {
+    public DeleteResponse(StatusLine statusLine, ContentStorage contentStorage, Controller controller) {
+        this.statusLine = statusLine;
         this.contentStorage = contentStorage;
-        this.formController = formController;
+        this.controller = controller;
     }
 
     @Override
-    public HttpResponse create() {
-        return null;
+    public HttpResponse create(String body) {
+        if (contentStorage.hasContentFor(controller)) {
+            contentStorage.deleteContentFor(controller);
+        }
+        return new HttpResponse(statusLine);
     }
 }

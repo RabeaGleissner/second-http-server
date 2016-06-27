@@ -9,7 +9,7 @@ public class PutResponse extends ResponseCreator {
     }
 
     @Override
-    public HttpResponse create() {
+    public HttpResponse create(String body) {
         return new HttpResponse(statusLine);
     }
 }

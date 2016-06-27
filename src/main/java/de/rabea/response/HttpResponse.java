@@ -2,6 +2,8 @@ package de.rabea.response;
 
 public class HttpResponse {
 
+    private StatusLine statusLine;
+    private String body;
     private String response;
 
     public HttpResponse(StatusLine statusLine) {
@@ -10,6 +12,12 @@ public class HttpResponse {
 
     public HttpResponse(StatusLine statusLine, ResponseHeader responseHeader) {
         this.response = new ResponseBuilder(statusLine, responseHeader).create();
+    }
+
+    public HttpResponse(StatusLine statusLine, String body) {
+        this.statusLine = statusLine;
+        this.body = body;
+        this.response = new ResponseBuilder(statusLine, body).create();
     }
 
     public HttpResponse() {

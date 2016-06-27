@@ -19,7 +19,7 @@ public class Main {
         ServerSocket serverSocket = new ServerSocket(port);
         Router router = new Router();
         router.configure("/", new RootController());
-        router.configure("/form", new FormController());
+        router.configure("/form", new FormController(new ContentStorage()));
         router.configure("/method_options", new MethodOptionsController());
         router.configure("/method_options2", new MethodOptions2Controller());
         HttpServer httpServer = new HttpServer(Executors.newFixedThreadPool(20), serverSocket, router);
