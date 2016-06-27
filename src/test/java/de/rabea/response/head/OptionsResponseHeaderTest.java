@@ -2,7 +2,7 @@ package de.rabea.response.head;
 
 import de.rabea.request.HttpVerb;
 import de.rabea.response.HttpResponse;
-import de.rabea.response.head.OptionsResponseHeader;
+import de.rabea.response.ResponseCreator;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -16,9 +16,9 @@ public class OptionsResponseHeaderTest {
 
     @Test
     public void returnsResponseWithAllowedMethods() {
-        Map<HttpVerb, HttpResponse> responses = new HashMap<>();
-        responses.put(GET, new FakeHttpResponse());
-        responses.put(POST, new FakeHttpResponse());
+        Map<HttpVerb, ResponseCreator> responses = new HashMap<>();
+        responses.put(GET, new FakeResponseCreator());
+        responses.put(POST, new FakeResponseCreator());
         OptionsResponseHeader header = new OptionsResponseHeader(responses);
         String allowHeader = header.create();
         assertTrue(allowHeader.contains("GET"));
@@ -26,9 +26,14 @@ public class OptionsResponseHeaderTest {
         assertTrue(allowHeader.contains("Allow:"));
     }
 
-    private class FakeHttpResponse extends HttpResponse {
-        public FakeHttpResponse() {
+    private class FakeResponseCreator extends ResponseCreator {
+        public FakeResponseCreator() {
             super();
+        }
+
+        @Override
+        public HttpResponse create(String body) {
+            return null;
         }
     }
 }

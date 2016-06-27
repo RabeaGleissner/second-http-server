@@ -1,43 +1,43 @@
 package de.rabea.controller;
 
+import de.rabea.ContentStorage;
 import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
-import de.rabea.response.HttpResponse;
+import de.rabea.response.*;
 import de.rabea.response.head.OptionsResponseHeader;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static de.rabea.request.HttpVerb.*;
+import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
 import static de.rabea.response.head.StatusLine.OK;
 
 public class MethodOptionsController extends Controller {
-    private Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
-    private HttpRequest request;
+    private Map<HttpVerb, ResponseCreator> responsesForMethods = new HashMap<>();
+    private ContentStorage contentStorage;
 
-    public MethodOptionsController() {
+    public MethodOptionsController(ContentStorage contentStorage) {
+        this.contentStorage = contentStorage;
         this.responsesForMethods = registerResponses();
-        this.request = null;
     }
 
     @Override
-    public HttpResponse getResponse(HttpRequest httpRequest) {
-        this.request = httpRequest;
-        return responsesForMethods.getOrDefault(request.requestLine().method(), methodNotAllowed());
+    public HttpResponse getResponse(HttpRequest request) {
+        return responsesForMethods.getOrDefault(
+                request.requestLine().method(),
+                new GetResponse(NOT_ALLOWED))
+                .create(request.body());
     }
 
-    private Map<HttpVerb, HttpResponse> registerResponses() {
-        HttpResponse okResponse = ok200();
-        responsesForMethods.put(GET, okResponse);
-        responsesForMethods.put(PUT, okResponse);
-        responsesForMethods.put(POST, okResponse);
-        responsesForMethods.put(HEAD, okResponse);
-        responsesForMethods.put(OPTIONS, responseForOptions());
+    private Map<HttpVerb, ResponseCreator> registerResponses() {
+        responsesForMethods.put(GET, new GetResponse(OK));
+        responsesForMethods.put(PUT, new PutResponse(OK, contentStorage, this));
+        responsesForMethods.put(POST, new PostResponse(OK, contentStorage, this));
+        responsesForMethods.put(HEAD, new HeadResponse(OK));
+        responsesForMethods.put(OPTIONS, new OptionsResponse(OK, new OptionsResponseHeader(responsesForMethods)));
         return responsesForMethods;
     }
 
-    private HttpResponse responseForOptions() {
-        return new HttpResponse(OK, new OptionsResponseHeader(responsesForMethods));
-    }
 }

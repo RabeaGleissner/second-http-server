@@ -1,5 +1,6 @@
 package de.rabea.response;
 
+import de.rabea.response.head.EmptyResponseHeader;
 import de.rabea.response.head.StatusLine;
 
 public class ResponseBuilder {

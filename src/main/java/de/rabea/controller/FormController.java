@@ -32,7 +32,7 @@ public class FormController extends Controller {
     }
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {
-        responsesForMethods.put(PUT, new PutResponse(OK));
+        responsesForMethods.put(PUT, new PutResponse(OK, contentStorage, this));
         responsesForMethods.put(GET, new GetResponse(OK, contentStorage, this));
         responsesForMethods.put(POST, new PostResponse(OK, contentStorage, this));
         responsesForMethods.put(DELETE, new DeleteResponse(OK, contentStorage, this));

@@ -1,11 +1,10 @@
 package de.rabea.response;
 
+import de.rabea.response.head.EmptyResponseHeader;
 import de.rabea.response.head.StatusLine;
 
 public class HttpResponse {
 
-    private StatusLine statusLine;
-    private String body;
     private String response;
 
     public HttpResponse(StatusLine statusLine) {
@@ -17,8 +16,6 @@ public class HttpResponse {
     }
 
     public HttpResponse(StatusLine statusLine, String body) {
-        this.statusLine = statusLine;
-        this.body = body;
         this.response = new ResponseBuilder(statusLine, body).create();
     }
 
