@@ -14,25 +14,22 @@ import java.util.concurrent.ExecutorService;
 public class HttpServer {
     private final ServerSocket serverSocket;
     private final ExecutorService executorService;
-    private final String directory;
     private final int POOL_SIZE = 20;
 
-    public HttpServer(ExecutorServiceFactory executorServiceFactory, ServerSocket serverSocket,
-                      String directory) {
+    public HttpServer(ExecutorServiceFactory executorServiceFactory, ServerSocket serverSocket) {
         this.executorService = executorServiceFactory.create(POOL_SIZE);
         this.serverSocket = serverSocket;
-        this.directory = directory;
     }
 
-    public void start() {
+    public void start(Router router) {
         while (true) {
-            execute();
+            execute(router);
         }
     }
 
-    public void execute() {
+    public void execute(Router router) {
         try {
-            executeServerRunnerInThread();
+            executeServerRunnerInThread(router);
         } catch (IOException e) {
             shutdown();
             throw new ServerSocketException("Cannot create Socket" + e.getMessage());
@@ -43,12 +40,13 @@ public class HttpServer {
         executorService.shutdown();
     }
 
-    private void executeServerRunnerInThread() throws IOException {
+    private void executeServerRunnerInThread(Router router) throws IOException {
         Socket socket = serverSocket.accept();
         executorService.execute(new HttpServerRunner(
                 new ServerWorkerFactory(
                         new SocketReader(new BufferedReader(new InputStreamReader(socket.getInputStream()))),
                         new SocketWriter(socket),
-                        directory)));
+                        router
+                )));
     }
 }

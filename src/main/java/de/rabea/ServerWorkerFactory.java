@@ -7,16 +7,16 @@ public class ServerWorkerFactory implements WorkerFactory {
 
     private final SocketReader socketReader;
     private final SocketWriter socketWriter;
-    private final String directory;
+    private Router router;
 
-    public ServerWorkerFactory(SocketReader socketReader, SocketWriter socketWriter, String directory) {
+    public ServerWorkerFactory(SocketReader socketReader, SocketWriter socketWriter, Router router) {
         this.socketReader = socketReader;
         this.socketWriter = socketWriter;
-        this.directory = directory;
+        this.router = router;
     }
 
     @Override
     public ServerWorker create() {
-        return new ServerWorker(socketReader, socketWriter, directory);
+        return new ServerWorker(socketReader, socketWriter, router);
     }
 }

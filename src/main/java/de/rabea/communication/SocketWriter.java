@@ -15,9 +15,9 @@ public class SocketWriter {
         this.socket = socket;
     }
 
-    public void write(String responseHead) {
+    public void write(byte[] responseHead) {
         try {
-            createWriter().write(responseHead.getBytes());
+            createWriter().write(responseHead);
         } catch (IOException e) {
             throw new SocketException("Could not write" + e.getMessage());
         }

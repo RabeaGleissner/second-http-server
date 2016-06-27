@@ -7,8 +7,8 @@ public class ServerWorkerSpy extends ServerWorker {
 
     public boolean wasStarted = false;
 
-    public ServerWorkerSpy(SocketReader socketReader, SocketWriter socketWriter, String directory) {
-        super(socketReader, socketWriter, directory);
+    public ServerWorkerSpy(SocketReader socketReader, SocketWriter socketWriter, Router router) {
+        super(socketReader, socketWriter, router);
     }
 
     @Override

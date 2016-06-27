@@ -1,5 +1,6 @@
 package de.rabea.request;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class HttpRequest {
@@ -12,6 +13,12 @@ public class HttpRequest {
         this.requestLine = requestLine;
         this.requestHeader = requestHeader;
         this.requestBody = requestBody;
+    }
+
+    public HttpRequest(HttpVerb verb, String path) {
+        this.requestLine = new RequestLine(verb + " " + path + " HTTP/1.1");
+        this.requestHeader = new HashMap<>();
+        this.requestBody = "";
     }
 
     public Map<String, String> requestHeaders() {
