@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static de.rabea.request.HttpVerb.*;
 import static de.rabea.request.HttpVerb.PUT;
-import static de.rabea.response.StatusLine.*;
+import static de.rabea.response.head.StatusLine.*;
 
 public class FormController extends Controller {
 

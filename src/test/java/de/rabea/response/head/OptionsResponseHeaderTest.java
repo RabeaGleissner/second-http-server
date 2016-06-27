@@ -1,6 +1,8 @@
-package de.rabea.response;
+package de.rabea.response.head;
 
 import de.rabea.request.HttpVerb;
+import de.rabea.response.HttpResponse;
+import de.rabea.response.head.OptionsResponseHeader;
 import org.junit.Test;
 
 import java.util.HashMap;

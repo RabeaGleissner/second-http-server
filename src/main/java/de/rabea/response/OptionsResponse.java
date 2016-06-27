@@ -1,5 +1,8 @@
 package de.rabea.response;
 
+import de.rabea.response.head.OptionsResponseHeader;
+import de.rabea.response.head.StatusLine;
+
 public class OptionsResponse extends ResponseCreator {
 
     private final StatusLine statusLine;

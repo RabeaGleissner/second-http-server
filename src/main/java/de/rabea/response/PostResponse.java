@@ -2,6 +2,7 @@ package de.rabea.response;
 
 import de.rabea.ContentStorage;
 import de.rabea.Controller;
+import de.rabea.response.head.StatusLine;
 
 public class PostResponse extends ResponseCreator {
 

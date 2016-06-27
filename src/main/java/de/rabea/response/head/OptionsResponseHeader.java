@@ -1,6 +1,8 @@
-package de.rabea.response;
+package de.rabea.response.head;
 
 import de.rabea.request.HttpVerb;
+import de.rabea.response.HttpResponse;
+import de.rabea.response.ResponseHeader;
 
 import java.util.ArrayList;
 import java.util.List;

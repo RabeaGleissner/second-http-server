@@ -3,8 +3,8 @@ package de.rabea;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
-import static de.rabea.response.StatusLine.NOT_ALLOWED;
-import static de.rabea.response.StatusLine.OK;
+import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
+import static de.rabea.response.head.StatusLine.OK;
 
 public abstract class Controller {
 

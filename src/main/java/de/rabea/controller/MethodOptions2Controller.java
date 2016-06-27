@@ -4,14 +4,14 @@ import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
 import de.rabea.response.HttpResponse;
-import de.rabea.response.OptionsResponseHeader;
+import de.rabea.response.head.OptionsResponseHeader;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static de.rabea.request.HttpVerb.GET;
 import static de.rabea.request.HttpVerb.OPTIONS;
-import static de.rabea.response.StatusLine.OK;
+import static de.rabea.response.head.StatusLine.OK;
 
 public class MethodOptions2Controller extends Controller {
 

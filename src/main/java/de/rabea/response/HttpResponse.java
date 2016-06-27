@@ -1,5 +1,7 @@
 package de.rabea.response;
 
+import de.rabea.response.head.StatusLine;
+
 public class HttpResponse {
 
     private StatusLine statusLine;

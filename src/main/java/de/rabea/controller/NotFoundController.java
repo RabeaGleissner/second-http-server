@@ -4,7 +4,7 @@ import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
-import static de.rabea.response.StatusLine.NOT_FOUND;
+import static de.rabea.response.head.StatusLine.NOT_FOUND;
 
 public class NotFoundController extends Controller {
 
