@@ -4,10 +4,12 @@ import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
+import static de.rabea.response.StatusLine.SERVER_ERROR;
+
 public class ServerError implements Controller {
 
     @Override
     public HttpResponse getResponse(HttpRequest request) {
-        return new HttpResponse("HTTP/1.1 500 Internal Server Error");
+        return new HttpResponse(SERVER_ERROR);
     }
 }

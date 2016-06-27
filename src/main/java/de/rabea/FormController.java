@@ -4,6 +4,8 @@ import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
 import static de.rabea.request.HttpVerb.PUT;
+import static de.rabea.response.StatusLine.NOT_ALLOWED;
+import static de.rabea.response.StatusLine.OK;
 
 public class FormController implements Controller {
 
@@ -16,10 +18,10 @@ public class FormController implements Controller {
     }
 
     private HttpResponse methodNotAllowed() {
-        return new HttpResponse("HTTP/1.1 405 Method Not Allowed\n");
+        return new HttpResponse(NOT_ALLOWED);
     }
 
     private HttpResponse ok200() {
-        return new HttpResponse("HTTP/1.1 200 OK\n");
+        return new HttpResponse(OK);
     }
 }

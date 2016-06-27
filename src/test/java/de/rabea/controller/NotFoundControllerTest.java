@@ -12,6 +12,6 @@ public class NotFoundControllerTest {
     public void returnsNotFoundResponse() {
         HttpRequest request = new HttpRequest(GET, "/non-existent-route");
         NotFoundController controller = new NotFoundController();
-        assertEquals("HTTP/1.1 404 Not Found", controller.getResponse(request).asString());
+        assertEquals("HTTP/1.1 404 Not Found\n", controller.getResponse(request).asString());
     }
 }
