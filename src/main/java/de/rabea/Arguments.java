@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public class Arguments {
 
-    private int port;
-    private String directory;
+    private final int port;
+    private final String directory;
 
     public Arguments(String[] commandLineArguments) {
         this.port = Integer.parseInt(parseArguments(commandLineArguments).get("-p"));

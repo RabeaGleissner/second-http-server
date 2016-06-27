@@ -10,7 +10,7 @@ import static de.rabea.request.HttpVerb.*;
 
 public class OptionsResponseHeader implements ResponseHeader {
 
-    private Map<HttpVerb, HttpResponse> responsesForMethods;
+    private final Map<HttpVerb, HttpResponse> responsesForMethods;
 
     public OptionsResponseHeader(Map<HttpVerb, HttpResponse> responsesForMethods) {
         this.responsesForMethods = responsesForMethods;

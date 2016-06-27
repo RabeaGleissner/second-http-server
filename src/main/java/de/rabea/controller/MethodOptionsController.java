@@ -13,8 +13,8 @@ import static de.rabea.request.HttpVerb.*;
 import static de.rabea.response.StatusLine.OK;
 
 public class MethodOptionsController extends Controller {
-    Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
-    HttpRequest request;
+    private Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
+    private HttpRequest request;
 
     public MethodOptionsController() {
         this.responsesForMethods = registerResponses();

@@ -9,7 +9,7 @@ public class ServerWorker {
 
     private final SocketReader socketReader;
     private final SocketWriter socketWriter;
-    private Router router;
+    private final Router router;
 
     public ServerWorker(SocketReader socketReader, SocketWriter socketWriter, Router router) {
         this.socketReader = socketReader;

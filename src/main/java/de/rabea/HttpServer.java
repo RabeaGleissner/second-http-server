@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 
 public class HttpServer  implements Runnable {
     private final ServerSocket serverSocket;
-    private Router router;
+    private final Router router;
     private final ExecutorService executorService;
 
     public HttpServer(ExecutorService executorService, ServerSocket serverSocket, Router router) {

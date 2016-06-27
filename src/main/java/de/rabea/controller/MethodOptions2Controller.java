@@ -15,8 +15,8 @@ import static de.rabea.response.StatusLine.OK;
 
 public class MethodOptions2Controller extends Controller {
 
-    Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
-    HttpRequest request;
+    private Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
+    private HttpRequest request;
 
     public MethodOptions2Controller() {
         this.responsesForMethods = registerResponses();

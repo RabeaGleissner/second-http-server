@@ -6,7 +6,7 @@ public enum StatusLine {
     NOT_ALLOWED("405 Method Not Allowed"),
     OK("200 OK");
 
-    private String status;
+    private final String status;
 
     StatusLine(String status){
         this.status = status;

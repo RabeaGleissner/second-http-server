@@ -13,7 +13,7 @@ import static de.rabea.request.HttpVerb.HEAD;
 
 public class RootController extends Controller {
 
-    Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
+    private Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
 
     public RootController() {
         this.responsesForMethods = registerResponses();
