@@ -1,7 +1,6 @@
 package de.rabea.response.head;
 
 import de.rabea.request.HttpVerb;
-import de.rabea.response.HttpResponse;
 import de.rabea.response.ResponseCreator;
 import org.junit.Test;
 
@@ -12,7 +11,7 @@ import static de.rabea.request.HttpVerb.GET;
 import static de.rabea.request.HttpVerb.POST;
 import static org.junit.Assert.*;
 
-public class OptionsResponseCreatorHeaderTest {
+public class OptionsResponseHeaderTest {
 
     @Test
     public void returnsResponseWithAllowedMethods() {
@@ -26,14 +25,4 @@ public class OptionsResponseCreatorHeaderTest {
         assertTrue(allowHeader.contains("Allow:"));
     }
 
-    private class FakeResponseCreator implements ResponseCreator {
-        public FakeResponseCreator() {
-            super();
-        }
-
-        @Override
-        public HttpResponse create(String body) {
-            return null;
-        }
-    }
 }
