@@ -9,21 +9,17 @@ import static org.junit.Assert.assertEquals;
 
 public class RequestParserTest {
     private RequestParser parser;
-    private String REQUEST_HEADERS;
-    private String REQUEST_LINE;
-    private String CONTENT_LENGTH;
-    private String BODY;
+    private String REQUEST_LINE = "POST /form HTTP/1.1\n";
+    private String REQUEST_HEADERS = "Host: localhost:5000\n" +
+                "Connection: Keep-Alive\n" +
+                "User-Agent: Apache-HttpClient/4.3.5 (java 1.5)\n" +
+                "Accept-Encoding: gzip,deflate\n";;
+    private String CONTENT_LENGTH = "Content-Length: 11\n";
+    private String BODY = "\nMy=Data";
 
     @Before
     public void setup() {
         parser = new RequestParser();
-        REQUEST_LINE = "POST /form HTTP/1.1\n";
-        REQUEST_HEADERS = "Host: localhost:5000\n" +
-                "Connection: Keep-Alive\n" +
-                "User-Agent: Apache-HttpClient/4.3.5 (java 1.5)\n" +
-                "Accept-Encoding: gzip,deflate\n";
-        CONTENT_LENGTH = "Content-Length: 11\n";
-        BODY = "\nMy=Data";
     }
 
     @Test
