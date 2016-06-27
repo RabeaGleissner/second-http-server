@@ -1,5 +1,6 @@
-package de.rabea;
+package de.rabea.controller;
 
+import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
 import de.rabea.response.HttpResponse;
