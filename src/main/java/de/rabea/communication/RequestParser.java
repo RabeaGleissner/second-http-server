@@ -47,17 +47,31 @@ public class RequestParser {
         return contentLength(request) > 0;
     }
 
-    private List<String> getHeaders(String[] requestLines) {
+    private List<String> getHeaders(String[] linesOfRequest) {
         List<String> lines = new ArrayList<>();
-        lines.addAll(Arrays.asList(requestLines));
-        lines.remove(0);
-        return removeBody(lines);
+        lines.addAll(Arrays.asList(linesOfRequest));
+        lines = removeRequestLine(lines);
+        return removeBodyLines(lines);
     }
 
-    private List<String> removeBody(List<String> lines) {
-        if (lines.contains("")) {
-            lines.subList(lines.indexOf(""), lines.size()).clear();
+    private List<String> removeRequestLine(List<String> lines) {
+        lines.remove(0);
+        return lines;
+    }
+
+    private List<String> removeBodyLines(List<String> lines) {
+        if (hasEmptyLine(lines)) {
+            lines = removeLinesAfterEmptyLine(lines);
         }
+        return lines;
+    }
+
+    private boolean hasEmptyLine(List<String> lines) {
+        return lines.contains("");
+    }
+
+    private List<String> removeLinesAfterEmptyLine(List<String> lines) {
+        lines.subList(lines.indexOf(""), lines.size()).clear();
         return lines;
     }
 
