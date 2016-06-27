@@ -5,17 +5,21 @@ import java.util.HashMap;
 public class Arguments {
 
     private String[] commandLineArguments;
+    private int port;
+    private String directory;
 
     public Arguments(String[] commandLineArguments) {
         this.commandLineArguments = commandLineArguments;
+        this.port = Integer.parseInt(parseArguments().get("-p"));
+        this.directory = parseArguments().get("-d");
     }
 
     public int getPort() {
-        return Integer.parseInt(parseArguments().get("-p"));
+        return port;
     }
 
     public String getDirectory() {
-        return parseArguments().get("-d");
+        return directory;
     }
 
     private HashMap<String, String> parseArguments() {
