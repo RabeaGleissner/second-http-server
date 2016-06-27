@@ -25,15 +25,7 @@ public class MethodOptionsController implements Controller {
     @Override
     public HttpResponse getResponse(HttpRequest httpRequest) {
         this.request = httpRequest;
-
-        if (request.requestLine().method() == GET) {
-            return responsesForMethods.get(GET);
-        }
-
-        if (request.requestLine().method() == OPTIONS) {
-            return responsesForMethods.get(OPTIONS);
-        }
-        return methodNotAllowed();
+        return responsesForMethods.getOrDefault(request.requestLine().method(), methodNotAllowed());
     }
 
     private Map<HttpVerb, HttpResponse> registerResponses() {
