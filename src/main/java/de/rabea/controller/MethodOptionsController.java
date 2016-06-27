@@ -1,19 +1,18 @@
 package de.rabea.controller;
 
 import de.rabea.Controller;
-import de.rabea.response.OptionsResponseHeader;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
 import de.rabea.response.HttpResponse;
+import de.rabea.response.OptionsResponseHeader;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static de.rabea.request.HttpVerb.*;
-import static de.rabea.response.StatusLine.NOT_ALLOWED;
 import static de.rabea.response.StatusLine.OK;
 
-public class MethodOptionsController implements Controller {
+public class MethodOptionsController extends Controller {
     Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
     HttpRequest request;
 
@@ -40,13 +39,5 @@ public class MethodOptionsController implements Controller {
 
     private HttpResponse responseForOptions() {
         return new HttpResponse(OK, new OptionsResponseHeader(responsesForMethods));
-    }
-
-    private HttpResponse ok200() {
-        return new HttpResponse(OK);
-    }
-
-    private HttpResponse methodNotAllowed() {
-        return new HttpResponse(NOT_ALLOWED);
     }
 }

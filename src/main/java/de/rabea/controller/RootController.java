@@ -10,10 +10,8 @@ import java.util.Map;
 
 import static de.rabea.request.HttpVerb.GET;
 import static de.rabea.request.HttpVerb.HEAD;
-import static de.rabea.response.StatusLine.NOT_ALLOWED;
-import static de.rabea.response.StatusLine.OK;
 
-public class RootController implements Controller {
+public class RootController extends Controller {
 
     Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
 
@@ -31,13 +29,5 @@ public class RootController implements Controller {
         responsesForMethods.put(GET, okResponse);
         responsesForMethods.put(HEAD, okResponse);
         return responsesForMethods;
-    }
-
-    private HttpResponse ok200() {
-        return new HttpResponse(OK);
-    }
-
-    private HttpResponse methodNotAllowed() {
-        return new HttpResponse(NOT_ALLOWED);
     }
 }

@@ -6,7 +6,7 @@ import de.rabea.response.HttpResponse;
 
 import static de.rabea.response.StatusLine.SERVER_ERROR;
 
-public class ServerError implements Controller {
+public class ServerError extends Controller {
 
     @Override
     public HttpResponse getResponse(HttpRequest request) {
