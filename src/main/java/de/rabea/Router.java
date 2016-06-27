@@ -7,16 +7,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Router {
-    private Map<String, Controller> configuredRoutes = new HashMap<>();
+    private Map<String, Controller> controllersForRoutes = new HashMap<>();
+    private NotFoundController notFoundController;
+
+    public Router() {
+        this.notFoundController =  new NotFoundController();
+    }
 
     public Controller getController(HttpRequest request) {
-        if (configuredRoutes.containsKey(request.requestLine().uri())) {
-            return configuredRoutes.get(request.requestLine().uri());
-        }
-        return new NotFoundController();
+        return controllersForRoutes.getOrDefault(request.requestLine().uri(), notFoundController());
+    }
+
+    private Controller notFoundController() {
+        return notFoundController;
     }
 
     public void configure(String route, Controller controller) {
-        configuredRoutes.put(route, controller);
+        controllersForRoutes.put(route, controller);
     }
 }
