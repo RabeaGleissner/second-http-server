@@ -11,7 +11,6 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class HttpServer  implements Runnable {
     private final ServerSocket serverSocket;
@@ -40,12 +39,12 @@ public class HttpServer  implements Runnable {
         try {
             socket = createSocket();
         } catch (IOException e) {
-            throw new ServerSocketException("cannot create socket " + e.getMessage());
+            throw new ServerSocketException("Apologies, the socket could not be created " + e.getMessage());
         }
         try {
             startServerWorker(socket);
         } catch (IOException e) {
-           throw new SocketException("cannot get input stream " + e.getMessage());
+           throw new SocketException("Apologies, the socket could not create the input stream " + e.getMessage());
         }
     }
 

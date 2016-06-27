@@ -1,5 +1,7 @@
 package de.rabea;
 
+import de.rabea.exceptions.ServerSocketException;
+import de.rabea.exceptions.SocketException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,21 +14,32 @@ import static org.junit.Assert.assertTrue;
 
 public class HttpServerTest {
     private ExecutorServiceSpy executorServiceSpy;
-    private HttpServer server;
 
     @Before
     public void setup() throws IOException {
         executorServiceSpy = new ExecutorServiceSpy();
-        server = new HttpServer(executorServiceSpy, new ServerSocketStub(), new Router());
     }
 
     @Test
-    public void executorServiceShutsDown() {
+    public void executorServiceShutsDown() throws IOException {
+        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub(), new Router());
         server.shutdown();
         assertTrue(executorServiceSpy.hasShutDown);
     }
 
-   private class ExecutorServiceSpy implements ExecutorService {
+    @Test(expected = ServerSocketException.class)
+    public void throwsExceptionWhenSocketCannotBeCreated() throws IOException {
+        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().throwsException(), new Router());
+        server.run();
+    }
+
+    @Test(expected = SocketException.class)
+    public void throwsExceptionWhenInputStreamCannotBeCreated() throws IOException {
+        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().createsSocketWithException(), new Router());
+        server.run();
+    }
+
+    private class ExecutorServiceSpy implements ExecutorService {
        public boolean hasShutDown = false;
 
        @Override
