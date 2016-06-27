@@ -1,5 +1,6 @@
 package de.rabea;
 
+import de.rabea.controller.MethodOptions2Controller;
 import de.rabea.controller.MethodOptionsController;
 import de.rabea.controller.RootController;
 
@@ -19,6 +20,7 @@ public class Main {
         router.configure("/", new RootController());
         router.configure("/form", new FormController());
         router.configure("/method_options", new MethodOptionsController());
+        router.configure("/method_options2", new MethodOptions2Controller());
         HttpServer httpServer = new HttpServer(Executors.newFixedThreadPool(20), serverSocket, router);
         httpServer.start();
     }
