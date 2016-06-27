@@ -6,11 +6,9 @@ import de.rabea.controller.RootController;
 import de.rabea.request.HttpRequest;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ServerWorkerTest {
 
