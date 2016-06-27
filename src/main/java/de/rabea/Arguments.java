@@ -4,14 +4,12 @@ import java.util.HashMap;
 
 public class Arguments {
 
-    private String[] commandLineArguments;
-    private int port;
-    private String directory;
+    private final int port;
+    private final String directory;
 
     public Arguments(String[] commandLineArguments) {
-        this.commandLineArguments = commandLineArguments;
-        this.port = Integer.parseInt(parseArguments().get("-p"));
-        this.directory = parseArguments().get("-d");
+        this.port = Integer.parseInt(parseArguments(commandLineArguments).get("-p"));
+        this.directory = parseArguments(commandLineArguments).get("-d");
     }
 
     public int getPort() {
@@ -22,7 +20,7 @@ public class Arguments {
         return directory;
     }
 
-    private HashMap<String, String> parseArguments() {
+    private HashMap<String, String> parseArguments(String[] commandLineArguments) {
         HashMap<String, String> parsedArguments = new HashMap<>();
         int argumentNumber = commandLineArguments.length;
 

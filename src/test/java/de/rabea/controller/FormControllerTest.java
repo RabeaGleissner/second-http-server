@@ -1,6 +1,5 @@
 package de.rabea.controller;
 
-import de.rabea.FormController;
 import de.rabea.request.HttpRequest;
 import org.junit.Test;
 

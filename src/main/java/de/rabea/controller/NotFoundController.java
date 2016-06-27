@@ -4,10 +4,12 @@ import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
-public class NotFoundController implements Controller {
+import static de.rabea.response.StatusLine.NOT_FOUND;
+
+public class NotFoundController extends Controller {
 
     @Override
     public HttpResponse getResponse(HttpRequest request) {
-        return new HttpResponse("HTTP/1.1 404 Not Found");
+        return new HttpResponse(NOT_FOUND);
     }
 }

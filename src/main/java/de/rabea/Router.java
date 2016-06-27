@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Router {
-    private Map<String, Controller> controllersForRoutes = new HashMap<>();
-    private NotFoundController notFoundController;
+    private final Map<String, Controller> controllersForRoutes = new HashMap<>();
+    private final NotFoundController notFoundController;
 
     public Router() {
         this.notFoundController =  new NotFoundController();

@@ -8,27 +8,27 @@ import de.rabea.response.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import static de.rabea.request.HttpVerb.GET;
-import static de.rabea.request.HttpVerb.HEAD;
+import static de.rabea.request.HttpVerb.*;
+import static de.rabea.request.HttpVerb.PUT;
 
-public class RootController extends Controller {
+public class FormController extends Controller {
 
     private Map<HttpVerb, HttpResponse> responsesForMethods = new HashMap<>();
 
-    public RootController() {
+    public FormController() {
         this.responsesForMethods = registerResponses();
     }
 
     @Override
-    public HttpResponse getResponse(HttpRequest httpRequest) {
-        return responsesForMethods.getOrDefault(httpRequest.requestLine().method(),
+    public HttpResponse getResponse(HttpRequest request) {
+        return responsesForMethods.getOrDefault(request.requestLine().method(),
                 methodNotAllowed());
     }
 
     private Map<HttpVerb, HttpResponse> registerResponses() {
         HttpResponse okResponse = ok200();
-        responsesForMethods.put(GET, okResponse);
-        responsesForMethods.put(HEAD, okResponse);
+        responsesForMethods.put(PUT, okResponse);
+        responsesForMethods.put(POST, okResponse);
         return responsesForMethods;
     }
 }
