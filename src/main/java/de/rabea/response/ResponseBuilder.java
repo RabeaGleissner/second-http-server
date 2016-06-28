@@ -35,6 +35,7 @@ public class ResponseBuilder {
 
     public byte[] combinedHeadAndBody(String head, byte[] body, ByteArrayOutputStream out) throws IOException {
         out.write(head.getBytes());
+        out.write("\n".getBytes());
         out.write(body);
         return out.toByteArray();
     }
@@ -47,7 +48,7 @@ public class ResponseBuilder {
     }
 
     private String status() {
-        return PROTOCOL + " " + statusLine.printable() + "\n\n";
+        return PROTOCOL + " " + statusLine.printable() + "\n";
     }
 
 }
