@@ -23,8 +23,8 @@ public class GetResponseCreatorTest {
     public void createsResponseWithBody() {
         ContentStorage storage = new ContentStorage();
         RootController controller = new RootController();
-        storage.store(controller, "some content");
-        GetResponseCreator creator = new GetResponseCreator(OK, storage, controller);
+        storage.store("some content");
+        GetResponseCreator creator = new GetResponseCreator(OK, storage);
         HttpResponse response = creator.create(REQUEST_BODY);
         assertEquals("HTTP/1.1 200 OK\n\nsome content", response.asString());
     }

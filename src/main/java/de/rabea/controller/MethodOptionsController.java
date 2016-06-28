@@ -34,8 +34,8 @@ public class MethodOptionsController implements Controller {
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {
         responsesForMethods.put(GET, new GetResponseCreator(OK));
-        responsesForMethods.put(PUT, new PutResponseCreator(OK, contentStorage, this));
-        responsesForMethods.put(POST, new PostResponseCreator(OK, contentStorage, this));
+        responsesForMethods.put(PUT, new PutResponseCreator(OK, contentStorage));
+        responsesForMethods.put(POST, new PostResponseCreator(OK, contentStorage));
         responsesForMethods.put(HEAD, new HeadResponseCreator(OK));
         responsesForMethods.put(OPTIONS, new OptionsResponseCreator(OK, new OptionsResponseHeader(responsesForMethods)));
         return responsesForMethods;

@@ -33,10 +33,10 @@ public class FormController implements Controller {
     }
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {
-        responsesForMethods.put(PUT, new PutResponseCreator(OK, contentStorage, this));
-        responsesForMethods.put(GET, new GetResponseCreator(OK, contentStorage, this));
-        responsesForMethods.put(POST, new PostResponseCreator(OK, contentStorage, this));
-        responsesForMethods.put(DELETE, new DeleteResponseCreator(OK, contentStorage, this));
+        responsesForMethods.put(PUT, new PutResponseCreator(OK, contentStorage));
+        responsesForMethods.put(GET, new GetResponseCreator(OK, contentStorage));
+        responsesForMethods.put(POST, new PostResponseCreator(OK, contentStorage));
+        responsesForMethods.put(DELETE, new DeleteResponseCreator(OK, contentStorage));
         return responsesForMethods;
     }
 }

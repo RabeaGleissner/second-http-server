@@ -1,24 +1,21 @@
 package de.rabea;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ContentStorage {
-    private final Map<Controller, String> storage = new HashMap<>();
+    private String storage = "";
 
-    public void store(Controller controller, String body) {
-        storage.put(controller, body);
+    public void store(String body) {
+        storage = body;
     }
 
-    public boolean hasContentFor(Controller controller) {
-        return storage.containsKey(controller);
+    public boolean hasContentFor() {
+        return !storage.equals("");
     }
 
-    public String contentFor(Controller controller) {
-        return storage.get(controller);
+    public String contentFor() {
+        return storage;
     }
 
-    public void deleteContentFor(Controller controller) {
-       storage.remove(controller);
+    public void deleteContentFor() {
+       storage = "";
     }
 }

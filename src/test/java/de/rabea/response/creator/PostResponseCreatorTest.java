@@ -12,7 +12,7 @@ public class PostResponseCreatorTest {
 
     @Test
     public void createsResponse() {
-        PostResponseCreator creator = new PostResponseCreator(OK, new ContentStorage(), new RootController());
+        PostResponseCreator creator = new PostResponseCreator(OK, new ContentStorage());
         HttpResponse response = creator.create("body content");
         assertEquals("HTTP/1.1 200 OK\n", response.asString());
     }
@@ -21,8 +21,8 @@ public class PostResponseCreatorTest {
     public void savesBodyInContentStorage() {
         ContentStorage storage = new ContentStorage();
         RootController controller = new RootController();
-        PostResponseCreator creator = new PostResponseCreator(OK, storage, controller);
+        PostResponseCreator creator = new PostResponseCreator(OK, storage);
         creator.create("body content");
-        assertEquals("body content", storage.contentFor(controller));
+        assertEquals("body content", storage.contentFor());
     }
 }
