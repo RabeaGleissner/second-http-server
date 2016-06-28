@@ -1,9 +1,10 @@
 package de.rabea;
 
 import de.rabea.request.HttpRequest;
+import de.rabea.request.HttpVerb;
 import de.rabea.response.HttpResponse;
 
-import static de.rabea.response.head.StatusLine.*;
+import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
 
 public class Controller2 {
 
@@ -37,4 +38,17 @@ public class Controller2 {
    public HttpResponse doHead(HttpRequest request) {
       return methodNotAllowed;
    }
+
+    public HttpResponse dispatch(HttpRequest httpRequest) {
+        HttpVerb verb = httpRequest.requestLine().method();
+        switch (verb) {
+            case PUT: return doPut(httpRequest);
+            case POST: return doPost(httpRequest);
+            case HEAD: return doHead(httpRequest);
+            case PATCH: return doPatch(httpRequest);
+            case DELETE: return doDelete(httpRequest);
+            case OPTIONS: return doOptions(httpRequest);
+            default: return doGet(httpRequest);
+        }
+    }
 }
