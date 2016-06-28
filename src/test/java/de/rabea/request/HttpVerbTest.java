@@ -1,7 +1,9 @@
 package de.rabea.request;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
+import static de.rabea.request.HttpVerb.NONE;
 import static org.junit.Assert.assertEquals;
 
 public class HttpVerbTest {
@@ -16,6 +18,6 @@ public class HttpVerbTest {
 
     @Test
     public void returnsNullIfCannotConvertToVerb() {
-        assertEquals(null, HttpVerb.convert("bogus-request"));
+        assertEquals(NONE, HttpVerb.convert("bogus-request"));
     }
 }

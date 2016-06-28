@@ -2,41 +2,47 @@ package de.rabea.controller;
 
 import de.rabea.ContentStorage;
 import de.rabea.Controller;
+import de.rabea.Controller2;
 import de.rabea.request.HttpRequest;
-import de.rabea.request.HttpVerb;
 import de.rabea.response.HttpResponse;
-import de.rabea.response.ResponseCreator;
-import de.rabea.response.creator.*;
+import de.rabea.response.creator.DeleteResponseCreator;
+import de.rabea.response.creator.GetResponseCreator;
+import de.rabea.response.creator.PostResponseCreator;
+import de.rabea.response.creator.PutResponseCreator;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static de.rabea.request.HttpVerb.*;
 import static de.rabea.response.head.StatusLine.OK;
 
-public class FormController implements Controller {
+public class FormController extends Controller2 implements Controller {
 
-    private Map<HttpVerb, ResponseCreator> responsesForMethods = new HashMap<>();
     private final ContentStorage contentStorage;
 
     public FormController(ContentStorage contentStorage) {
         this.contentStorage = contentStorage;
-        this.responsesForMethods = registerResponses();
     }
 
     @Override
     public HttpResponse getResponse(HttpRequest request) {
-        return responsesForMethods.getOrDefault(
-                request.requestLine().method(),
-                new NoMethodResponseCreator())
-                .create(request.body().getBytes());
+        throw new RuntimeException("I should not be called");
     }
 
-    private Map<HttpVerb, ResponseCreator> registerResponses() {
-        responsesForMethods.put(PUT, new PutResponseCreator(OK, contentStorage));
-        responsesForMethods.put(GET, new GetResponseCreator(OK, contentStorage));
-        responsesForMethods.put(POST, new PostResponseCreator(OK, contentStorage));
-        responsesForMethods.put(DELETE, new DeleteResponseCreator(OK, contentStorage));
-        return responsesForMethods;
+    @Override
+    public HttpResponse doPut(HttpRequest request) {
+        return new PutResponseCreator(OK, contentStorage).create(request.body().getBytes());
     }
+
+    @Override
+    public HttpResponse doPost(HttpRequest request) {
+        return new PostResponseCreator(OK, contentStorage).create(request.body().getBytes());
+    }
+
+    @Override
+    public HttpResponse doGet(HttpRequest request) {
+        return new GetResponseCreator(OK, contentStorage).create(request.body().getBytes());
+    }
+
+    @Override
+    public HttpResponse doDelete(HttpRequest request) {
+        return new DeleteResponseCreator(OK, contentStorage).create(request.body().getBytes());
+    }
+
 }

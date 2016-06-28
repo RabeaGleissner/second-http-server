@@ -19,8 +19,8 @@ public class ServerWorker {
 
     public void start() {
         HttpRequest request = socketReader.read();
-        Controller controller = router.getController(request);
-        HttpResponse httpResponse = controller.getResponse(request);
+        Controller2 controller = router.getController(request);
+        HttpResponse httpResponse = controller.dispatch(request);
         socketWriter.write(httpResponse.asBytes());
     }
 }

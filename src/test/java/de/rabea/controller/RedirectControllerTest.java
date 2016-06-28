@@ -13,7 +13,7 @@ public class RedirectControllerTest {
     public void createsResponseForRedirect() {
         HttpRequest httpRequest = new HttpRequest(HttpVerb.GET, "/redirect");
         RedirectController redirectController = new RedirectController();
-        HttpResponse response = redirectController.getResponse(httpRequest);
+        HttpResponse response = redirectController.dispatch(httpRequest);
         assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/\n", response.asString());
     }
 }

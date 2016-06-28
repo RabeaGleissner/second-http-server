@@ -36,14 +36,14 @@ public class RouterTest {
     public void returnsControllerForGivenRoute() {
         Router router = new Router("PUBLIC_DIR");
         router.configure("/", new RootController());
-        Controller controller = router.getController(new HttpRequest(GET, "/"));
+        Controller2 controller = router.getController(new HttpRequest(GET, "/"));
         assertTrue(controller instanceof RootController);
     }
 
     @Test
     public void returnsControllerForNonExistingRoute() {
         Router router = new Router("PUBLIC_DIR");
-        Controller controller = router.getController(new HttpRequest(GET, "/some-route"));
+        Controller2 controller = router.getController(new HttpRequest(GET, "/some-route"));
         assertTrue(controller instanceof NotFoundController);
     }
 
@@ -51,7 +51,7 @@ public class RouterTest {
     public void returnsAssetControllerForFolderPath() {
         Router router = new Router(pathToFolder);
         router.configure(pathToFolder, new AssetController(pathToFolder, new ContentStorage()));
-        Controller controller = router.getController(new HttpRequest(GET, "/file1"));
+        Controller2 controller = router.getController(new HttpRequest(GET, "/file1"));
         assertTrue(controller instanceof AssetController);
     }
 
@@ -60,7 +60,7 @@ public class RouterTest {
         String nonExistantFolder = "DIR";
         Router router = new Router(nonExistantFolder);
         router.configure(nonExistantFolder, new AssetController(pathToFolder, new ContentStorage()));
-        Controller controller = router.getController(new HttpRequest(GET, "/file1"));
+        Controller2 controller = router.getController(new HttpRequest(GET, "/file1"));
         assertTrue(controller instanceof AssetController);
     }
 }

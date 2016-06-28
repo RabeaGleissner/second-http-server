@@ -13,7 +13,7 @@ public class CoffeeControllerTest {
     public void returnsResponseForCoffeeRoute() {
         HttpRequest httpRequest = new HttpRequest(GET, "/teapot");
         CoffeeController controller = new CoffeeController();
-        HttpResponse response = controller.getResponse(httpRequest);
+        HttpResponse response = controller.dispatch(httpRequest);
         assertEquals("HTTP/1.1 418 I'm a teapot\n\nI'm a teapot", response.asString());
     }
 }

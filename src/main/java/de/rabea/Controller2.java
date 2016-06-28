@@ -48,7 +48,8 @@ public class Controller2 {
             case PATCH: return doPatch(httpRequest);
             case DELETE: return doDelete(httpRequest);
             case OPTIONS: return doOptions(httpRequest);
-            default: return doGet(httpRequest);
+            case GET: return doGet(httpRequest);
+            default: return new HttpResponse(NOT_ALLOWED);
         }
     }
 }

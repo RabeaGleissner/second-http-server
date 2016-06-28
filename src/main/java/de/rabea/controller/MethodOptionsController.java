@@ -2,43 +2,49 @@ package de.rabea.controller;
 
 import de.rabea.ContentStorage;
 import de.rabea.Controller;
+import de.rabea.Controller2;
 import de.rabea.request.HttpRequest;
-import de.rabea.request.HttpVerb;
 import de.rabea.response.HttpResponse;
-import de.rabea.response.ResponseCreator;
-import de.rabea.response.creator.*;
-import de.rabea.response.head.OptionsResponseHeader;
+import de.rabea.response.creator.PostResponseCreator;
+import de.rabea.response.creator.PutResponseCreator;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static de.rabea.request.HttpVerb.*;
 import static de.rabea.response.head.StatusLine.OK;
 
-public class MethodOptionsController implements Controller {
-    private Map<HttpVerb, ResponseCreator> responsesForMethods = new HashMap<>();
+public class MethodOptionsController extends Controller2 implements Controller {
     private final ContentStorage contentStorage;
 
     public MethodOptionsController(ContentStorage contentStorage) {
         this.contentStorage = contentStorage;
-        this.responsesForMethods = registerResponses();
     }
 
     @Override
     public HttpResponse getResponse(HttpRequest request) {
-        return responsesForMethods.getOrDefault(
-                request.requestLine().method(),
-                new NoMethodResponseCreator())
-                .create(request.body().getBytes());
+        throw new RuntimeException("should not be called");
     }
 
-    private Map<HttpVerb, ResponseCreator> registerResponses() {
-        responsesForMethods.put(GET, new GetResponseCreator(OK));
-        responsesForMethods.put(PUT, new PutResponseCreator(OK, contentStorage));
-        responsesForMethods.put(POST, new PostResponseCreator(OK, contentStorage));
-        responsesForMethods.put(HEAD, new HeadResponseCreator(OK));
-        responsesForMethods.put(OPTIONS, new OptionsResponseCreator(OK, new OptionsResponseHeader(responsesForMethods)));
-        return responsesForMethods;
+    @Override
+    public HttpResponse doGet(HttpRequest request) {
+        return new HttpResponse(OK);
+    }
+
+    @Override
+    public HttpResponse doHead(HttpRequest request) {
+        return new HttpResponse(OK);
+    }
+
+    @Override
+    public HttpResponse doPost(HttpRequest request) {
+        return new PostResponseCreator(OK, contentStorage).create(request.body().getBytes());
+    }
+
+    @Override
+    public HttpResponse doPut(HttpRequest request) {
+        return new PutResponseCreator(OK, contentStorage).create(request.body().getBytes());
+    }
+
+    @Override
+    public HttpResponse doOptions(HttpRequest request) {
+        return new HttpResponse(OK, () -> "Allow: GET,POST,PUT,HEAD");
     }
 
 }
