@@ -5,7 +5,7 @@ import de.rabea.response.head.StatusLine;
 
 public class HttpResponse {
 
-    private String response;
+    private final String response;
 
     public HttpResponse(StatusLine statusLine) {
         this.response = new ResponseBuilder(statusLine, new EmptyResponseHeader()).create();
@@ -17,9 +17,6 @@ public class HttpResponse {
 
     public HttpResponse(StatusLine statusLine, String body) {
         this.response = new ResponseBuilder(statusLine, body).create();
-    }
-
-    public HttpResponse() {
     }
 
     public byte[] asBytes() {

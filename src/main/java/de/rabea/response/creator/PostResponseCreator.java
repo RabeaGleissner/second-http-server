@@ -8,9 +8,9 @@ import de.rabea.response.head.StatusLine;
 
 public class PostResponseCreator implements ResponseCreator {
 
-    private StatusLine statusLine;
-    private ContentStorage contentStorage;
-    private Controller controller;
+    private final StatusLine statusLine;
+    private final ContentStorage contentStorage;
+    private final Controller controller;
 
     public PostResponseCreator(StatusLine statusLine, ContentStorage contentStorage, Controller controller) {
         this.statusLine = statusLine;

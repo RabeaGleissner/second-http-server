@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ContentStorage {
-    private Map<Controller, String> storage = new HashMap<>();
+    private final Map<Controller, String> storage = new HashMap<>();
 
     public void store(Controller controller, String body) {
         storage.put(controller, body);

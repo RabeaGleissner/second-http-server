@@ -17,7 +17,7 @@ import static de.rabea.response.head.StatusLine.OK;
 
 public class MethodOptionsController implements Controller {
     private Map<HttpVerb, ResponseCreator> responsesForMethods = new HashMap<>();
-    private ContentStorage contentStorage;
+    private final ContentStorage contentStorage;
 
     public MethodOptionsController(ContentStorage contentStorage) {
         this.contentStorage = contentStorage;

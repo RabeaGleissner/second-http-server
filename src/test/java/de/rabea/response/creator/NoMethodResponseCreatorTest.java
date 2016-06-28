@@ -3,7 +3,7 @@ package de.rabea.response.creator;
 import de.rabea.response.HttpResponse;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class NoMethodResponseCreatorTest {
 

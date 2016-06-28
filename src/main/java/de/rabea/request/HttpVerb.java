@@ -15,12 +15,6 @@ public enum HttpVerb {
                 return verb;
             }
         }
-        throw new UnknownHttpVerbException();
-    }
-
-    public static class UnknownHttpVerbException extends RuntimeException {
-        public UnknownHttpVerbException() {
-            super("The verb to be converted was not a valid HTTP Verb. Please pass in a valid verb.");
-        }
+        return null;
     }
 }

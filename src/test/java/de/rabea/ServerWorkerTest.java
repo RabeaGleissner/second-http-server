@@ -16,7 +16,7 @@ public class ServerWorkerTest {
     public void startsServerWorker() {
         SocketReaderStub socketReaderStub = new SocketReaderStub();
         SocketWriterSpy socketWriterSpy = new SocketWriterSpy(new SocketStub());
-        Router router = new Router();
+        Router router = new Router("DIR");
         router.configure("/", new RootController());
         ServerWorker worker = new ServerWorker(socketReaderStub, socketWriterSpy, router);
         worker.start();

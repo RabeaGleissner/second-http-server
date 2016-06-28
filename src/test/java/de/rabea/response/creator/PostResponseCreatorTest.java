@@ -3,11 +3,10 @@ package de.rabea.response.creator;
 import de.rabea.ContentStorage;
 import de.rabea.controller.RootController;
 import de.rabea.response.HttpResponse;
-import de.rabea.response.head.StatusLine;
 import org.junit.Test;
 
-import static de.rabea.response.head.StatusLine.*;
-import static org.junit.Assert.*;
+import static de.rabea.response.head.StatusLine.OK;
+import static org.junit.Assert.assertEquals;
 
 public class PostResponseCreatorTest {
 
