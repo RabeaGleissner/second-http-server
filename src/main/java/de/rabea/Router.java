@@ -38,8 +38,7 @@ public class Router {
     }
 
     private boolean isPublicDirectory(String route) {
-//        return route.equals("public");
-        return route.equals("vendor/cob_spec/public");
+        return route.equals("public/");
     }
 
     private void registerControllerForFiles(String route, Controller controller) throws IOException {
