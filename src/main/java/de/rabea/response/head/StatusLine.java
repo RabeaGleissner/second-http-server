@@ -4,6 +4,7 @@ public enum StatusLine {
     NOT_FOUND("404 Not Found"),
     SERVER_ERROR("500 Internal Server Error"),
     NOT_ALLOWED("405 Method Not Allowed"),
+    REDIRECT("302 Found"),
     OK("200 OK");
 
     private final String status;
