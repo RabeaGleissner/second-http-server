@@ -9,10 +9,10 @@ import static de.rabea.request.HttpVerb.*;
 import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
 import static org.junit.Assert.*;
 
-public class Controller2Test {
+public class ControllerTest {
 
     private HttpRequestDummy anyRequest = new HttpRequestDummy("GET / HTTP/1.1");
-    private Controller2 controller2 = new Controller2();
+    private Controller controller = new Controller();
     private SampleControllerSpy controllerSpy;
 
     @Before
@@ -70,7 +70,7 @@ public class Controller2Test {
     }
 
 
-    private static class SampleControllerSpy extends Controller2 {
+    private static class SampleControllerSpy extends Controller {
 
         public String lastMethod;
 

@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Router {
-    private final Map<String, Controller2> controllersForRoutes = new HashMap<>();
+    private final Map<String, Controller> controllersForRoutes = new HashMap<>();
     private final NotFoundController notFoundController;
     private final String directory;
 
@@ -20,15 +20,15 @@ public class Router {
         this.notFoundController =  new NotFoundController();
     }
 
-    public Controller2 getController(HttpRequest request) {
+    public Controller getController(HttpRequest request) {
         return controllersForRoutes.getOrDefault(request.requestLine().uri(), notFoundController());
     }
 
-    private Controller2 notFoundController() {
+    private Controller notFoundController() {
         return notFoundController;
     }
 
-    public void configure(String route, Controller2 controller) {
+    public void configure(String route, Controller controller) {
         if (isDirectory(route)) {
             try {
                 registerControllerForFiles(route, controller);
@@ -43,7 +43,7 @@ public class Router {
         return route.equals(directory);
     }
 
-    private void registerControllerForFiles(String route, Controller2 controller) throws IOException {
+    private void registerControllerForFiles(String route, Controller controller) throws IOException {
         Files.walk(Paths.get(route)).forEach(filePath -> {
             if (Files.isRegularFile(filePath)) {
                 controllersForRoutes.put(fileName(filePath), controller);

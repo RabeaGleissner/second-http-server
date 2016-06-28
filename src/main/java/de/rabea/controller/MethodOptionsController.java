@@ -1,7 +1,7 @@
 package de.rabea.controller;
 
 import de.rabea.ContentStorage;
-import de.rabea.Controller2;
+import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import de.rabea.response.creator.PostResponseCreator;
@@ -9,7 +9,7 @@ import de.rabea.response.creator.PutResponseCreator;
 
 import static de.rabea.response.head.StatusLine.OK;
 
-public class MethodOptionsController extends Controller2 {
+public class MethodOptionsController extends Controller {
     private final ContentStorage contentStorage;
 
     public MethodOptionsController(ContentStorage contentStorage) {

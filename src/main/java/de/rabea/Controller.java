@@ -6,7 +6,7 @@ import de.rabea.response.HttpResponse;
 
 import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
 
-public class Controller2 {
+public class Controller {
 
 
    private final HttpResponse methodNotAllowed = new HttpResponse(NOT_ALLOWED);
