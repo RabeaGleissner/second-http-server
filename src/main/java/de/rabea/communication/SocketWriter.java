@@ -18,11 +18,6 @@ public class SocketWriter {
 
     public void write(byte[] responseHead) {
         try {
-            System.out.println("response" + new String(responseHead, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        try {
             createWriter().write(responseHead);
         } catch (IOException e) {
             throw new SocketException("Could not write" + e.getMessage());

@@ -12,10 +12,14 @@ public class FileReader {
         String fileName = httpRequest.requestLine().uri();
         String filePath = directory + fileName;
         try {
-            return Files.readAllBytes(Paths.get(filePath));
+            return fileContent(filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return new byte[0];
+    }
+
+    private static byte[] fileContent(String filePath) throws IOException {
+        return Files.readAllBytes(Paths.get(filePath));
     }
 }

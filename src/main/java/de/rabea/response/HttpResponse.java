@@ -3,6 +3,7 @@ package de.rabea.response;
 import de.rabea.response.head.EmptyResponseHeader;
 import de.rabea.response.head.StatusLine;
 
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 
 public class HttpResponse {
@@ -10,15 +11,15 @@ public class HttpResponse {
     private final byte[] response;
 
     public HttpResponse(StatusLine statusLine) {
-        this.response = new ResponseBuilder(statusLine, new EmptyResponseHeader()).create();
+        this.response = new ResponseBuilder(statusLine, new EmptyResponseHeader()).create(new ByteArrayOutputStream());
     }
 
     public HttpResponse(StatusLine statusLine, ResponseHeader responseHeader) {
-        this.response = new ResponseBuilder(statusLine, responseHeader).create();
+        this.response = new ResponseBuilder(statusLine, responseHeader).create(new ByteArrayOutputStream());
     }
 
     public HttpResponse(StatusLine statusLine, byte[] body) {
-        this.response = new ResponseBuilder(statusLine, body).create();
+        this.response = new ResponseBuilder(statusLine, body).create(new ByteArrayOutputStream());
     }
 
     public byte[] asBytes() {

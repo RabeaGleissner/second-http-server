@@ -1,7 +1,6 @@
 package de.rabea.response.creator;
 
 import de.rabea.ContentStorage;
-import de.rabea.controller.RootController;
 import de.rabea.response.HttpResponse;
 import org.junit.Test;
 

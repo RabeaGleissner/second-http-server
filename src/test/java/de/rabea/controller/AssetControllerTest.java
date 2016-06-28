@@ -4,7 +4,6 @@ import de.rabea.ContentStorage;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;

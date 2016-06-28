@@ -25,23 +25,29 @@ public class ResponseBuilder {
         this.body = body;
     }
 
-    public byte[] create() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+    public byte[] create(ByteArrayOutputStream out) {
         try {
             return combinedHeadAndBody(status() + responseHeader.create(), body, out);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new OutPutStreamWriterException();
         }
-        return new byte[0];
+    }
+
+    public byte[] combinedHeadAndBody(String head, byte[] body, ByteArrayOutputStream out) throws IOException {
+        out.write(head.getBytes());
+        out.write(body);
+        return out.toByteArray();
+    }
+
+    public class OutPutStreamWriterException extends RuntimeException {
+
+       public OutPutStreamWriterException() {
+           super("Apologies, something went wrong with writing to the ByteArrayOutputStream");
+        }
     }
 
     private String status() {
         return PROTOCOL + " " + statusLine.printable() + "\n\n";
     }
 
-    private byte[] combinedHeadAndBody(String head, byte[] body, ByteArrayOutputStream out) throws IOException {
-        out.write(head.getBytes());
-        out.write(body);
-        return out.toByteArray();
-    }
 }
