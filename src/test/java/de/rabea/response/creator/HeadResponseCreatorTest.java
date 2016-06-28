@@ -11,7 +11,7 @@ public class HeadResponseCreatorTest {
     @Test
     public void createsResponse() {
         HeadResponseCreator creator = new HeadResponseCreator(OK);
-        HttpResponse response = creator.create("");
-        assertEquals("HTTP/1.1 200 OK\n", response.asString());
+        HttpResponse response = creator.create(new byte[0]);
+        assertEquals("HTTP/1.1 200 OK\n\n", response.asString());
     }
 }

@@ -37,7 +37,7 @@ public class AssetController implements Controller {
     }
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {
-        responsesForMethods.put(GET, new GetResponseCreator(OK, contentStorage, this));
+        responsesForMethods.put(GET, new GetResponseCreator(OK, contentStorage));
         return responsesForMethods;
     }
 }

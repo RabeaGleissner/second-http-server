@@ -29,7 +29,7 @@ public class MethodOptionsController implements Controller {
         return responsesForMethods.getOrDefault(
                 request.requestLine().method(),
                 new NoMethodResponseCreator())
-                .create(request.body());
+                .create(request.body().getBytes());
     }
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {

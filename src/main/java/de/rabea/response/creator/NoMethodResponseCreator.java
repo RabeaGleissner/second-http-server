@@ -7,7 +7,7 @@ import de.rabea.response.head.StatusLine;
 public class NoMethodResponseCreator implements ResponseCreator {
 
     @Override
-    public HttpResponse create(String body) {
+    public HttpResponse create(byte[] body) {
         return new HttpResponse(StatusLine.NOT_ALLOWED);
     }
 }

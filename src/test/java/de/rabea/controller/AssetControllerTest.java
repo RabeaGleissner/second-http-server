@@ -27,11 +27,10 @@ public class AssetControllerTest {
     }
 
     @Test
-    @Ignore
     public void returnsResponse() {
         HttpRequest httpRequest = new HttpRequest(GET, "/file1");
         AssetController controller = new AssetController(pathToFolder, new ContentStorage());
         HttpResponse response = controller.getResponse(httpRequest);
-        assertEquals("HTTP/1.1 200 OK\n", response.asString());
+        assertEquals("HTTP/1.1 200 OK\n\n", response.asString());
     }
 }

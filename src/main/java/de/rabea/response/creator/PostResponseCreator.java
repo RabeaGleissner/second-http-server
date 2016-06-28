@@ -16,7 +16,7 @@ public class PostResponseCreator implements ResponseCreator {
     }
 
     @Override
-    public HttpResponse create(String body) {
+    public HttpResponse create(byte[] body) {
         contentStorage.store(body);
         return new HttpResponse(statusLine);
     }

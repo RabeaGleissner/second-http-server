@@ -9,7 +9,7 @@ public class FakeResponseCreator implements ResponseCreator {
     }
 
     @Override
-    public HttpResponse create(String body) {
+    public HttpResponse create(byte[] body) {
         return null;
     }
 }

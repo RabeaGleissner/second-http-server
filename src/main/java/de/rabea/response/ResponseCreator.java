@@ -1,5 +1,5 @@
 package de.rabea.response;
 
 public interface ResponseCreator {
-    HttpResponse create(String body);
+    HttpResponse create(byte[] body);
 }

@@ -15,19 +15,18 @@ public class DeleteResponseCreatorTest {
     @Test
     public void createsNewHttpResponse() {
         DeleteResponseCreator creator = new DeleteResponseCreator(NOT_FOUND, new ContentStorage());
-        HttpResponse response = creator.create(REQUEST_BODY);
-        assertEquals("HTTP/1.1 404 Not Found\n", response.asString());
+        HttpResponse response = creator.create(REQUEST_BODY.getBytes());
+        assertEquals("HTTP/1.1 404 Not Found\n\n", response.asString());
     }
 
     @Test
     public void deletesExistingContentInStorage() {
-        RootController controller = new RootController();
         ContentStorage contentStorage = new ContentStorage();
-        contentStorage.store("some content");
+        contentStorage.store("some content".getBytes());
         DeleteResponseCreator creator = new DeleteResponseCreator(NOT_FOUND, contentStorage);
 
-        HttpResponse response = creator.create(REQUEST_BODY);
+        HttpResponse response = creator.create(REQUEST_BODY.getBytes());
 
-        assertEquals("HTTP/1.1 404 Not Found\n", response.asString());
+        assertEquals("HTTP/1.1 404 Not Found\n\n", response.asString());
     }
 }

@@ -23,18 +23,18 @@ public class GetResponseCreator implements ResponseCreator {
     }
 
     @Override
-    public HttpResponse create(String body) {
+    public HttpResponse create(byte[] body) {
         if (simpleResponse) {
             return new HttpResponse(statusLine);
         } else {
-            contentStorage.store(controller, body);
+            contentStorage.store(body);
             return responseWithBody();
         }
     }
 
     private HttpResponse responseWithBody() {
         if (contentStorage.hasContentFor()) {
-            return new HttpResponse(statusLine, contentStorage.contentFor());
+            return new HttpResponse(statusLine, contentStorage.content());
         } else {
             return new HttpResponse(statusLine);
         }

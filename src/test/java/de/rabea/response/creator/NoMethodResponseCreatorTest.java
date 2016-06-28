@@ -10,7 +10,7 @@ public class NoMethodResponseCreatorTest {
     @Test
     public void returnsResponse() {
         NoMethodResponseCreator responseCreator = new NoMethodResponseCreator();
-        HttpResponse response = responseCreator.create("");
-        assertEquals("HTTP/1.1 405 Method Not Allowed\n", response.asString());
+        HttpResponse response = responseCreator.create("".getBytes());
+        assertEquals("HTTP/1.1 405 Method Not Allowed\n\n", response.asString());
     }
 }

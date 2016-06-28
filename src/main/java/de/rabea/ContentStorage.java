@@ -1,9 +1,9 @@
 package de.rabea;
 
 public class ContentStorage {
-    private String storage = "";
+    private byte[] storage = new byte[0];
 
-    public void store(String body) {
+    public void store(byte[] body) {
         storage = body;
     }
 
@@ -11,11 +11,11 @@ public class ContentStorage {
         return !storage.equals("");
     }
 
-    public String contentFor() {
+    public byte[] content() {
         return storage;
     }
 
     public void deleteContentFor() {
-       storage = "";
+       storage = new byte[0];
     }
 }

@@ -23,7 +23,7 @@ public class OptionsResponseCreatorTest {
         responses.put(POST, new FakeResponseCreator());
         OptionsResponseCreator creator = new OptionsResponseCreator(OK, new OptionsResponseHeader(responses));
 
-        String response = creator.create("").asString();
+        String response = creator.create("".getBytes()).asString();
 
         assertTrue(response.contains("GET"));
         assertTrue(response.contains("POST"));

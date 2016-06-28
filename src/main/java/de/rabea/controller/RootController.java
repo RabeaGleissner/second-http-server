@@ -27,7 +27,7 @@ public class RootController implements Controller {
     @Override
     public HttpResponse getResponse(HttpRequest httpRequest) {
         return responsesForMethods.getOrDefault(httpRequest.requestLine().method(),
-                new NoMethodResponseCreator()).create(httpRequest.body());
+                new NoMethodResponseCreator()).create(httpRequest.body().getBytes());
     }
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {

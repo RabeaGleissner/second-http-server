@@ -3,9 +3,11 @@ package de.rabea.response;
 import de.rabea.response.head.EmptyResponseHeader;
 import de.rabea.response.head.StatusLine;
 
+import java.io.UnsupportedEncodingException;
+
 public class HttpResponse {
 
-    private final String response;
+    private final byte[] response;
 
     public HttpResponse(StatusLine statusLine) {
         this.response = new ResponseBuilder(statusLine, new EmptyResponseHeader()).create();
@@ -15,15 +17,20 @@ public class HttpResponse {
         this.response = new ResponseBuilder(statusLine, responseHeader).create();
     }
 
-    public HttpResponse(StatusLine statusLine, String body) {
+    public HttpResponse(StatusLine statusLine, byte[] body) {
         this.response = new ResponseBuilder(statusLine, body).create();
     }
 
     public byte[] asBytes() {
-        return response.getBytes();
+        return response;
     }
 
     public String asString() {
-       return response;
+        try {
+            return new String(response, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

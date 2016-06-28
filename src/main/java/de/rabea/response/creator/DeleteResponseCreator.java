@@ -16,7 +16,7 @@ public class DeleteResponseCreator implements ResponseCreator {
     }
 
     @Override
-    public HttpResponse create(String body) {
+    public HttpResponse create(byte[] body) {
         if (contentStorage.hasContentFor()) {
             contentStorage.deleteContentFor();
         }

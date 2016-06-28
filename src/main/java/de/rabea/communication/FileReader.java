@@ -8,14 +8,14 @@ import java.nio.file.Paths;
 
 public class FileReader {
 
-    public static String read(HttpRequest httpRequest, String directory) {
+    public static byte[] read(HttpRequest httpRequest, String directory) {
         String fileName = httpRequest.requestLine().uri();
         String filePath = directory + fileName;
         try {
-            return new String(Files.readAllBytes(Paths.get(filePath)), "UTF-8");
+            return Files.readAllBytes(Paths.get(filePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "";
+        return new byte[0];
     }
 }
