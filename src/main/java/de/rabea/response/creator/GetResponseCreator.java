@@ -27,6 +27,7 @@ public class GetResponseCreator implements ResponseCreator {
         if (simpleResponse) {
             return new HttpResponse(statusLine);
         } else {
+            contentStorage.store(controller, body);
             return responseWithBody();
         }
     }

@@ -5,6 +5,7 @@ import de.rabea.exceptions.SocketException;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 
 public class SocketWriter {
@@ -16,6 +17,11 @@ public class SocketWriter {
     }
 
     public void write(byte[] responseHead) {
+        try {
+            System.out.println(new String(responseHead, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         try {
             createWriter().write(responseHead);
         } catch (IOException e) {

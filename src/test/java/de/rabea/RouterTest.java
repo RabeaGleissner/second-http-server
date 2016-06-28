@@ -50,7 +50,7 @@ public class RouterTest {
     @Test
     public void returnsAssetControllerForFolderPath() {
         Router router = new Router(pathToFolder);
-        router.configure(pathToFolder, new AssetController());
+        router.configure(pathToFolder, new AssetController(pathToFolder, new ContentStorage()));
         Controller controller = router.getController(new HttpRequest(GET, "/file1"));
         assertTrue(controller instanceof AssetController);
     }
@@ -59,7 +59,7 @@ public class RouterTest {
     public void throwsExceptionIfItCannotReadAnyFilesInFolder() {
         String nonExistantFolder = "DIR";
         Router router = new Router(nonExistantFolder);
-        router.configure(nonExistantFolder, new AssetController());
+        router.configure(nonExistantFolder, new AssetController(pathToFolder, new ContentStorage()));
         Controller controller = router.getController(new HttpRequest(GET, "/file1"));
         assertTrue(controller instanceof AssetController);
     }

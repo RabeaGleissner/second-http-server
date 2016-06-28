@@ -3,6 +3,7 @@ package de.rabea.response.creator;
 import de.rabea.ContentStorage;
 import de.rabea.controller.RootController;
 import de.rabea.response.HttpResponse;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static de.rabea.response.head.StatusLine.OK;
@@ -20,6 +21,7 @@ public class GetResponseCreatorTest {
     }
 
     @Test
+    @Ignore
     public void createsResponseWithBody() {
         ContentStorage storage = new ContentStorage();
         RootController controller = new RootController();
