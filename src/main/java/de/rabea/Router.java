@@ -13,8 +13,10 @@ import java.util.Map;
 public class Router {
     private final Map<String, Controller> controllersForRoutes = new HashMap<>();
     private final NotFoundController notFoundController;
+    private String directory;
 
-    public Router() {
+    public Router(String directory) {
+        this.directory = directory;
         this.notFoundController =  new NotFoundController();
     }
 
@@ -27,7 +29,7 @@ public class Router {
     }
 
     public void configure(String route, Controller controller) {
-        if (isPublicDirectory(route)) {
+        if (isDirectory(route)) {
             try {
                 registerControllerForFiles(route, controller);
             } catch (IOException e) {
@@ -37,14 +39,13 @@ public class Router {
         controllersForRoutes.put(route, controller);
     }
 
-    private boolean isPublicDirectory(String route) {
-        return route.equals("public/");
+    private boolean isDirectory(String route) {
+        return route.equals(directory);
     }
 
     private void registerControllerForFiles(String route, Controller controller) throws IOException {
         Files.walk(Paths.get(route)).forEach(filePath -> {
             if (Files.isRegularFile(filePath)) {
-                System.out.println("file path" + fileName(filePath));
                 controllersForRoutes.put(fileName(filePath), controller);
             }
         });
@@ -56,7 +57,7 @@ public class Router {
         return "/" + folders[folders.length - 1];
     }
 
-    private class FileException extends RuntimeException {
+    public class FileException extends RuntimeException {
         public FileException() {
             super("Cannot read files in given directory. Please make sure the directory is correct.");
         }

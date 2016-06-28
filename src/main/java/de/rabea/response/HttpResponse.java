@@ -19,9 +19,6 @@ public class HttpResponse {
         this.response = new ResponseBuilder(statusLine, body).create();
     }
 
-    public HttpResponse() {
-    }
-
     public byte[] asBytes() {
         return response.getBytes();
     }

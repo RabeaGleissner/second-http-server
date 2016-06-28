@@ -14,7 +14,7 @@ public class Main {
 
         System.out.println("Server started at port " + port + " and directory " + directory);
         ServerSocket serverSocket = new ServerSocket(port);
-        Router router = new Router();
+        Router router = new Router(directory);
         router.configure("/", new RootController());
         router.configure("/form", new FormController(new ContentStorage()));
         router.configure("/method_options", new MethodOptionsController(new ContentStorage()));
