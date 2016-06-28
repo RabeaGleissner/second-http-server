@@ -4,7 +4,8 @@ import de.rabea.ContentStorage;
 import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
-import de.rabea.response.*;
+import de.rabea.response.HttpResponse;
+import de.rabea.response.ResponseCreator;
 import de.rabea.response.creator.*;
 import de.rabea.response.head.OptionsResponseHeader;
 
@@ -12,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static de.rabea.request.HttpVerb.*;
-import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
 import static de.rabea.response.head.StatusLine.OK;
 
 public class MethodOptionsController implements Controller {
@@ -28,7 +28,7 @@ public class MethodOptionsController implements Controller {
     public HttpResponse getResponse(HttpRequest request) {
         return responsesForMethods.getOrDefault(
                 request.requestLine().method(),
-                new GetResponseCreator(NOT_ALLOWED))
+                new NoMethodResponseCreator())
                 .create(request.body());
     }
 

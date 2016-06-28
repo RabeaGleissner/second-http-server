@@ -7,13 +7,13 @@ import de.rabea.response.HttpResponse;
 import de.rabea.response.ResponseCreator;
 import de.rabea.response.creator.GetResponseCreator;
 import de.rabea.response.creator.HeadResponseCreator;
+import de.rabea.response.creator.NoMethodResponseCreator;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static de.rabea.request.HttpVerb.GET;
 import static de.rabea.request.HttpVerb.HEAD;
-import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
 import static de.rabea.response.head.StatusLine.OK;
 
 public class RootController implements Controller {
@@ -27,7 +27,7 @@ public class RootController implements Controller {
     @Override
     public HttpResponse getResponse(HttpRequest httpRequest) {
         return responsesForMethods.getOrDefault(httpRequest.requestLine().method(),
-                new GetResponseCreator(NOT_ALLOWED)).create(httpRequest.body());
+                new NoMethodResponseCreator()).create(httpRequest.body());
     }
 
     private Map<HttpVerb, ResponseCreator> registerResponses() {

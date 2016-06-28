@@ -5,10 +5,7 @@ import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
 import de.rabea.response.*;
-import de.rabea.response.creator.DeleteResponseCreator;
-import de.rabea.response.creator.GetResponseCreator;
-import de.rabea.response.creator.PostResponseCreator;
-import de.rabea.response.creator.PutResponseCreator;
+import de.rabea.response.creator.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +28,7 @@ public class FormController implements Controller {
     public HttpResponse getResponse(HttpRequest request) {
         return responsesForMethods.getOrDefault(
                 request.requestLine().method(),
-                new GetResponseCreator(NOT_ALLOWED, contentStorage, this))
+                new NoMethodResponseCreator())
                 .create(request.body());
     }
 
