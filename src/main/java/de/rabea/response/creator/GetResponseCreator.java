@@ -27,7 +27,9 @@ public class GetResponseCreator implements ResponseCreator {
         if (simpleResponse) {
             return new HttpResponse(statusLine);
         } else {
-            contentStorage.store(body);
+            if (body.length != 0) {
+                contentStorage.store(body);
+            }
             return responseWithBody();
         }
     }
