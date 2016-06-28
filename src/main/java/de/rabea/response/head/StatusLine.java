@@ -1,4 +1,4 @@
-package de.rabea.response;
+package de.rabea.response.head;
 
 public enum StatusLine {
     NOT_FOUND("404 Not Found"),

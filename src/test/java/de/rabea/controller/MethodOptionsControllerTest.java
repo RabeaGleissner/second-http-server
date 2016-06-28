@@ -1,5 +1,6 @@
 package de.rabea.controller;
 
+import de.rabea.ContentStorage;
 import de.rabea.request.HttpRequest;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ public class MethodOptionsControllerTest {
 
     @Test
     public void returnsResponseForOptionsRequest() {
-        MethodOptionsController controller = new MethodOptionsController();
+        MethodOptionsController controller = new MethodOptionsController(new ContentStorage());
         String response = controller.getResponse(new HttpRequest(OPTIONS, "/method_options")).asString();
         assertTrue(response.contains("Allow: "));
         assertTrue(response.contains("GET"));

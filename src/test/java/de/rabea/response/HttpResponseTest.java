@@ -2,7 +2,7 @@ package de.rabea.response;
 
 import org.junit.Test;
 
-import static de.rabea.response.StatusLine.*;
+import static de.rabea.response.head.StatusLine.*;
 import static org.junit.Assert.assertArrayEquals;
 
 public class HttpResponseTest {
