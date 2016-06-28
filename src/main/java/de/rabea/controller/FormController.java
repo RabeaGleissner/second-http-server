@@ -1,7 +1,6 @@
 package de.rabea.controller;
 
 import de.rabea.ContentStorage;
-import de.rabea.Controller;
 import de.rabea.Controller2;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
@@ -12,17 +11,12 @@ import de.rabea.response.creator.PutResponseCreator;
 
 import static de.rabea.response.head.StatusLine.OK;
 
-public class FormController extends Controller2 implements Controller {
+public class FormController extends Controller2 {
 
     private final ContentStorage contentStorage;
 
     public FormController(ContentStorage contentStorage) {
         this.contentStorage = contentStorage;
-    }
-
-    @Override
-    public HttpResponse getResponse(HttpRequest request) {
-        throw new RuntimeException("I should not be called");
     }
 
     @Override
