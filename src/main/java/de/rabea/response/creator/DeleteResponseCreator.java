@@ -8,7 +8,7 @@ import de.rabea.response.head.StatusLine;
 
 public class DeleteResponseCreator implements ResponseCreator {
 
-    private StatusLine statusLine;
+    private final StatusLine statusLine;
     private final ContentStorage contentStorage;
     private final Controller controller;
 

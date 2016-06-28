@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static de.rabea.request.HttpVerb.POST;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class HttpRequestTest {
     private HttpRequest request;

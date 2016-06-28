@@ -6,7 +6,7 @@ import de.rabea.response.head.StatusLine;
 
 public class HeadResponseCreator implements ResponseCreator {
 
-    private StatusLine statusLine;
+    private final StatusLine statusLine;
 
     public HeadResponseCreator(StatusLine statusLine) {
         this.statusLine = statusLine;

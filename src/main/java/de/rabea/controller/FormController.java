@@ -4,20 +4,20 @@ import de.rabea.ContentStorage;
 import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.HttpVerb;
-import de.rabea.response.*;
+import de.rabea.response.HttpResponse;
+import de.rabea.response.ResponseCreator;
 import de.rabea.response.creator.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static de.rabea.request.HttpVerb.*;
-import static de.rabea.request.HttpVerb.PUT;
-import static de.rabea.response.head.StatusLine.*;
+import static de.rabea.response.head.StatusLine.OK;
 
 public class FormController implements Controller {
 
     private Map<HttpVerb, ResponseCreator> responsesForMethods = new HashMap<>();
-    private ContentStorage contentStorage;
+    private final ContentStorage contentStorage;
 
     public FormController(ContentStorage contentStorage) {
         this.contentStorage = contentStorage;

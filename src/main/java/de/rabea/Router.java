@@ -13,7 +13,7 @@ import java.util.Map;
 public class Router {
     private final Map<String, Controller> controllersForRoutes = new HashMap<>();
     private final NotFoundController notFoundController;
-    private String directory;
+    private final String directory;
 
     public Router(String directory) {
         this.directory = directory;

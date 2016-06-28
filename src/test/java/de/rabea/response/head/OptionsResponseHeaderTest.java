@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static de.rabea.request.HttpVerb.GET;
 import static de.rabea.request.HttpVerb.POST;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class OptionsResponseHeaderTest {
 

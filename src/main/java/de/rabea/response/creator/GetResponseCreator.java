@@ -8,10 +8,10 @@ import de.rabea.response.head.StatusLine;
 
 public class GetResponseCreator implements ResponseCreator {
 
-    private StatusLine statusLine;
+    private final StatusLine statusLine;
     private ContentStorage contentStorage;
     private Controller controller;
-    private boolean simpleResponse;
+    private final boolean simpleResponse;
 
     public GetResponseCreator(StatusLine statusLine, ContentStorage contentStorage, Controller controller) {
         this.statusLine = statusLine;
