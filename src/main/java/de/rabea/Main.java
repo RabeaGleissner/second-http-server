@@ -16,6 +16,7 @@ public class Main {
         ServerSocket serverSocket = new ServerSocket(port);
         Router router = new Router(directory);
         router.configure("/", new RootController());
+        router.configure("/tea", new TeaController());
         router.configure("/form", new FormController(new ContentStorage()));
         router.configure("/method_options", new MethodOptionsController(new ContentStorage()));
         router.configure("/method_options2", new MethodOptions2Controller());
