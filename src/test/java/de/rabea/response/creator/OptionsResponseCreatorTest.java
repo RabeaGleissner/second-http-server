@@ -18,13 +18,8 @@ public class OptionsResponseCreatorTest {
 
     @Test
     public void createResponse() {
-        Map<HttpVerb, ResponseCreator> responses = new HashMap<>();
-        responses.put(GET, new FakeResponseCreator());
-        responses.put(POST, new FakeResponseCreator());
-        OptionsResponseCreator creator = new OptionsResponseCreator(OK, new OptionsResponseHeader(responses));
-
+        OptionsResponseCreator creator = new OptionsResponseCreator(OK, new OptionsResponseHeader(GET, POST));
         String response = creator.create("".getBytes()).asString();
-
         assertTrue(response.contains("GET"));
         assertTrue(response.contains("POST"));
         assertTrue(response.contains("Allow"));

@@ -1,31 +1,24 @@
 package de.rabea.response.head;
 
 import de.rabea.request.HttpVerb;
-import de.rabea.response.ResponseCreator;
 import de.rabea.response.ResponseHeader;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
-import static de.rabea.request.HttpVerb.OPTIONS;
+import java.util.stream.Collectors;
 
 public class OptionsResponseHeader implements ResponseHeader {
 
-    private final Map<HttpVerb, ResponseCreator> responsesForMethods;
+    private final List<HttpVerb> httpVerbs;
 
-    public OptionsResponseHeader(Map<HttpVerb, ResponseCreator> responsesForMethods) {
-        this.responsesForMethods = responsesForMethods;
+    public OptionsResponseHeader(HttpVerb...verb) {
+        this.httpVerbs = new ArrayList<>(Arrays.asList(verb));
     }
 
     @Override
     public String create() {
-        List<HttpVerb> verbs = new ArrayList<>(responsesForMethods.keySet());
-        String stringBuilder = "";
-        for (HttpVerb verb : verbs) {
-            stringBuilder += verb;
-            stringBuilder += ",";
-        }
-        return "Allow: " + stringBuilder + OPTIONS;
+        String allowedMethods = httpVerbs.stream().map(HttpVerb::toString).collect(Collectors.joining(","));
+        return "Allow: " + allowedMethods;
     }
 }

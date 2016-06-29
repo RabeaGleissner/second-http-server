@@ -5,7 +5,6 @@ import de.rabea.Controller;
 import de.rabea.communication.FileReader;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
-import de.rabea.response.creator.GetResponseCreator;
 
 import static de.rabea.response.head.StatusLine.OK;
 
@@ -21,6 +20,7 @@ public class AssetController extends Controller {
 
     @Override
     public HttpResponse doGet(HttpRequest request) {
-        return new GetResponseCreator(OK, contentStorage).create(FileReader.read(request, directory));
+        contentStorage.store(FileReader.read(request, directory));
+        return new HttpResponse(OK);
     }
 }

@@ -1,28 +1,15 @@
 package de.rabea.response.head;
 
-import de.rabea.request.HttpVerb;
-import de.rabea.response.ResponseCreator;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static de.rabea.request.HttpVerb.GET;
-import static de.rabea.request.HttpVerb.POST;
-import static org.junit.Assert.assertTrue;
+import static de.rabea.request.HttpVerb.*;
+import static org.junit.Assert.assertEquals;
 
 public class OptionsResponseHeaderTest {
 
     @Test
     public void returnsResponseWithAllowedMethods() {
-        Map<HttpVerb, ResponseCreator> responses = new HashMap<>();
-        responses.put(GET, new FakeResponseCreator());
-        responses.put(POST, new FakeResponseCreator());
-        OptionsResponseHeader header = new OptionsResponseHeader(responses);
-        String allowHeader = header.create();
-        assertTrue(allowHeader.contains("GET"));
-        assertTrue(allowHeader.contains("POST"));
-        assertTrue(allowHeader.contains("Allow:"));
+        OptionsResponseHeader header = new OptionsResponseHeader(GET,HEAD,POST,OPTIONS,PUT);
+        assertEquals("Allow: GET,HEAD,POST,OPTIONS,PUT", header.create());
     }
-
 }
