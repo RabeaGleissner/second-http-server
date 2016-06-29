@@ -28,5 +28,4 @@ public class RootControllerTest {
         RootController controller = new RootController();
         assertEquals("HTTP/1.1 200 OK\n\n", controller.dispatch(httpRequest).asString());
     }
-
 }

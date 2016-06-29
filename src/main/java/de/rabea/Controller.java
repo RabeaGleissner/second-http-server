@@ -5,9 +5,9 @@ import de.rabea.request.HttpVerb;
 import de.rabea.response.HttpResponse;
 
 import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
+import static de.rabea.response.head.StatusLine.OK;
 
 public class Controller {
-
 
    private final HttpResponse methodNotAllowed = new HttpResponse(NOT_ALLOWED);
 
@@ -51,5 +51,9 @@ public class Controller {
             case GET: return doGet(httpRequest);
             default: return new HttpResponse(NOT_ALLOWED);
         }
+    }
+
+    public HttpResponse okResponse() {
+        return new HttpResponse(OK);
     }
 }

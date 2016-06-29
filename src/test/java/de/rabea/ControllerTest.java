@@ -11,8 +11,6 @@ import static org.junit.Assert.*;
 
 public class ControllerTest {
 
-    private HttpRequestDummy anyRequest = new HttpRequestDummy("GET / HTTP/1.1");
-    private Controller controller = new Controller();
     private SampleControllerSpy controllerSpy;
 
     @Before
@@ -69,6 +67,12 @@ public class ControllerTest {
         assertTrue(controllerSpy.lastMethod.equals("PATCH"));
     }
 
+    @Test
+    public void returnsResponseForBogusRequest() {
+        Controller controller = new Controller();
+        HttpResponse response = controller.dispatch(new HttpRequestDummy(NONE));
+        assertEquals(NOT_ALLOWED, response.getStatusCode());
+    }
 
     private static class SampleControllerSpy extends Controller {
 
@@ -116,5 +120,4 @@ public class ControllerTest {
             return super.doPatch(request);
         }
     }
-
 }

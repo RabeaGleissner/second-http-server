@@ -21,6 +21,6 @@ public class AssetController extends Controller {
     @Override
     public HttpResponse doGet(HttpRequest request) {
         contentStorage.store(FileReader.read(request, directory));
-        return new HttpResponse(OK);
+        return new HttpResponse(OK, contentStorage.content());
     }
 }
