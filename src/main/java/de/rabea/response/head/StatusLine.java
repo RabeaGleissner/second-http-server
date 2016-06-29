@@ -2,7 +2,7 @@ package de.rabea.response.head;
 
 public enum StatusLine {
     NOT_FOUND("404 Not Found"),
-    SERVER_ERROR("500 Internal Server Error"),
+    UNAUTHORIZED("401 Unauthorized"),
     NOT_ALLOWED("405 Method Not Allowed"),
     TEAPOT("418 I'm a teapot"),
     REDIRECT("302 Found"),
