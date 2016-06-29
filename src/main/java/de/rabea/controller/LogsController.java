@@ -4,8 +4,10 @@ import de.rabea.Controller;
 import de.rabea.Logger;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
+import de.rabea.response.head.AuthenticateResponseHeader;
 
 import static de.rabea.response.head.StatusLine.OK;
+import static de.rabea.response.head.StatusLine.UNAUTHORIZED;
 
 public class LogsController extends Controller {
 
@@ -18,6 +20,17 @@ public class LogsController extends Controller {
 
     @Override
     public HttpResponse doGet(HttpRequest request) {
-        return new HttpResponse(OK, logger.getLogs());
+        if (authorized(request)) {
+            return new HttpResponse(OK, logger.getLogs());
+        }
+        return new HttpResponse(UNAUTHORIZED, new AuthenticateResponseHeader());
+
+    }
+
+    private boolean authorized(HttpRequest request) {
+        if (request.requestHeaders().containsKey("Authorization")) {
+            return request.requestHeaders().get("Authorization").equals("Basic YWRtaW46aHVudGVyMg==");
+        }
+        return false;
     }
 }
