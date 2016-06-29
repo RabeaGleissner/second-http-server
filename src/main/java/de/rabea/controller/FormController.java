@@ -17,13 +17,13 @@ public class FormController extends Controller {
 
     @Override
     public HttpResponse doPut(HttpRequest request) {
-        contentStorage.store(request.body().getBytes());
+        contentStorage.storeResponseBody(request.body());
         return okResponse();
     }
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
-        contentStorage.store(request.body().getBytes());
+        contentStorage.storeResponseBody(request.body());
         return okResponse();
     }
 
@@ -34,7 +34,7 @@ public class FormController extends Controller {
 
     @Override
     public HttpResponse doDelete(HttpRequest request) {
-        contentStorage.deleteContentFor();
+        contentStorage.deleteContent();
         return okResponse();
     }
 }
