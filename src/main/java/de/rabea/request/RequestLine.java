@@ -20,6 +20,10 @@ public class RequestLine {
         return firstLine.split(" ")[2];
     }
 
+    public String asString() {
+       return firstLine;
+    }
+
     private String getFirstLine(String rawRequest) {
         return rawRequest.split("\n")[0];
     }
