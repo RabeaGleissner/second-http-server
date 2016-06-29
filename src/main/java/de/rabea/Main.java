@@ -12,7 +12,6 @@ public class Main {
         int port = arguments.getPort();
         String directory = arguments.getDirectory();
 
-        System.out.println("Server started at port " + port + " and directory " + directory);
         ServerSocket serverSocket = new ServerSocket(port);
         Router router = new Router(directory);
         router.configure("/", new RootController());
@@ -24,6 +23,6 @@ public class Main {
         router.configure("/tea", new TeaController());
         router.configure(directory, new AssetController(directory, new ContentStorage()));
         HttpServer httpServer = new HttpServer(Executors.newFixedThreadPool(20), serverSocket, router);
-        httpServer.start();
+        httpServer.start(directory, port);
     }
 }
