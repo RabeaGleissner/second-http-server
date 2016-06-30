@@ -17,7 +17,7 @@ public class Router {
     }
 
     public Controller getController(HttpRequest request) {
-        return controllersForRoutes.getOrDefault(request.requestLine().uri(), notFoundController());
+        return controllersForRoutes.getOrDefault(request.requestLine().route(), notFoundController());
     }
 
     private Controller notFoundController() {
