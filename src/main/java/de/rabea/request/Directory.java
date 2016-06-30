@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Directory {
 
@@ -36,6 +38,26 @@ public class Directory {
         return fileNames;
     }
 
+    public byte[] contentOfFile(String fileName) {
+        String filePath = new File(givenDirectory).getAbsolutePath();
+        return FileReader.read(filePath + fileName);
+    }
+
+    public Map<String, String> filesWithPaths() {
+        Map<String, String> filesWithPaths = new HashMap<>();
+        for (String filePath : allFilePaths()) {
+            String[] folders = filePath.split("/");
+            filesWithPaths.put(folders[folders.length - 1], filePath);
+        }
+        return filesWithPaths;
+    }
+
+    public class FileException extends RuntimeException {
+        public FileException() {
+            super("Cannot read files in given directory. Please make sure the directory is correct.");
+        }
+    }
+
     private List<String> allExistingFiles(List<String> files) throws IOException {
         Files.walk(Paths.get(givenDirectory)).forEach(filePath -> {
             if (Files.isRegularFile(filePath)) {
@@ -45,14 +67,4 @@ public class Directory {
         return files;
     }
 
-    public byte[] contentOfFile(String fileName) {
-        String filePath = new File(givenDirectory).getAbsolutePath();
-        return FileReader.read(filePath + fileName);
-    }
-
-    public class FileException extends RuntimeException {
-        public FileException() {
-            super("Cannot read files in given directory. Please make sure the directory is correct.");
-        }
-    }
 }

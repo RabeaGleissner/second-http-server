@@ -9,7 +9,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -59,6 +61,14 @@ public class DirectoryTest {
     public void returnsContentOfGivenFile() {
         Directory directory = new Directory(pathToFolder);
         assertArrayEquals("Some content".getBytes(), directory.contentOfFile("/file1"));
+    }
+
+    @Test
+    public void returnsMapOfFileNamesAndCorrespondingPaths() {
+        Directory directory = new Directory(pathToFolder);
+        Map<String, String> filesAndPaths = directory.filesWithPaths();
+        String path = filesAndPaths.get("file1");
+        assertTrue(path.contains("/var/folders/gp/r"));
     }
 
     private void writeContentTo(File file, String content) throws IOException {
