@@ -17,7 +17,7 @@ public class Main {
         ServerSocket serverSocket = new ServerSocket(port);
         Router router = new Router();
         Logger logger = new Logger();
-        router.configure("/", new RootController());
+        router.configure("/", new RootController(directory));
         router.configure("/coffee", new CoffeeController());
         router.configure("/logs", new LogsController(logger));
         router.configure("/form", new FormController(new ContentStorage()));

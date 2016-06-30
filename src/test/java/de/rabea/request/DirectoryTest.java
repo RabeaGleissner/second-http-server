@@ -9,7 +9,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,9 +65,9 @@ public class DirectoryTest {
     @Test
     public void returnsMapOfFileNamesAndCorrespondingPaths() {
         Directory directory = new Directory(pathToFolder);
-        Map<String, String> filesAndPaths = directory.filesWithPaths();
-        String path = filesAndPaths.get("file1");
-        assertTrue(path.contains("/var/folders/gp/r"));
+        Map<String, String> filesAndPaths = directory.filesWithRelativePaths();
+        String path = filesAndPaths.get("/file1");
+        assertEquals("/file1", path);
     }
 
     private void writeContentTo(File file, String content) throws IOException {
@@ -77,5 +76,4 @@ public class DirectoryTest {
         bufferedWriter.write(content);
         bufferedWriter.close();
     }
-
 }

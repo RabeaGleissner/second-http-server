@@ -43,11 +43,10 @@ public class Directory {
         return FileReader.read(filePath + fileName);
     }
 
-    public Map<String, String> filesWithPaths() {
+    public Map<String, String> filesWithRelativePaths() {
         Map<String, String> filesWithPaths = new HashMap<>();
-        for (String filePath : allFilePaths()) {
-            String[] folders = filePath.split("/");
-            filesWithPaths.put(folders[folders.length - 1], filePath);
+        for (String fileName : allFileNames()) {
+            filesWithPaths.put(fileName, fileName);
         }
         return filesWithPaths;
     }

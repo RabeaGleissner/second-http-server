@@ -1,6 +1,7 @@
 package de.rabea;
 
 import de.rabea.controller.AssetController;
+import de.rabea.controller.MethodOptions2Controller;
 import de.rabea.controller.NotFoundController;
 import de.rabea.controller.RootController;
 import de.rabea.request.Directory;
@@ -36,9 +37,9 @@ public class RouterTest {
     @Test
     public void returnsControllerForGivenRoute() {
         Router router = new Router();
-        router.configure("/", new RootController());
-        Controller controller = router.getController(new HttpRequest(GET, "/"));
-        assertTrue(controller instanceof RootController);
+        router.configure("/method_options2", new MethodOptions2Controller());
+        Controller controller = router.getController(new HttpRequest(GET, "/method_options2"));
+        assertTrue(controller instanceof MethodOptions2Controller);
     }
 
     @Test
