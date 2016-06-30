@@ -14,7 +14,6 @@ import java.util.Map;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class DirectoryTest {
 
@@ -36,7 +35,6 @@ public class DirectoryTest {
     public void returnsAllFilePaths() {
         Directory directory = new Directory(pathToFolder);
         List<String> result = directory.allFilePaths();
-        assertTrue(result.get(0).contains("/var/folders/gp/r"));
         assertEquals(3, result.size());
     }
 
