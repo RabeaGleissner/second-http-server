@@ -15,7 +15,6 @@ public class LogsController extends Controller {
     private Logger logger;
 
     public LogsController(Logger logger) {
-        super();
         this.logger = logger;
     }
 
