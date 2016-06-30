@@ -31,6 +31,6 @@ public class LogsControllerTest {
     public void returnsAuthenticateResponseIfNotAuthorised() {
         LogsController controller = new LogsController(new Logger());
         HttpResponse response = controller.dispatch(new HttpRequest(GET, "/logs"));
-        assertEquals("HTTP/1.1 401 Unauthorized\nWWW-Authenticate: Basic realm=\"secondServer\"\n", response.asString());
+        assertEquals("HTTP/1.1 401 Unauthorized\nWWW-Authenticate: Basic realm=\"Logger\"\n", response.asString());
     }
 }
