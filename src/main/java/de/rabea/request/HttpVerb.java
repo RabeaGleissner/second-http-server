@@ -7,7 +7,8 @@ public enum HttpVerb {
     OPTIONS,
     HEAD,
     DELETE,
-    PATCH;
+    PATCH,
+    NONE;
 
     public static HttpVerb convert(String word) {
         for (HttpVerb verb : HttpVerb.values()) {
@@ -15,6 +16,6 @@ public enum HttpVerb {
                 return verb;
             }
         }
-        return null;
+        return NONE;
     }
 }

@@ -23,7 +23,8 @@ public class HttpServer  implements Runnable {
         this.executorService = executorService;
     }
 
-    public void start() {
+    public void start(String directory, int port) {
+        System.out.println("Server started at port " + port + " and directory " + directory);
         while (true) {
             run();
         }

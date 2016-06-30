@@ -9,8 +9,10 @@ import java.io.UnsupportedEncodingException;
 public class HttpResponse {
 
     private final byte[] response;
+    private StatusLine statusLine;
 
     public HttpResponse(StatusLine statusLine) {
+        this.statusLine = statusLine;
         this.response = new ResponseBuilder(statusLine, new EmptyResponseHeader()).create(new ByteArrayOutputStream());
     }
 
@@ -33,5 +35,9 @@ public class HttpResponse {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public StatusLine getStatusCode() {
+        return statusLine;
     }
 }

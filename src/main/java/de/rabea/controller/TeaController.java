@@ -4,12 +4,10 @@ import de.rabea.Controller;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
-import static de.rabea.response.head.StatusLine.OK;
-
-public class TeaController implements Controller {
+public class TeaController extends Controller {
 
     @Override
-    public HttpResponse getResponse(HttpRequest httpRequest) {
-        return new HttpResponse(OK);
+    public HttpResponse doGet(HttpRequest request) {
+        return okResponse();
     }
 }

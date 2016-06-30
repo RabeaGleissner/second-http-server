@@ -12,7 +12,7 @@ public class TeaControllerTest {
     @Test
     public void returnResponse() {
         TeaController controller = new TeaController();
-        HttpResponse response = controller.getResponse(new HttpRequest(GET, "/"));
+        HttpResponse response = controller.dispatch(new HttpRequest(GET, "/"));
         assertEquals("HTTP/1.1 200 OK\n\n", response.asString());
     }
 }

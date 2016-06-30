@@ -6,10 +6,10 @@ import de.rabea.response.HttpResponse;
 
 import static de.rabea.response.head.StatusLine.NOT_FOUND;
 
-public class NotFoundController implements Controller {
+public class NotFoundController extends Controller {
 
     @Override
-    public HttpResponse getResponse(HttpRequest request) {
+    public HttpResponse dispatch(HttpRequest httpRequest) {
         return new HttpResponse(NOT_FOUND);
     }
 }

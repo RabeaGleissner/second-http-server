@@ -6,10 +6,10 @@ import de.rabea.response.HttpResponse;
 
 import static de.rabea.response.head.StatusLine.TEAPOT;
 
-public class CoffeeController implements Controller {
+public class CoffeeController extends Controller {
 
     @Override
-    public HttpResponse getResponse(HttpRequest httpRequest) {
+    public HttpResponse doGet(HttpRequest request) {
         return new HttpResponse(TEAPOT, "I'm a teapot".getBytes());
     }
 }

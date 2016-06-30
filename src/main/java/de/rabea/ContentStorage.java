@@ -3,19 +3,19 @@ package de.rabea;
 public class ContentStorage {
     private byte[] storage = new byte[0];
 
-    public void store(byte[] body) {
-        storage = body;
+    public void storeResponseBody(String body) {
+        storage = body.getBytes();
     }
 
-    public boolean hasContentFor() {
-        return !storage.equals("");
+    public void storeFileContent(byte[] body) {
+        storage = body;
     }
 
     public byte[] content() {
         return storage;
     }
 
-    public void deleteContentFor() {
+    public void deleteContent() {
        storage = new byte[0];
     }
 }

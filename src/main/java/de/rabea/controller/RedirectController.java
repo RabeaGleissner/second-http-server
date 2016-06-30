@@ -7,10 +7,10 @@ import de.rabea.response.head.RedirectResponseHeader;
 
 import static de.rabea.response.head.StatusLine.*;
 
-public class RedirectController implements Controller {
+public class RedirectController extends Controller {
 
     @Override
-    public HttpResponse getResponse(HttpRequest httpRequest) {
+    public HttpResponse doGet(HttpRequest request) {
         return new HttpResponse(REDIRECT, new RedirectResponseHeader("http://localhost:5000/"));
     }
 }
