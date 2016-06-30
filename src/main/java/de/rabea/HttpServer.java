@@ -16,11 +16,13 @@ public class HttpServer  implements Runnable {
     private final ServerSocket serverSocket;
     private final Router router;
     private final ExecutorService executorService;
+    private Logger logger;
 
-    public HttpServer(ExecutorService executorService, ServerSocket serverSocket, Router router) {
+    public HttpServer(ExecutorService executorService, ServerSocket serverSocket, Router router, Logger logger) {
         this.serverSocket = serverSocket;
         this.router = router;
         this.executorService = executorService;
+        this.logger = logger;
     }
 
     public void start(String directory, int port) {
@@ -57,6 +59,7 @@ public class HttpServer  implements Runnable {
         new ServerWorker(
                 new SocketReader(new BufferedReader(new InputStreamReader(socket.getInputStream()))),
                 new SocketWriter(socket),
-                router).start();
+                router,
+                logger).start();
     }
 }

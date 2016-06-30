@@ -22,20 +22,20 @@ public class HttpServerTest {
 
     @Test
     public void executorServiceShutsDown() throws IOException {
-        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub(), new Router("DIR"));
+        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub(), new Router("DIR"), new Logger());
         server.shutdown();
         assertTrue(executorServiceSpy.hasShutDown);
     }
 
     @Test(expected = ServerSocketException.class)
     public void throwsExceptionWhenSocketCannotBeCreated() throws IOException {
-        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().throwsException(), new Router("DIR"));
+        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().throwsException(), new Router("DIR"), new Logger());
         server.run();
     }
 
     @Test(expected = SocketException.class)
     public void throwsExceptionWhenInputStreamCannotBeCreated() throws IOException {
-        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().createsSocketWithException(), new Router("DIR"));
+        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().createsSocketWithException(), new Router("DIR"), new Logger());
         server.run();
     }
 
