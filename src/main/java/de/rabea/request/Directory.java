@@ -1,5 +1,8 @@
 package de.rabea.request;
 
+import de.rabea.communication.FileReader;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -24,6 +27,15 @@ public class Directory {
         return files;
     }
 
+    public List<String> allFileNames() {
+        List<String> fileNames = new ArrayList<>();
+        for (String filePath : allFilePaths()) {
+            String[] folders = filePath.split("/");
+            fileNames.add("/" + folders[folders.length - 1]);
+        }
+        return fileNames;
+    }
+
     private List<String> allExistingFiles(List<String> files) throws IOException {
         Files.walk(Paths.get(givenDirectory)).forEach(filePath -> {
             if (Files.isRegularFile(filePath)) {
@@ -33,13 +45,9 @@ public class Directory {
         return files;
     }
 
-    public List<String> allFileNames() {
-        List<String> fileNames = new ArrayList<>();
-        for (String filePath : allFilePaths()) {
-            String[] folders = filePath.split("/");
-            fileNames.add("/" + folders[folders.length - 1]);
-        }
-        return fileNames;
+    public byte[] contentOfFile(String fileName) {
+        String filePath = new File(givenDirectory).getAbsolutePath();
+        return FileReader.read(filePath + fileName);
     }
 
     public class FileException extends RuntimeException {

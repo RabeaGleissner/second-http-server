@@ -25,7 +25,7 @@ public class Main {
         router.configure("/method_options2", new MethodOptions2Controller());
         router.configure("/redirect", new RedirectController());
         router.configure("/tea", new TeaController());
-        router.configure(directory, new AssetController(givenDirectory, new ContentStorage()));
+        router.configure(directory, new AssetController(directory, new ContentStorage()));
         HttpServer httpServer = new HttpServer(Executors.newFixedThreadPool(20), serverSocket, router, logger);
         httpServer.start(givenDirectory, port);
     }

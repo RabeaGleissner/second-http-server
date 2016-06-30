@@ -1,6 +1,7 @@
 package de.rabea.controller;
 
 import de.rabea.ContentStorage;
+import de.rabea.request.Directory;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import org.junit.Before;
@@ -33,7 +34,7 @@ public class AssetControllerTest {
 
     @Test
     public void returnsResponse() {
-        AssetController controller = new AssetController(pathToFolder, new ContentStorage());
+        AssetController controller = new AssetController(new Directory(pathToFolder), new ContentStorage());
         HttpResponse response = controller.dispatch(new HttpRequest(GET, "/file1"));
         assertEquals("HTTP/1.1 200 OK\n\nSome content", response.asString());
     }
@@ -41,7 +42,7 @@ public class AssetControllerTest {
     @Test
     public void savesFileContentInContentStorage() {
         ContentStorage storage = new ContentStorage();
-        AssetController controller = new AssetController(pathToFolder, storage);
+        AssetController controller = new AssetController(new Directory(pathToFolder), storage);
         controller.dispatch(new HttpRequest(GET, "/file1"));
         assertArrayEquals("Some content".getBytes(), storage.content());
     }
