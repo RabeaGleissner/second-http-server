@@ -2,6 +2,7 @@ package de.rabea.controller;
 
 import de.rabea.ContentStorage;
 import de.rabea.Controller;
+import de.rabea.EntityTagChecker;
 import de.rabea.request.Directory;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;

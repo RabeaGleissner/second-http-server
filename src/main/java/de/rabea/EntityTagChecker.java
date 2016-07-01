@@ -1,4 +1,4 @@
-package de.rabea.controller;
+package de.rabea;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

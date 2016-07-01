@@ -1,5 +1,6 @@
-package de.rabea.controller;
+package de.rabea;
 
+import de.rabea.EntityTagChecker;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
