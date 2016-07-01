@@ -1,6 +1,7 @@
 package de.rabea;
 
 import de.rabea.controller.*;
+import de.rabea.request.Directory;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,12 +11,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Arguments arguments = new Arguments(args);
         int port = arguments.getPort();
-        String directory = arguments.getDirectory();
+        String givenDirectory = arguments.getDirectory();
+        Directory directory = new Directory(givenDirectory);
 
         ServerSocket serverSocket = new ServerSocket(port);
-        Router router = new Router(directory);
+        Router router = new Router();
         Logger logger = new Logger();
-        router.configure("/", new RootController());
+        router.configure("/", new RootController(directory));
         router.configure("/coffee", new CoffeeController());
         router.configure("/logs", new LogsController(logger));
         router.configure("/form", new FormController(new ContentStorage()));
@@ -25,6 +27,6 @@ public class Main {
         router.configure("/tea", new TeaController());
         router.configure(directory, new AssetController(directory, new ContentStorage()));
         HttpServer httpServer = new HttpServer(Executors.newFixedThreadPool(20), serverSocket, router, logger);
-        httpServer.start(directory, port);
+        httpServer.start(givenDirectory, port);
     }
 }

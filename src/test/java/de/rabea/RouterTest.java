@@ -1,8 +1,10 @@
 package de.rabea;
 
 import de.rabea.controller.AssetController;
+import de.rabea.controller.MethodOptions2Controller;
 import de.rabea.controller.NotFoundController;
 import de.rabea.controller.RootController;
+import de.rabea.request.Directory;
 import de.rabea.request.HttpRequest;
 import org.junit.Before;
 import org.junit.Rule;
@@ -34,32 +36,23 @@ public class RouterTest {
 
     @Test
     public void returnsControllerForGivenRoute() {
-        Router router = new Router("PUBLIC_DIR");
-        router.configure("/", new RootController());
-        Controller controller = router.getController(new HttpRequest(GET, "/"));
-        assertTrue(controller instanceof RootController);
+        Router router = new Router();
+        router.configure("/method_options2", new MethodOptions2Controller());
+        Controller controller = router.getController(new HttpRequest(GET, "/method_options2"));
+        assertTrue(controller instanceof MethodOptions2Controller);
     }
 
     @Test
     public void returnsControllerForNonExistingRoute() {
-        Router router = new Router("PUBLIC_DIR");
+        Router router = new Router();
         Controller controller = router.getController(new HttpRequest(GET, "/some-route"));
         assertTrue(controller instanceof NotFoundController);
     }
 
     @Test
     public void returnsAssetControllerForFolderPath() {
-        Router router = new Router(pathToFolder);
-        router.configure(pathToFolder, new AssetController(pathToFolder, new ContentStorage()));
-        Controller controller = router.getController(new HttpRequest(GET, "/file1"));
-        assertTrue(controller instanceof AssetController);
-    }
-
-    @Test(expected = Router.FileException.class)
-    public void throwsExceptionIfItCannotReadAnyFilesInFolder() {
-        String nonExistantFolder = "DIR";
-        Router router = new Router(nonExistantFolder);
-        router.configure(nonExistantFolder, new AssetController(pathToFolder, new ContentStorage()));
+        Router router = new Router();
+        router.configure(new Directory(pathToFolder), new AssetController(new Directory(pathToFolder), new ContentStorage()));
         Controller controller = router.getController(new HttpRequest(GET, "/file1"));
         assertTrue(controller instanceof AssetController);
     }

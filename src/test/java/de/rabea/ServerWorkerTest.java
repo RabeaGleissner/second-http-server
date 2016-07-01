@@ -2,7 +2,7 @@ package de.rabea;
 
 import de.rabea.communication.SocketReader;
 import de.rabea.communication.SocketWriter;
-import de.rabea.controller.RootController;
+import de.rabea.controller.MethodOptions2Controller;
 import de.rabea.request.HttpRequest;
 import org.junit.Test;
 
@@ -16,8 +16,8 @@ public class ServerWorkerTest {
     public void startsServerWorker() {
         SocketReaderStub socketReaderStub = new SocketReaderStub();
         SocketWriterSpy socketWriterSpy = new SocketWriterSpy(new SocketStub());
-        Router router = new Router("DIR");
-        router.configure("/", new RootController());
+        Router router = new Router();
+        router.configure("/method_options2", new MethodOptions2Controller());
         ServerWorker worker = new ServerWorker(socketReaderStub, socketWriterSpy, router, new Logger());
         worker.start();
         assertEquals("HTTP/1.1 200 OK\n\n", socketWriterSpy.responseWritten());
@@ -31,7 +31,7 @@ public class ServerWorkerTest {
 
         @Override
         public HttpRequest read() {
-            return new HttpRequestDummy("GET / HTTP/1.1");
+            return new HttpRequestDummy("GET /method_options2 HTTP/1.1");
         }
     }
 
