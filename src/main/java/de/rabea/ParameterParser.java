@@ -13,9 +13,7 @@ public class ParameterParser {
         List<String> parameters = split(requestUri);
         for (String parameter : parameters) {
             try {
-                String decoded = decode(parameter);
-                parsed += decoded;
-                parsed += "\n\n";
+                parsed += decode(parameter) + "\n\n";
             } catch (UnsupportedEncodingException e) {
                 throw new UrlDecodingException();
             }
