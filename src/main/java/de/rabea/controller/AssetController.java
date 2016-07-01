@@ -9,6 +9,7 @@ import de.rabea.response.HttpResponse;
 
 import static de.rabea.response.head.StatusLine.NO_CONTENT;
 import static de.rabea.response.head.StatusLine.OK;
+import static de.rabea.response.head.StatusLine.PARTIAL_CONTENT;
 
 public class AssetController extends Controller {
 
@@ -23,6 +24,9 @@ public class AssetController extends Controller {
     @Override
     public HttpResponse doGet(HttpRequest request) {
         contentStorage.storeFileContent(directory.contentOfFile(request.requestLine().uri()));
+        if (request.requestHeaders().containsKey("Range")) {
+           return new HttpResponse(PARTIAL_CONTENT);
+        }
         return new HttpResponse(OK, contentStorage.content());
     }
 
