@@ -6,6 +6,7 @@ import de.rabea.request.Directory;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
+import static de.rabea.response.head.StatusLine.NO_CONTENT;
 import static de.rabea.response.head.StatusLine.OK;
 
 public class AssetController extends Controller {
@@ -22,5 +23,11 @@ public class AssetController extends Controller {
     public HttpResponse doGet(HttpRequest request) {
         contentStorage.storeFileContent(directory.contentOfFile(request.requestLine().uri()));
         return new HttpResponse(OK, contentStorage.content());
+    }
+
+    @Override
+    public HttpResponse doPatch(HttpRequest request) {
+        directory.updateFile(request.requestLine().route(), request.body());
+        return new HttpResponse(NO_CONTENT);
     }
 }

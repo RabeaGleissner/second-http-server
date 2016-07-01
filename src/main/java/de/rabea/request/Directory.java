@@ -53,7 +53,8 @@ public class Directory {
     }
 
     public void updateFile(String fileName, String newContent) {
-        File file = new File(fileName);
+        String filePath = new File(givenDirectory).getAbsolutePath();
+        File file = new File(filePath + fileName);
         try {
             FileWriter fileWriter = new FileWriter(file, false);
             fileWriter.write(newContent);
