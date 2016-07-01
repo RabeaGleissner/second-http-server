@@ -27,7 +27,9 @@ public class AssetController extends Controller {
 
     @Override
     public HttpResponse doPatch(HttpRequest request) {
-        directory.updateFile(request.requestLine().route(), request.body());
+        if (EntityTagChecker.isCorrectTag(directory.contentOfFile(request.requestLine().uri()), request.requestHeaders().get("If-Match"))) {
+            directory.updateFile(request.requestLine().route(), request.body());
+        }
         return new HttpResponse(NO_CONTENT);
     }
 }

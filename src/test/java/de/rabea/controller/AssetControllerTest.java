@@ -71,6 +71,18 @@ public class AssetControllerTest {
         assertArrayEquals("patched content".getBytes(), directory.contentOfFile("/file1"));
     }
 
+    @Test
+    public void doesNotUpdateFileContentForPatchIfEtagIsIncorrect() {
+        Directory directory = new Directory(pathToFolder);
+        AssetController controller = new AssetController(directory, new ContentStorage());
+        Map<String, String> headers = new HashMap<>();
+        headers.put("If-Match", "notTheRightEtag");
+
+        controller.dispatch(new HttpRequest(new RequestLine("PATCH /file1 HTTP/1.1"), headers, "patched content"));
+
+        assertArrayEquals("default content".getBytes(), directory.contentOfFile("/file1"));
+    }
+
     private void writeContentTo(File file, String content) throws IOException {
         FileWriter writer = new FileWriter(file.getAbsoluteFile());
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
