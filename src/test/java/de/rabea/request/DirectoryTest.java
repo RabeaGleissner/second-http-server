@@ -18,6 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class DirectoryTest {
 
     private String pathToFolder;
+    private String file1Location;
 
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
@@ -29,6 +30,7 @@ public class DirectoryTest {
         testFolder.newFile("file2");
         testFolder.newFile("file3");
         pathToFolder = testFolder.getRoot().getAbsolutePath();
+        file1Location = file1.getAbsolutePath();
     }
 
     @Test
@@ -66,6 +68,13 @@ public class DirectoryTest {
         Map<String, String> filesAndPaths = directory.filesWithRelativePaths();
         String path = filesAndPaths.get("/file1");
         assertEquals("/file1", path);
+    }
+
+    @Test
+    public void updatesExistingFileWithNewContent() {
+        Directory directory = new Directory(pathToFolder);
+        directory.updateFile(file1Location, "new content");
+        assertArrayEquals("new content".getBytes(), directory.contentOfFile("/file1"));
     }
 
     private void writeContentTo(File file, String content) throws IOException {

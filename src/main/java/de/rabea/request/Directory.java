@@ -3,6 +3,7 @@ package de.rabea.request;
 import de.rabea.communication.FileReader;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -49,6 +50,18 @@ public class Directory {
             filesWithPaths.put(fileName, fileName);
         }
         return filesWithPaths;
+    }
+
+    public void updateFile(String fileName, String newContent) {
+        File file = new File(fileName);
+        try {
+            FileWriter fileWriter = new FileWriter(file, false);
+            fileWriter.write(newContent);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public class FileException extends RuntimeException {
