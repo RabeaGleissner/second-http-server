@@ -15,10 +15,8 @@ public class ServerAuthenticator {
     }
 
     public boolean hasCorrectCredentials(HttpRequest request) {
-        if (request.requestHeaders().containsKey("Authorization")) {
-            return request.requestHeaders().get("Authorization").equals("Basic " + encodedCredentials());
-        }
-        return false;
+        return request.requestHeaders().containsKey("Authorization") &&
+                request.requestHeaders().get("Authorization").equals("Basic " + encodedCredentials());
     }
 
     private String encodedCredentials() {

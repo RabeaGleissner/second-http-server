@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class Directory {
 
-    private String givenDirectory;
+    private final String givenDirectory;
 
     public Directory(String givenDirectory) {
         this.givenDirectory = givenDirectory;

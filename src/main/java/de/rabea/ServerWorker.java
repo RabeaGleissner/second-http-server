@@ -10,7 +10,7 @@ public class ServerWorker {
     private final SocketReader socketReader;
     private final SocketWriter socketWriter;
     private final Router router;
-    private Logger logger;
+    private final Logger logger;
 
     public ServerWorker(SocketReader socketReader, SocketWriter socketWriter, Router router, Logger logger) {
         this.socketReader = socketReader;

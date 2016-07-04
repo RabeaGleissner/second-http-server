@@ -1,6 +1,5 @@
 package de.rabea;
 
-import de.rabea.ServerAuthenticator;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.RequestLine;
 import org.junit.Test;
@@ -8,7 +7,8 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ServerAuthenticatorTest {
 

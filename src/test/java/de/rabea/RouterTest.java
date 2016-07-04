@@ -3,7 +3,6 @@ package de.rabea;
 import de.rabea.controller.AssetController;
 import de.rabea.controller.MethodOptions2Controller;
 import de.rabea.controller.NotFoundController;
-import de.rabea.controller.RootController;
 import de.rabea.request.Directory;
 import de.rabea.request.HttpRequest;
 import org.junit.Before;

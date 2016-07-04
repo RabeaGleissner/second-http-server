@@ -12,7 +12,7 @@ import static de.rabea.response.head.StatusLine.UNAUTHORIZED;
 
 public class LogsController extends Controller {
 
-    private Logger logger;
+    private final Logger logger;
 
     public LogsController(Logger logger) {
         this.logger = logger;

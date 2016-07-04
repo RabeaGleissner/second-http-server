@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Logger {
-    private List<RequestLine> requests;
+    private final List<RequestLine> requests;
 
     public Logger() {
         requests = new ArrayList<>();
@@ -23,6 +23,6 @@ public class Logger {
     }
 
     public String logsAsString() {
-        return requests.stream().map(requestLine -> requestLine.asString()).collect(Collectors.joining(", "));
+        return requests.stream().map(RequestLine::asString).collect(Collectors.joining(", "));
     }
 }

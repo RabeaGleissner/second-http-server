@@ -12,8 +12,8 @@ import static de.rabea.response.head.StatusLine.OK;
 
 public class AssetController extends Controller {
 
-    private Directory directory;
-    private ContentStorage contentStorage;
+    private final Directory directory;
+    private final ContentStorage contentStorage;
 
     public AssetController(Directory directory, ContentStorage contentStorage) {
         this.directory = directory;

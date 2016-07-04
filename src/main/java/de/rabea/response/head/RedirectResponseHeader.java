@@ -4,7 +4,7 @@ import de.rabea.response.ResponseHeader;
 
 public class RedirectResponseHeader implements ResponseHeader {
 
-    private String newLocation;
+    private final String newLocation;
 
     public RedirectResponseHeader(String newLocation) {
         this.newLocation = newLocation;

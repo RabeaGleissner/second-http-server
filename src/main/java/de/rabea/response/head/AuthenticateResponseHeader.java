@@ -4,7 +4,7 @@ import de.rabea.response.ResponseHeader;
 
 public class AuthenticateResponseHeader implements ResponseHeader {
 
-    private String realm;
+    private final String realm;
 
     public AuthenticateResponseHeader(String realm) {
         this.realm = realm;

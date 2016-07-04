@@ -7,7 +7,8 @@ import org.junit.Test;
 
 import static de.rabea.request.HttpVerb.*;
 import static de.rabea.response.head.StatusLine.NOT_ALLOWED;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ControllerTest {
 

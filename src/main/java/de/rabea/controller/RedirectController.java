@@ -5,7 +5,7 @@ import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import de.rabea.response.head.RedirectResponseHeader;
 
-import static de.rabea.response.head.StatusLine.*;
+import static de.rabea.response.head.StatusLine.REDIRECT;
 
 public class RedirectController extends Controller {
 

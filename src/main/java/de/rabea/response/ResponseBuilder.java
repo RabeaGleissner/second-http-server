@@ -33,7 +33,7 @@ public class ResponseBuilder {
         }
     }
 
-    public byte[] combinedHeadAndBody(String head, byte[] body, ByteArrayOutputStream out) throws IOException {
+    private byte[] combinedHeadAndBody(String head, byte[] body, ByteArrayOutputStream out) throws IOException {
         out.write(head.getBytes());
         out.write("\n".getBytes());
         out.write(body);

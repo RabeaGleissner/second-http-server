@@ -16,7 +16,7 @@ public class HttpServer  implements Runnable {
     private final ServerSocket serverSocket;
     private final Router router;
     private final ExecutorService executorService;
-    private Logger logger;
+    private final Logger logger;
 
     public HttpServer(ExecutorService executorService, ServerSocket serverSocket, Router router, Logger logger) {
         this.serverSocket = serverSocket;

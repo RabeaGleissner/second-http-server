@@ -10,7 +10,7 @@ import static de.rabea.response.head.StatusLine.OK;
 
 public class RootController extends Controller {
 
-    private Directory directory;
+    private final Directory directory;
 
     public RootController(Directory directory) {
 
