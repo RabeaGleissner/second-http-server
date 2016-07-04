@@ -30,9 +30,9 @@ public class RangeParser {
 
     private int rangeStart() {
         if (startIsGiven()) {
-            return Integer.parseInt(range.substring(0, 1));
+            return getStartingPosition();
         }
-        return textLength - Integer.parseInt(range.substring(rangeCharacterLength - 1, rangeCharacterLength));
+        return calculatePositionFromEnd();
     }
 
     private int rangeEnd() {
@@ -40,9 +40,13 @@ public class RangeParser {
             return textLength;
         }
         if (endIsGiven()) {
-            return Integer.parseInt(range.substring(2)) + 1;
+            return getEndPosition();
         }
         return textLength;
+    }
+
+    private int getEndPosition() {
+        return Integer.parseInt(range.substring(2)) + 1;
     }
 
     private boolean reverse() {
@@ -56,4 +60,13 @@ public class RangeParser {
     private boolean endIsGiven() {
         return !range.endsWith("-");
     }
+
+    private int calculatePositionFromEnd() {
+        return textLength - Integer.parseInt(range.substring(rangeCharacterLength - 1, rangeCharacterLength));
+    }
+
+    private int getStartingPosition() {
+        return Integer.parseInt(range.substring(0, 1));
+    }
+
 }

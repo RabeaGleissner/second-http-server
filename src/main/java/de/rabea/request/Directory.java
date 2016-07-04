@@ -64,8 +64,8 @@ public class Directory {
         }
     }
 
-    public byte[] partialFileContent(String uri, String range) {
-        RangeParser rangeParser = new RangeParser(fileContent(uri), range);
+    public byte[] partialFileContent(String fileName, String range) {
+        RangeParser rangeParser = new RangeParser(fileContent(fileName), range);
         return rangeParser.partialContent();
     }
 
