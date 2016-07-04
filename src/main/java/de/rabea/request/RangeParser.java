@@ -9,11 +9,15 @@ public class RangeParser {
     private int textLength;
     private int rangeCharacterLength;
 
-    public RangeParser(byte[] text, String range) {
+    public RangeParser(byte[] text, String rangeWithDescription) {
         this.text = text;
-        this.range = range;
+        this.range = strip(rangeWithDescription);
         this.textLength = text.length;
         this.rangeCharacterLength = range.length();
+    }
+
+    private String strip(String rangeWithDescription) {
+        return rangeWithDescription.substring(6);
     }
 
     public byte[] partialContent() {
@@ -36,7 +40,7 @@ public class RangeParser {
             return textLength;
         }
         if (endIsGiven()) {
-            return Integer.parseInt(range.substring(2));
+            return Integer.parseInt(range.substring(2)) + 1;
         }
         return textLength;
     }

@@ -62,7 +62,11 @@ public class Directory {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public byte[] partialContentOfFile(String uri, String range) {
+        RangeParser rangeParser = new RangeParser(contentOfFile(uri), range);
+        return rangeParser.partialContent();
     }
 
     public class FileException extends RuntimeException {

@@ -24,10 +24,17 @@ public class AssetController extends Controller {
     @Override
     public HttpResponse doGet(HttpRequest request) {
         contentStorage.storeFileContent(directory.contentOfFile(request.requestLine().uri()));
-        if (request.requestHeaders().containsKey("Range")) {
-           return new HttpResponse(PARTIAL_CONTENT);
+        if (containsRange(request)) {
+            contentStorage.storeFileContent(
+                    directory.partialContentOfFile(request.requestLine().uri(),
+                    request.requestHeaders().get("Range")));
+           return new HttpResponse(PARTIAL_CONTENT, contentStorage.content());
         }
         return new HttpResponse(OK, contentStorage.content());
+    }
+
+    private boolean containsRange(HttpRequest request) {
+        return request.requestHeaders().containsKey("Range");
     }
 
     @Override
