@@ -19,6 +19,7 @@ public class SocketReader {
     public HttpRequest read() {
         String rawRequest = readRequest();
         System.out.println("rawRequest = " + rawRequest);
+
         return requestParser.parse(rawRequest);
     }
 

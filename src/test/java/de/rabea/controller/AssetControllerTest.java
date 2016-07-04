@@ -1,6 +1,5 @@
 package de.rabea.controller;
 
-import de.rabea.ContentStorage;
 import de.rabea.request.Directory;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.RequestLine;
@@ -38,22 +37,21 @@ public class AssetControllerTest {
 
     @Test
     public void returnsResponse() {
-        AssetController controller = new AssetController(new Directory(pathToFolder), new ContentStorage());
+        AssetController controller = new AssetController(new Directory(pathToFolder));
         HttpResponse response = controller.dispatch(new HttpRequest(GET, "/file1"));
         assertEquals("HTTP/1.1 200 OK\n\ndefault content", response.asString());
     }
 
     @Test
     public void returns204ResponseForPatchRequest() {
-        ContentStorage storage = new ContentStorage();
-        AssetController controller = new AssetController(new Directory(pathToFolder), storage);
+        AssetController controller = new AssetController(new Directory(pathToFolder));
         assertEquals("HTTP/1.1 204 No Content\n\n", controller.dispatch(new HttpRequest(PATCH, "/file1")).asString());
     }
 
     @Test
     public void updatesFileContentForPatchRequest() {
         Directory directory = new Directory(pathToFolder);
-        AssetController controller = new AssetController(directory, new ContentStorage());
+        AssetController controller = new AssetController(directory);
         Map<String, String> headers = new HashMap<>();
         headers.put("If-Match", "dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec");
 
@@ -65,7 +63,7 @@ public class AssetControllerTest {
     @Test
     public void doesNotUpdateFileContentForPatchIfEtagIsIncorrect() {
         Directory directory = new Directory(pathToFolder);
-        AssetController controller = new AssetController(directory, new ContentStorage());
+        AssetController controller = new AssetController(directory);
         Map<String, String> headers = new HashMap<>();
         headers.put("If-Match", "notTheRightEtag");
 
@@ -77,7 +75,7 @@ public class AssetControllerTest {
     @Test
     public void returns206PartialContentResponseIfHeaderContainsRange() {
         Directory directory = new Directory(pathToFolder);
-        AssetController controller = new AssetController(directory, new ContentStorage());
+        AssetController controller = new AssetController(directory);
         Map<String, String> headers = new HashMap<>();
         headers.put("Range", "bytes=0-4");
 

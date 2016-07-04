@@ -51,7 +51,7 @@ public class RouterTest {
     @Test
     public void returnsAssetControllerForFolderPath() {
         Router router = new Router();
-        router.configure(new Directory(pathToFolder), new AssetController(new Directory(pathToFolder), new ContentStorage()));
+        router.configure(new Directory(pathToFolder), new AssetController(new Directory(pathToFolder)));
         Controller controller = router.getController(new HttpRequest(GET, "/file1"));
         assertTrue(controller instanceof AssetController);
     }
