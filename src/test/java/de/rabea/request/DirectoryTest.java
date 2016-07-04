@@ -68,6 +68,13 @@ public class DirectoryTest {
         assertEquals("/file1", path);
     }
 
+    @Test
+    public void updatesExistingFileWithNewContent() {
+        Directory directory = new Directory(pathToFolder);
+        directory.updateFile("/file1", "new content");
+        assertArrayEquals("new content".getBytes(), directory.contentOfFile("/file1"));
+    }
+
     private void writeContentTo(File file, String content) throws IOException {
         FileWriter writer = new FileWriter(file.getAbsoluteFile());
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
