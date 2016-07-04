@@ -57,7 +57,7 @@ public class DirectoryTest {
     @Test
     public void returnsContentOfGivenFile() {
         Directory directory = new Directory(pathToFolder);
-        assertArrayEquals("Some content".getBytes(), directory.contentOfFile("/file1"));
+        assertArrayEquals("Some content".getBytes(), directory.fileContent("/file1"));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class DirectoryTest {
     public void updatesExistingFileWithNewContent() {
         Directory directory = new Directory(pathToFolder);
         directory.updateFile("/file1", "new content");
-        assertArrayEquals("new content".getBytes(), directory.contentOfFile("/file1"));
+        assertArrayEquals("new content".getBytes(), directory.fileContent("/file1"));
     }
 
     private void writeContentTo(File file, String content) throws IOException {

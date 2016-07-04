@@ -39,7 +39,7 @@ public class Directory {
         return fileNames;
     }
 
-    public byte[] contentOfFile(String fileName) {
+    public byte[] fileContent(String fileName) {
         String filePath = new File(givenDirectory).getAbsolutePath();
         return FileReader.read(filePath + fileName);
     }
@@ -64,8 +64,8 @@ public class Directory {
         }
     }
 
-    public byte[] partialContentOfFile(String uri, String range) {
-        RangeParser rangeParser = new RangeParser(contentOfFile(uri), range);
+    public byte[] partialFileContent(String uri, String range) {
+        RangeParser rangeParser = new RangeParser(fileContent(uri), range);
         return rangeParser.partialContent();
     }
 

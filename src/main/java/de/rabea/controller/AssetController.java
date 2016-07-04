@@ -23,14 +23,15 @@ public class AssetController extends Controller {
 
     @Override
     public HttpResponse doGet(HttpRequest request) {
-        contentStorage.storeFileContent(directory.contentOfFile(request.requestLine().uri()));
+        String file = request.requestLine().uri();
         if (containsRange(request)) {
-            contentStorage.storeFileContent(
-                    directory.partialContentOfFile(request.requestLine().uri(),
-                    request.requestHeaders().get("Range")));
-           return new HttpResponse(PARTIAL_CONTENT, contentStorage.content());
+           return new HttpResponse(PARTIAL_CONTENT, directory.partialFileContent(file, getRange(request)));
         }
-        return new HttpResponse(OK, contentStorage.content());
+        return new HttpResponse(OK, directory.fileContent(file));
+    }
+
+    private String getRange(HttpRequest request) {
+        return request.requestHeaders().get("Range");
     }
 
     private boolean containsRange(HttpRequest request) {
@@ -39,7 +40,7 @@ public class AssetController extends Controller {
 
     @Override
     public HttpResponse doPatch(HttpRequest request) {
-        if (EntityTagChecker.isCorrectTag(directory.contentOfFile(request.requestLine().uri()), request.requestHeaders().get("If-Match"))) {
+        if (EntityTagChecker.isCorrectTag(directory.fileContent(request.requestLine().uri()), request.requestHeaders().get("If-Match"))) {
             directory.updateFile(request.requestLine().route(), request.body());
         }
         return new HttpResponse(NO_CONTENT);

@@ -44,14 +44,6 @@ public class AssetControllerTest {
     }
 
     @Test
-    public void savesFileContentInContentStorage() {
-        ContentStorage storage = new ContentStorage();
-        AssetController controller = new AssetController(new Directory(pathToFolder), storage);
-        controller.dispatch(new HttpRequest(GET, "/file1"));
-        assertArrayEquals("default content".getBytes(), storage.content());
-    }
-
-    @Test
     public void returns204ResponseForPatchRequest() {
         ContentStorage storage = new ContentStorage();
         AssetController controller = new AssetController(new Directory(pathToFolder), storage);
@@ -67,7 +59,7 @@ public class AssetControllerTest {
 
         controller.dispatch(new HttpRequest(new RequestLine("PATCH /file1 HTTP/1.1"), headers, "patched content"));
 
-        assertArrayEquals("patched content".getBytes(), directory.contentOfFile("/file1"));
+        assertArrayEquals("patched content".getBytes(), directory.fileContent("/file1"));
     }
 
     @Test
@@ -79,19 +71,19 @@ public class AssetControllerTest {
 
         controller.dispatch(new HttpRequest(new RequestLine("PATCH /file1 HTTP/1.1"), headers, "patched content"));
 
-        assertArrayEquals("default content".getBytes(), directory.contentOfFile("/file1"));
+        assertArrayEquals("default content".getBytes(), directory.fileContent("/file1"));
     }
 
-//    @Test
-//    public void returns206PartialContentResponseIfHeaderContainsRange() {
-//        Directory directory = new Directory(pathToFolder);
-//        AssetController controller = new AssetController(directory, new ContentStorage());
-//        Map<String, String> headers = new HashMap<>();
-//        headers.put("Range", "bytes=0-4");
-//
-//        HttpResponse response = controller.dispatch(new HttpRequest(new RequestLine("GET /file1 HTTP/1.1"), headers, ""));
-//        assertEquals("HTTP/1.1 206 Partial Content\n\n", response.asString());
-//    }
+    @Test
+    public void returns206PartialContentResponseIfHeaderContainsRange() {
+        Directory directory = new Directory(pathToFolder);
+        AssetController controller = new AssetController(directory, new ContentStorage());
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Range", "bytes=0-4");
+
+        HttpResponse response = controller.dispatch(new HttpRequest(new RequestLine("GET /file1 HTTP/1.1"), headers, ""));
+        assertEquals("HTTP/1.1 206 Partial Content\n\ndefau", response.asString());
+    }
 
     private void writeContentTo(File file, String content) throws IOException {
         FileWriter writer = new FileWriter(file.getAbsoluteFile());

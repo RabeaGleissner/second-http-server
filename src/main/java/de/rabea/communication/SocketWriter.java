@@ -16,7 +16,6 @@ public class SocketWriter {
     }
 
     public void write(byte[] responseHead) {
-        System.out.println(new String(responseHead));
         try {
             createWriter().write(responseHead);
         } catch (IOException e) {
