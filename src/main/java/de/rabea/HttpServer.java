@@ -27,14 +27,14 @@ public class HttpServer {
 
     public void start(String directory, int port) {
         System.out.println("Server started at port " + port + " and directory " + directory);
-        while (true) {
-            try {
+        try {
+            while (true) {
                 Socket clientSocket = serverSocket.accept();
                 startServerWorker(clientSocket);
-            } catch (IOException e) {
-                shutdown();
-                throw new SocketException("Apologies, the socket could not create the input stream " + e.getMessage());
             }
+        } catch (IOException e) {
+            shutdown();
+            throw new SocketException("Apologies, the socket could not create the input stream " + e.getMessage());
         }
     }
 
