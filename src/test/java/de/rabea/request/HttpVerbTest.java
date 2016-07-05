@@ -1,5 +1,6 @@
 package de.rabea.request;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static de.rabea.request.HttpVerb.NONE;

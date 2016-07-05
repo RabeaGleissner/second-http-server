@@ -39,7 +39,7 @@ public class Directory {
         return fileNames;
     }
 
-    public byte[] contentOfFile(String fileName) {
+    public byte[] fileContent(String fileName) {
         String filePath = new File(givenDirectory).getAbsolutePath();
         return FileReader.read(filePath + fileName);
     }
@@ -62,7 +62,11 @@ public class Directory {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public byte[] partialFileContent(String fileName, String range) {
+        RangeParser rangeParser = new RangeParser(fileContent(fileName), range);
+        return rangeParser.partialContent();
     }
 
     public class FileException extends RuntimeException {

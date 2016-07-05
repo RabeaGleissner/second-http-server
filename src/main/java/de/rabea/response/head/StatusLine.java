@@ -7,6 +7,7 @@ public enum StatusLine {
     TEAPOT("418 I'm a teapot"),
     REDIRECT("302 Found"),
     NO_CONTENT("204 No Content"),
+    PARTIAL_CONTENT("206 Partial Content"),
     OK("200 OK");
 
     private final String status;

@@ -3,8 +3,7 @@ package de.rabea;
 import de.rabea.request.RequestLine;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class LoggerTest {
 

@@ -1,6 +1,5 @@
 package de.rabea.controller;
 
-import de.rabea.ContentStorage;
 import de.rabea.request.Directory;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.RequestLine;
@@ -38,48 +37,50 @@ public class AssetControllerTest {
 
     @Test
     public void returnsResponse() {
-        AssetController controller = new AssetController(new Directory(pathToFolder), new ContentStorage());
+        AssetController controller = new AssetController(new Directory(pathToFolder));
         HttpResponse response = controller.dispatch(new HttpRequest(GET, "/file1"));
         assertEquals("HTTP/1.1 200 OK\n\ndefault content", response.asString());
     }
 
     @Test
-    public void savesFileContentInContentStorage() {
-        ContentStorage storage = new ContentStorage();
-        AssetController controller = new AssetController(new Directory(pathToFolder), storage);
-        controller.dispatch(new HttpRequest(GET, "/file1"));
-        assertArrayEquals("default content".getBytes(), storage.content());
-    }
-
-    @Test
     public void returns204ResponseForPatchRequest() {
-        ContentStorage storage = new ContentStorage();
-        AssetController controller = new AssetController(new Directory(pathToFolder), storage);
+        AssetController controller = new AssetController(new Directory(pathToFolder));
         assertEquals("HTTP/1.1 204 No Content\n\n", controller.dispatch(new HttpRequest(PATCH, "/file1")).asString());
     }
 
     @Test
     public void updatesFileContentForPatchRequest() {
         Directory directory = new Directory(pathToFolder);
-        AssetController controller = new AssetController(directory, new ContentStorage());
+        AssetController controller = new AssetController(directory);
         Map<String, String> headers = new HashMap<>();
         headers.put("If-Match", "dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec");
 
         controller.dispatch(new HttpRequest(new RequestLine("PATCH /file1 HTTP/1.1"), headers, "patched content"));
 
-        assertArrayEquals("patched content".getBytes(), directory.contentOfFile("/file1"));
+        assertArrayEquals("patched content".getBytes(), directory.fileContent("/file1"));
     }
 
     @Test
     public void doesNotUpdateFileContentForPatchIfEtagIsIncorrect() {
         Directory directory = new Directory(pathToFolder);
-        AssetController controller = new AssetController(directory, new ContentStorage());
+        AssetController controller = new AssetController(directory);
         Map<String, String> headers = new HashMap<>();
         headers.put("If-Match", "notTheRightEtag");
 
         controller.dispatch(new HttpRequest(new RequestLine("PATCH /file1 HTTP/1.1"), headers, "patched content"));
 
-        assertArrayEquals("default content".getBytes(), directory.contentOfFile("/file1"));
+        assertArrayEquals("default content".getBytes(), directory.fileContent("/file1"));
+    }
+
+    @Test
+    public void returns206PartialContentResponseIfHeaderContainsRange() {
+        Directory directory = new Directory(pathToFolder);
+        AssetController controller = new AssetController(directory);
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Range", "bytes=0-4");
+
+        HttpResponse response = controller.dispatch(new HttpRequest(new RequestLine("GET /file1 HTTP/1.1"), headers, ""));
+        assertEquals("HTTP/1.1 206 Partial Content\n\ndefau", response.asString());
     }
 
     private void writeContentTo(File file, String content) throws IOException {

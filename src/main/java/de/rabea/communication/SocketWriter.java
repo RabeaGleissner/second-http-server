@@ -5,6 +5,7 @@ import de.rabea.exceptions.SocketException;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 
 public class SocketWriter {
