@@ -19,7 +19,8 @@ public class AssetController extends Controller {
     public HttpResponse doGet(HttpRequest request) {
         String file = request.requestLine().uri();
         if (containsRange(request)) {
-           return new HttpResponse(PARTIAL_CONTENT, directory.partialFileContent(file, getRange(request)));
+            byte[] partialFileContent = directory.partialFileContent(file, getRange(request));
+            return new HttpResponse(PARTIAL_CONTENT, partialFileContent);
         }
         return new HttpResponse(OK, directory.fileContent(file));
     }

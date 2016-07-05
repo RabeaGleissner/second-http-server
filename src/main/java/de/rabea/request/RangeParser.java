@@ -17,7 +17,7 @@ public class RangeParser {
     }
 
     private String strip(String rangeWithDescription) {
-        return rangeWithDescription.substring(6);
+        return rangeWithDescription.substring("bytes=".length());
     }
 
     public byte[] partialContent() {
@@ -46,7 +46,8 @@ public class RangeParser {
     }
 
     private int getEndPosition() {
-        return Integer.parseInt(range.substring(2)) + 1;
+        String lastNumberInRange = range.substring(2);
+        return Integer.parseInt(lastNumberInRange) + 1;
     }
 
     private boolean reverse() {
