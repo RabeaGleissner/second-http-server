@@ -4,7 +4,6 @@ import de.rabea.request.HttpRequest;
 import org.junit.Test;
 
 import static de.rabea.request.HttpVerb.*;
-import static de.rabea.request.HttpVerb.OPTIONS;
 import static org.junit.Assert.assertEquals;
 
 public class MethodOptionsControllerTest {
