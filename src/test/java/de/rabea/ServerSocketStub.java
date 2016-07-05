@@ -20,11 +20,6 @@ public class ServerSocketStub extends ServerSocket {
         ServerSocketStub.createsSocketWithException = createsSocketWithException;
     }
 
-    public static ServerSocket throwsException() throws IOException {
-        throwException = true;
-        return new ServerSocketStub(throwException, createsSocketWithException);
-    }
-
     public static ServerSocket createsSocketWithException() throws IOException {
         createsSocketWithException = true;
         return new ServerSocketStub(throwException, createsSocketWithException);

@@ -5,7 +5,7 @@ import de.rabea.communication.SocketWriter;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
-public class ServerWorker {
+public class ServerWorker implements Runnable {
 
     private final SocketReader socketReader;
     private final SocketWriter socketWriter;
@@ -19,7 +19,8 @@ public class ServerWorker {
         this.logger = logger;
     }
 
-    public void start() {
+    @Override
+    public void run() {
         HttpRequest request = socketReader.read();
         logger.log(request.requestLine());
         Controller controller = router.getController(request);

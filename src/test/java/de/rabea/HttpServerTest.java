@@ -1,6 +1,5 @@
 package de.rabea;
 
-import de.rabea.exceptions.ServerSocketException;
 import de.rabea.exceptions.SocketException;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,16 +26,10 @@ public class HttpServerTest {
         assertTrue(executorServiceSpy.hasShutDown);
     }
 
-    @Test(expected = ServerSocketException.class)
-    public void throwsExceptionWhenSocketCannotBeCreated() throws IOException {
-        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().throwsException(), new Router(), new Logger());
-        server.run();
-    }
-
     @Test(expected = SocketException.class)
     public void throwsExceptionWhenInputStreamCannotBeCreated() throws IOException {
         HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().createsSocketWithException(), new Router(), new Logger());
-        server.run();
+        server.start("dir", 1234);
     }
 
     private class ExecutorServiceSpy implements ExecutorService {

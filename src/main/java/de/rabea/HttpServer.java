@@ -28,7 +28,13 @@ public class HttpServer {
     public void start(String directory, int port) {
         System.out.println("Server started at port " + port + " and directory " + directory);
         while (true) {
-            run();
+            try {
+                Socket clientSocket = serverSocket.accept();
+                startServerWorker(clientSocket);
+            } catch (IOException e) {
+                shutdown();
+                throw new SocketException("Apologies, the socket could not create the input stream " + e.getMessage());
+            }
         }
     }
 
@@ -36,29 +42,11 @@ public class HttpServer {
         executorService.shutdown();
     }
 
-    public void run() {
-        Socket socket;
-        try {
-            socket = createSocket();
-        } catch (IOException e) {
-            throw new ServerSocketException("Apologies, the socket could not be created " + e.getMessage());
-        }
-        try {
-            startServerWorker(socket);
-        } catch (IOException e) {
-           throw new SocketException("Apologies, the socket could not create the input stream " + e.getMessage());
-        }
-    }
-
-    private Socket createSocket() throws IOException {
-        return serverSocket.accept();
-    }
-
-    private void startServerWorker(Socket socket) throws IOException {
-        new ServerWorker(
-                new SocketReader(new BufferedReader(new InputStreamReader(socket.getInputStream()))),
-                new SocketWriter(socket),
+    private void startServerWorker(Socket clientSocket) throws IOException {
+        executorService.execute(new ServerWorker(
+                new SocketReader(new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))),
+                new SocketWriter(clientSocket),
                 router,
-                logger).start();
+                logger));
     }
 }
