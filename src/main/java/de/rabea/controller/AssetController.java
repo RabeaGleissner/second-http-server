@@ -25,20 +25,20 @@ public class AssetController extends Controller {
         return new HttpResponse(OK, directory.fileContent(file));
     }
 
-    private String getRange(HttpRequest request) {
-        return request.requestHeaders().get("Range");
-    }
-
-    private boolean containsRange(HttpRequest request) {
-        return request.requestHeaders().containsKey("Range");
-    }
-
     @Override
     public HttpResponse doPatch(HttpRequest request) {
         if (EntityTagChecker.isCorrectTag(fileContent(request), eTag(request))) {
             directory.updateFile(request.requestLine().route(), request.body());
         }
         return new HttpResponse(NO_CONTENT);
+    }
+
+    private String getRange(HttpRequest request) {
+        return request.requestHeaders().get("Range");
+    }
+
+    private boolean containsRange(HttpRequest request) {
+        return request.requestHeaders().containsKey("Range");
     }
 
     private String eTag(HttpRequest request) {

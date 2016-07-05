@@ -12,7 +12,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
-public class HttpServer  implements Runnable {
+public class HttpServer {
     private final ServerSocket serverSocket;
     private final Router router;
     private final ExecutorService executorService;
@@ -36,7 +36,6 @@ public class HttpServer  implements Runnable {
         executorService.shutdown();
     }
 
-    @Override
     public void run() {
         Socket socket;
         try {
