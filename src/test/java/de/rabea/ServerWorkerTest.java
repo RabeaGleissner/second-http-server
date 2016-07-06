@@ -18,7 +18,7 @@ public class ServerWorkerTest {
         SocketWriterSpy socketWriterSpy = new SocketWriterSpy(new SocketStub());
         Router router = new Router();
         router.configure("/method_options2", new MethodOptions2Controller());
-        ServerWorker worker = new ServerWorker(socketReaderStub, socketWriterSpy, router, new Logger());
+        ServerWorker worker = new ServerWorker(socketReaderStub, socketWriterSpy, router, new MultiLogger());
         worker.run();
         assertEquals("HTTP/1.1 200 OK\n\n", socketWriterSpy.responseWritten());
     }

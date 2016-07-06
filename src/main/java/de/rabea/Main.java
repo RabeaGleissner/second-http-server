@@ -16,7 +16,7 @@ public class Main {
 
         ServerSocket serverSocket = new ServerSocket(port);
         Router router = new Router();
-        Logger logger = new Logger();
+        MultiLogger logger = new MultiLogger();
         router.configure("/", new RootController(directory));
         router.configure("/coffee", new CoffeeController());
         router.configure("/logs", new LogsController(logger));

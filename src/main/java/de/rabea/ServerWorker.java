@@ -22,7 +22,7 @@ public class ServerWorker implements Runnable {
     @Override
     public void run() {
         HttpRequest request = socketReader.read();
-        logger.log(request.requestLine());
+        logger.log(request.requestLine().asString());
         Controller controller = router.getController(request);
         HttpResponse httpResponse = controller.dispatch(request);
         socketWriter.write(httpResponse.asBytes());
