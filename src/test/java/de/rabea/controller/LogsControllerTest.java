@@ -1,6 +1,5 @@
 package de.rabea.controller;
 
-import de.rabea.Logger;
 import de.rabea.MultiLogger;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.RequestLine;
@@ -17,7 +16,7 @@ public class LogsControllerTest {
 
     @Test
     public void returnsResponseWithLogsIfAuthorised() {
-        Logger logger = new MultiLogger();
+        MultiLogger logger = new MultiLogger();
         logger.log("GET /somewhere HTTP/1.1");
         LogsController controller = new LogsController(logger);
         Map<String, String> requestHeaders = new HashMap<>();

@@ -1,7 +1,7 @@
 package de.rabea.controller;
 
 import de.rabea.Controller;
-import de.rabea.Logger;
+import de.rabea.MultiLogger;
 import de.rabea.ServerAuthenticator;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
@@ -12,9 +12,9 @@ import static de.rabea.response.head.StatusLine.UNAUTHORIZED;
 
 public class LogsController extends Controller {
 
-    private final Logger logger;
+    private final MultiLogger logger;
 
-    public LogsController(Logger logger) {
+    public LogsController(MultiLogger logger) {
         this.logger = logger;
     }
 
