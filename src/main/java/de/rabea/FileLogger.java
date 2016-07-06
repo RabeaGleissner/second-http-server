@@ -10,25 +10,31 @@ import java.nio.file.Paths;
 public class FileLogger implements Logger {
 
     private String filePath;
+    private FileWriter fileWriter;
 
     public FileLogger(String filePath) {
         this.filePath = filePath;
-    }
-
-    @Override
-    public void log(String message) {
         try {
-            FileWriter fileWriter = createFileWriter();
-            fileWriter.write(message);
-            fileWriter.flush();
+            this.fileWriter = createFileWriter();
         } catch (IOException e) {
             throw new FileWriterException();
         }
     }
 
-    public byte[] getLogs() {
+    @Override
+    public void log(String message) {
         try {
-            return readFileContent();
+            fileWriter.write(formatted(message));
+            fileWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String getLogs() {
+        try {
+            return new String(readFileContent());
         } catch (IOException e) {
             throw new FileReaderException();
         }
@@ -40,6 +46,10 @@ public class FileLogger implements Logger {
 
     public FileWriter createFileWriter() throws IOException {
         return new FileWriter(filePath);
+    }
+
+    private String formatted(String message) {
+        return message + ", ";
     }
 
     public class FileWriterException extends RuntimeException {

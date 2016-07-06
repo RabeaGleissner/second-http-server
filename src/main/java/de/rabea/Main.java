@@ -3,6 +3,7 @@ package de.rabea;
 import de.rabea.controller.*;
 import de.rabea.request.Directory;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.Executors;
@@ -17,6 +18,7 @@ public class Main {
         ServerSocket serverSocket = new ServerSocket(port);
         Router router = new Router();
         MultiLogger logger = new MultiLogger();
+        logger.add(new FileLogger(new File("../../logs.txt").getAbsolutePath()), new ConsoleLogger(new ServerConsole()));
         router.configure("/", new RootController(directory));
         router.configure("/coffee", new CoffeeController());
         router.configure("/logs", new LogsController(logger));

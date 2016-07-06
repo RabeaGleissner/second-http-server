@@ -22,7 +22,7 @@ public class LogsController extends Controller {
     public HttpResponse doGet(HttpRequest request) {
         ServerAuthenticator authenticator = new ServerAuthenticator("admin", "hunter2");
         if (authenticator.hasCorrectCredentials(request)) {
-            return new HttpResponse(OK, logger.getLogs());
+            return new HttpResponse(OK, logger.getLogs().getBytes());
         }
         return new HttpResponse(UNAUTHORIZED, new AuthenticateResponseHeader("Logger"));
 

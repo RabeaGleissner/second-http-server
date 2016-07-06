@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class FileLoggerTest {
@@ -38,24 +37,25 @@ public class FileLoggerTest {
     public void writesMessageToFile() throws IOException {
         FileLogger logger = new FileLogger(pathToEmptyFile);
         logger.log("message");
-        assertEquals("message", new String(Files.readAllBytes(Paths.get(pathToEmptyFile))));
+        assertEquals("message, ", new String(Files.readAllBytes(Paths.get(pathToEmptyFile))));
     }
 
     @Test
     public void readsMessageFromFile() {
-        FileLogger logger = new FileLogger(pathToFileWithContent);
-        assertArrayEquals("Some content".getBytes(), logger.getLogs());
+        FileLogger logger = new FileLogger(pathToEmptyFile);
+        logger.log("Some content");
+        assertEquals("Some content, ", logger.getLogs());
     }
 
     @Test(expected = FileLogger.FileWriterException.class)
     public void throwsExceptionWhenFileWriterCannotBeCreated() {
-        FileLoggerWithWriterException logger = new FileLoggerWithWriterException("path");
+        FileLoggerWithWriterException logger = new FileLoggerWithWriterException(pathToEmptyFile);
         logger.log("something");
     }
 
     @Test(expected = FileReaderException.class)
     public void throwsExceptionWhenCannotReadFile() {
-        FileLoggerWithReaderException logger = new FileLoggerWithReaderException("path");
+        FileLoggerWithReaderException logger = new FileLoggerWithReaderException(pathToEmptyFile);
         logger.getLogs();
 
     }

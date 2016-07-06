@@ -12,4 +12,9 @@ public class ConsoleLogger implements Logger {
     public void log(String message) {
         console.write(message);
     }
+
+    @Override
+    public String getLogs() {
+        return "";
+    }
 }

@@ -34,7 +34,7 @@ public class FileReaderTest {
 
     @Test(expected = FileReaderException.class)
     public void throwsExceptionWhenFilePathIsIncorrect() {
-        FileReader.read("wrong path");
+        FileReader.read(pathToFile + "123");
     }
 
     private void writeContentTo(File file, String content) throws IOException {
