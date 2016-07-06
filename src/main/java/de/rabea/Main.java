@@ -9,6 +9,8 @@ import de.rabea.request.Directory;
 import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.Executors;
 
 public class Main {
@@ -23,8 +25,8 @@ public class Main {
         ServerSocket serverSocket = new ServerSocket(port);
         Router router = new Router();
 
-        MultiLogger logger = new MultiLogger();
-        logger.add(new FileLogger(logFilePath), new ConsoleLogger(new ServerConsole()));
+        MultiLogger logger = new MultiLogger(new ArrayList<>(Arrays.asList(new FileLogger(logFilePath),
+                new ConsoleLogger(new ServerConsole()))));
 
         router.configure("/", new RootController(directory));
         router.configure("/coffee", new CoffeeController());

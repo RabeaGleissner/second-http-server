@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MultiLogger implements Logger {
+
     private List<Logger> existingLoggers = new ArrayList<>();
+
+    public MultiLogger(List<Logger> existingLoggers) {
+        this.existingLoggers = existingLoggers;
+    }
 
     @Override
     public void log(String message) {
@@ -20,11 +25,5 @@ public class MultiLogger implements Logger {
             logs += logger.getLogs();
         }
         return logs;
-    }
-
-    public void add(Logger ... loggers) {
-        for (Logger logger : loggers) {
-            existingLoggers.add(logger);
-        }
     }
 }

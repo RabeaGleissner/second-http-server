@@ -1,7 +1,6 @@
 package de.rabea.logger;
 
 import de.rabea.exceptions.FileReaderException;
-import de.rabea.logger.FileLogger;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,7 +18,6 @@ import static org.junit.Assert.assertEquals;
 public class FileLoggerTest {
 
     private String pathToEmptyFile;
-    private String pathToFileWithContent;
     private File file;
 
     @Rule
@@ -31,7 +29,6 @@ public class FileLoggerTest {
         pathToEmptyFile = file.getAbsolutePath();
         File file2 = folder.newFile("content.txt");
         writeContentTo(file2, "Some content");
-        pathToFileWithContent = file2.getAbsolutePath();
     }
 
     @Test
