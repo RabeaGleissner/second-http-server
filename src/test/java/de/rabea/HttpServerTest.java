@@ -1,6 +1,7 @@
 package de.rabea;
 
 import de.rabea.exceptions.SocketException;
+import de.rabea.logger.MultiLogger;
 import org.junit.Before;
 import org.junit.Test;
 

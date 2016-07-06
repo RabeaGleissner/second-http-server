@@ -1,6 +1,7 @@
-package de.rabea;
+package de.rabea.logger;
 
 import de.rabea.exceptions.FileReaderException;
+import de.rabea.logger.FileLogger;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

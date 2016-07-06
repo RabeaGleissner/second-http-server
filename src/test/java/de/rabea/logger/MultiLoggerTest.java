@@ -1,5 +1,9 @@
-package de.rabea;
+package de.rabea.logger;
 
+import de.rabea.ServerConsole;
+import de.rabea.logger.ConsoleLogger;
+import de.rabea.logger.FileLogger;
+import de.rabea.logger.MultiLogger;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,7 +29,7 @@ public class MultiLoggerTest {
     @Test
     public void savesRequestLine() {
         MultiLogger multiLogger = new MultiLogger();
-        multiLogger.add(new FileLogger(pathToEmptyFile));
+        multiLogger.add(new FileLogger(pathToEmptyFile), new ConsoleLogger(new ServerConsole()));
         multiLogger.log("GET /logs HTTP/1.1");
         multiLogger.log("POST /logs HTTP/1.1");
         assertEquals("GET /logs HTTP/1.1, POST /logs HTTP/1.1, ", multiLogger.getLogs());

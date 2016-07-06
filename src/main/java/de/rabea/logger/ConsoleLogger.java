@@ -1,4 +1,6 @@
-package de.rabea;
+package de.rabea.logger;
+
+import de.rabea.Console;
 
 public class ConsoleLogger implements Logger {
 

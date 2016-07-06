@@ -1,7 +1,7 @@
 package de.rabea.controller;
 
-import de.rabea.FileLogger;
-import de.rabea.MultiLogger;
+import de.rabea.logger.FileLogger;
+import de.rabea.logger.MultiLogger;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.RequestLine;
 import de.rabea.response.HttpResponse;

@@ -1,4 +1,4 @@
-package de.rabea;
+package de.rabea.logger;
 
 import de.rabea.exceptions.FileReaderException;
 
@@ -27,7 +27,7 @@ public class FileLogger implements Logger {
             fileWriter.write(formatted(message));
             fileWriter.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new FileWriterException();
         }
     }
 

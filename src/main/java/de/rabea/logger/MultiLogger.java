@@ -1,4 +1,4 @@
-package de.rabea;
+package de.rabea.logger;
 
 import java.util.ArrayList;
 import java.util.List;

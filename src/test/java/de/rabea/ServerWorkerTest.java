@@ -3,6 +3,7 @@ package de.rabea;
 import de.rabea.communication.SocketReader;
 import de.rabea.communication.SocketWriter;
 import de.rabea.controller.MethodOptions2Controller;
+import de.rabea.logger.MultiLogger;
 import de.rabea.request.HttpRequest;
 import org.junit.Test;
 

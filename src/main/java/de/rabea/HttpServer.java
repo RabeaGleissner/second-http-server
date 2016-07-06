@@ -2,8 +2,8 @@ package de.rabea;
 
 import de.rabea.communication.SocketReader;
 import de.rabea.communication.SocketWriter;
-import de.rabea.exceptions.ServerSocketException;
 import de.rabea.exceptions.SocketException;
+import de.rabea.logger.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;

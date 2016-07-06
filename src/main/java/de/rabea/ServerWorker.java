@@ -2,6 +2,7 @@ package de.rabea;
 
 import de.rabea.communication.SocketReader;
 import de.rabea.communication.SocketWriter;
+import de.rabea.logger.Logger;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 

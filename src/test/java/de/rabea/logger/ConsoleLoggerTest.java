@@ -1,8 +1,9 @@
-package de.rabea;
+package de.rabea.logger;
 
+import de.rabea.FakeConsole;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ConsoleLoggerTest {
 
