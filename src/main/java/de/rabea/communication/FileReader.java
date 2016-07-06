@@ -1,5 +1,7 @@
 package de.rabea.communication;
 
+import de.rabea.exceptions.FileReaderException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,12 +18,5 @@ public class FileReader {
 
     private static byte[] fileContent(String filePath) throws IOException {
         return Files.readAllBytes(Paths.get(filePath));
-    }
-
-    public static class FileReaderException extends RuntimeException {
-
-        public FileReaderException() {
-            super("Cannot read file content");
-        }
     }
 }

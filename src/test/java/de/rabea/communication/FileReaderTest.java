@@ -1,5 +1,6 @@
 package de.rabea.communication;
 
+import de.rabea.exceptions.FileReaderException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class FileReaderTest {
         assertArrayEquals("Some content".getBytes(), FileReader.read(pathToFile));
     }
 
-    @Test(expected = FileReader.FileReaderException.class)
+    @Test(expected = FileReaderException.class)
     public void throwsExceptionWhenFilePathIsIncorrect() {
         FileReader.read("wrong path");
     }

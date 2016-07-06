@@ -1,5 +1,7 @@
 package de.rabea;
 
+import de.rabea.exceptions.FileReaderException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,11 +24,6 @@ public class FileLogger implements Logger {
         } catch (IOException e) {
             throw new FileWriterException();
         }
-
-    }
-
-    private FileWriter createFileWriter() throws IOException {
-        return new FileWriter(filePath);
     }
 
     public byte[] getLogs() {
@@ -37,19 +34,17 @@ public class FileLogger implements Logger {
         }
     }
 
-    private byte[] readFileContent() throws IOException {
+    public byte[] readFileContent() throws IOException {
         return Files.readAllBytes(Paths.get(filePath));
     }
 
-    private class FileWriterException extends RuntimeException {
-        public FileWriterException() {
-            super("Sorry, the FileWriter could not be created");
-        }
+    public FileWriter createFileWriter() throws IOException {
+        return new FileWriter(filePath);
     }
 
-    private class FileReaderException extends RuntimeException {
-        public FileReaderException() {
-            super("Sorry, the log file could not be read");
+    public class FileWriterException extends RuntimeException {
+        public FileWriterException() {
+            super("Sorry, the FileWriter could not be created");
         }
     }
 }

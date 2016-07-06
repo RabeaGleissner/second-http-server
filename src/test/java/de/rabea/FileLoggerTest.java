@@ -1,5 +1,6 @@
 package de.rabea;
 
+import de.rabea.exceptions.FileReaderException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,7 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class FileLoggerTest {
 
@@ -45,11 +47,46 @@ public class FileLoggerTest {
         assertArrayEquals("Some content".getBytes(), logger.getLogs());
     }
 
+    @Test(expected = FileLogger.FileWriterException.class)
+    public void throwsExceptionWhenFileWriterCannotBeCreated() {
+        FileLoggerWithWriterException logger = new FileLoggerWithWriterException("path");
+        logger.log("something");
+    }
+
+    @Test(expected = FileReaderException.class)
+    public void throwsExceptionWhenCannotReadFile() {
+        FileLoggerWithReaderException logger = new FileLoggerWithReaderException("path");
+        logger.getLogs();
+
+    }
+
+    private class FileLoggerWithWriterException extends FileLogger {
+
+        public FileLoggerWithWriterException(String filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public FileWriter createFileWriter() throws IOException {
+            throw new IOException();
+        }
+    }
+
+    private class FileLoggerWithReaderException extends FileLogger {
+        public FileLoggerWithReaderException(String filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public byte[] readFileContent() throws IOException {
+            throw new IOException();
+        }
+    }
+
     private void writeContentTo(File file, String content) throws IOException {
         FileWriter writer = new FileWriter(file.getAbsoluteFile());
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
         bufferedWriter.write(content);
         bufferedWriter.close();
     }
-
 }
