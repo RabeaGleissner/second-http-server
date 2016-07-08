@@ -38,6 +38,7 @@ public class Main {
         router.configure("/parameters", new ParametersController());
         router.configure("/redirect", new RedirectController());
         router.configure("/tea", new TeaController());
+        router.configure("/ttt-game", new TicTacToeController());
         router.configure(directory, new AssetController(directory));
 
         HttpServer httpServer = new HttpServer(Executors.newFixedThreadPool(20), serverSocket, router, logger);
