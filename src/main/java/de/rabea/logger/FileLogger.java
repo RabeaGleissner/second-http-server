@@ -17,7 +17,7 @@ public class FileLogger implements Logger {
         try {
             this.fileWriter = createFileWriter();
         } catch (IOException e) {
-            throw new FileWriterException();
+            throw new FileWriterException(e.getMessage());
         }
     }
 
@@ -27,7 +27,7 @@ public class FileLogger implements Logger {
             fileWriter.write(formatted(message));
             fileWriter.flush();
         } catch (IOException e) {
-            throw new FileWriterException();
+            throw new FileWriterException(e.getMessage());
         }
     }
 
@@ -36,7 +36,7 @@ public class FileLogger implements Logger {
         try {
             return new String(readFileContent());
         } catch (IOException e) {
-            throw new FileReaderException();
+            throw new FileReaderException(e.getMessage());
         }
     }
 
@@ -53,8 +53,8 @@ public class FileLogger implements Logger {
     }
 
     public class FileWriterException extends RuntimeException {
-        public FileWriterException() {
-            super("Sorry, the FileWriter could not be created");
+        public FileWriterException(String message) {
+            super("Sorry, the FileWriter could not be created " + message);
         }
     }
 }

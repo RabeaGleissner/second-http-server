@@ -3,6 +3,7 @@ package de.rabea;
 import de.rabea.controller.*;
 import de.rabea.logger.ConsoleLogger;
 import de.rabea.logger.FileLogger;
+import de.rabea.logger.Logger;
 import de.rabea.logger.MultiLogger;
 import de.rabea.request.Directory;
 
@@ -25,7 +26,7 @@ public class Main {
         ServerSocket serverSocket = new ServerSocket(port);
         Router router = new Router();
 
-        MultiLogger logger = new MultiLogger(new ArrayList<>(Arrays.asList(new FileLogger(logFilePath),
+        Logger logger = new MultiLogger(new ArrayList<>(Arrays.asList(new FileLogger(logFilePath),
                 new ConsoleLogger(new ServerConsole()))));
 
         router.configure("/", new RootController(directory));

@@ -12,7 +12,7 @@ public class FileReader {
         try {
             return fileContent(filePath);
         } catch (IOException e) {
-            throw new FileReaderException();
+            throw new FileReaderException(e.getMessage());
         }
     }
 
