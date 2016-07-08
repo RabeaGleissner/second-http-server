@@ -1,10 +1,12 @@
 package de.rabea;
 
 import de.rabea.exceptions.SocketException;
+import de.rabea.logger.MultiLogger;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.*;
@@ -21,14 +23,15 @@ public class HttpServerTest {
 
     @Test
     public void executorServiceShutsDown() throws IOException {
-        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub(), new Router(), new Logger());
+        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub(), new Router(), new MultiLogger(new ArrayList<>()));
         server.shutdown();
         assertTrue(executorServiceSpy.hasShutDown);
     }
 
     @Test(expected = SocketException.class)
     public void throwsExceptionWhenInputStreamCannotBeCreated() throws IOException {
-        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().createsSocketWithException(), new Router(), new Logger());
+        HttpServer server = new HttpServer(executorServiceSpy, new ServerSocketStub().createsSocketWithException(),
+                new Router(), new MultiLogger(new ArrayList<>()));
         server.start("dir", 1234);
     }
 

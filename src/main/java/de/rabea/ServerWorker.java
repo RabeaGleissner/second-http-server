@@ -2,6 +2,7 @@ package de.rabea;
 
 import de.rabea.communication.SocketReader;
 import de.rabea.communication.SocketWriter;
+import de.rabea.logger.Logger;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
@@ -22,7 +23,7 @@ public class ServerWorker implements Runnable {
     @Override
     public void run() {
         HttpRequest request = socketReader.read();
-        logger.log(request.requestLine());
+        logger.log(request.requestLine().asString());
         Controller controller = router.getController(request);
         HttpResponse httpResponse = controller.dispatch(request);
         socketWriter.write(httpResponse.asBytes());

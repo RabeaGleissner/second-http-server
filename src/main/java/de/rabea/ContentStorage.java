@@ -7,10 +7,6 @@ public class ContentStorage {
         storage = body.getBytes();
     }
 
-    public void storeFileContent(byte[] body) {
-        storage = body;
-    }
-
     public byte[] content() {
         return storage;
     }

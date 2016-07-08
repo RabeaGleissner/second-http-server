@@ -1,8 +1,8 @@
 package de.rabea.controller;
 
 import de.rabea.Controller;
-import de.rabea.Logger;
 import de.rabea.ServerAuthenticator;
+import de.rabea.logger.Logger;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import de.rabea.response.head.AuthenticateResponseHeader;
@@ -22,7 +22,7 @@ public class LogsController extends Controller {
     public HttpResponse doGet(HttpRequest request) {
         ServerAuthenticator authenticator = new ServerAuthenticator("admin", "hunter2");
         if (authenticator.hasCorrectCredentials(request)) {
-            return new HttpResponse(OK, logger.getLogs());
+            return new HttpResponse(OK, logger.getLogs().getBytes());
         }
         return new HttpResponse(UNAUTHORIZED, new AuthenticateResponseHeader("Logger"));
 
