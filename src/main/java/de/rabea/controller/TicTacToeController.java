@@ -13,7 +13,7 @@ public class TicTacToeController extends Controller {
     @Override
     public HttpResponse doGet(HttpRequest request) {
         Board board = new Board(3);
-        String html = new TicTacToeHtmlGenerator(new BoardHtml(board.cells())).generate();
+        String html = new TicTacToeHtmlGenerator(new BoardHtml(board)).generate();
         return new HttpResponse(StatusLine.OK, html.getBytes());
     }
 

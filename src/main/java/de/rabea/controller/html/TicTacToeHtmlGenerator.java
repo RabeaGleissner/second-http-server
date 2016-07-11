@@ -9,23 +9,30 @@ public class TicTacToeHtmlGenerator {
     }
 
     public String generate() {
-        String html = head() + boardHtml.generate() + end();
-        return html;
+        return header() + boardHtml.generate() + end();
     }
 
-    private String head() {
+    private String header() {
         return "<!DOCTYPE html>" +
                 "<html lang=\"en\">" +
-                "<head>" +
-                "  <meta charset=\"UTF-8\">" +
-                "  <title>Tic Tac Toe</title>" +
-                "  <link rel=\"stylesheet\" href=\"/styles.css\">" +
-                "</head>" +
-                "<body>";
+                head() +
+                "<body>" +
+                "<h1>Tic Tac Toe</h1>" +
+                "<div class='board'>";
     }
 
     private String end() {
-        return "</body>" +
+        return "</div>" +
+                "</body>" +
                 "</html>";
     }
+
+    private String head() {
+        return "<head>" +
+                "  <meta charset=\"UTF-8\">" +
+                "  <title>Tic Tac Toe</title>" +
+                "  <link rel=\"stylesheet\" href=\"/styles.css\">" +
+                "</head>";
+    }
+
 }
