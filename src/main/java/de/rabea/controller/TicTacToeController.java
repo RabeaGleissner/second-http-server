@@ -16,5 +16,4 @@ public class TicTacToeController extends Controller {
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board)).generate();
         return new HttpResponse(StatusLine.OK, html.getBytes());
     }
-
 }
