@@ -6,7 +6,8 @@ import de.rabea.controller.html.TicTacToeHtmlGenerator;
 import de.rabea.game.Board;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
-import de.rabea.response.head.StatusLine;
+
+import static de.rabea.response.head.StatusLine.OK;
 
 public class TicTacToeController extends Controller {
 
@@ -14,6 +15,6 @@ public class TicTacToeController extends Controller {
     public HttpResponse doGet(HttpRequest request) {
         Board board = new Board(3);
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board)).generate();
-        return new HttpResponse(StatusLine.OK, html.getBytes());
+        return new HttpResponse(OK, html.getBytes());
     }
 }
