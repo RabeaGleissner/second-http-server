@@ -11,7 +11,7 @@ public class ArgumentsTest {
         String[] commandLineArguments = {};
         Arguments arguments = new Arguments(commandLineArguments);
         assertEquals(5000, arguments.getPort());
-        assertEquals("PUBLIC_DIR", arguments.getDirectory());
+        assertEquals("vendor/cob_spec/public", arguments.getDirectory());
     }
 
     @Test
@@ -19,7 +19,7 @@ public class ArgumentsTest {
         String[] commandLineArguments = {"-p", "1234"};
         Arguments arguments = new Arguments(commandLineArguments);
         assertEquals(1234, arguments.getPort());
-        assertEquals("PUBLIC_DIR", arguments.getDirectory());
+        assertEquals("vendor/cob_spec/public", arguments.getDirectory());
     }
 
     @Test

@@ -64,7 +64,7 @@ public class Arguments {
     }
 
     private HashMap<String, String> addDefaultDirectory(HashMap<String, String> parsedArguments) {
-        parsedArguments.put("-d", "PUBLIC_DIR");
+        parsedArguments.put("-d", "vendor/cob_spec/public");
         return parsedArguments;
     }
 }
