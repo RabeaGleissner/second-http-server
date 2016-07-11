@@ -17,7 +17,7 @@ public class StyleSheetController extends Controller {
         return new HttpResponse(OK, new ContentTypeHeader("text/css"), responseBody);
     }
 
-    private byte[] readStylesheetContent() {
+    public byte[] readStylesheetContent() {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("styles.css");
         byte[] responseBody = new byte[0];
