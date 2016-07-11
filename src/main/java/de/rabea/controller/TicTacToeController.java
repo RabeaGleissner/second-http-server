@@ -1,28 +1,20 @@
 package de.rabea.controller;
 
-import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.io.FileTemplateLoader;
-import com.github.jknack.handlebars.io.TemplateLoader;
 import de.rabea.Controller;
+import de.rabea.controller.html.BoardHtml;
+import de.rabea.controller.html.TicTacToeHtmlGenerator;
+import de.rabea.game.Board;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
-
-import java.io.IOException;
-
-import static de.rabea.response.head.StatusLine.OK;
+import de.rabea.response.head.StatusLine;
 
 public class TicTacToeController extends Controller {
 
     @Override
     public HttpResponse doGet(HttpRequest request) {
-        TemplateLoader loader = new FileTemplateLoader("/Users/rabeagleissner/code/java/http-server/second-http-server/src/main/Resources/templates", ".mustache");
-        Handlebars handlebars = new Handlebars(loader);
-        try {
-            String html = handlebars.compile("ttt-game").text();
-            return new HttpResponse(OK, html.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        Board board = new Board(3);
+        String html = new TicTacToeHtmlGenerator(new BoardHtml(board.cells())).generate();
+        return new HttpResponse(StatusLine.OK, html.getBytes());
     }
+
 }
