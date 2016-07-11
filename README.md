@@ -35,3 +35,16 @@ Then type
 `java -jar fitnesse.jar -p 9090`
 
 The test suite will run on [http://localhost:9090/HttpTestSuite](http://localhost:9090/HttpTestSuite).
+
+## Playing Tic Tac Toe
+
+Clone the [Tic Tac Toe core jar](https://github.com/RabeaGleissner/java-tic-tac-toe) and copy that jar into this project by running the following command
+(replace paths with your own):
+
+`mvn install:install-file -Dfile=/path/to/downloaded/jar/target/tic-tac-toe-1.0-SNAPSHOT.jar -DpomFile=/path/to/ttt/pom/http-server/second-http-server/pom.xml`
+
+To see the game in your browser, run the following commands in the root directory of this application.
+
+`java -jar target/second-http-server-1.0-SNAPSHOT.jar -p 5000 -d vendor/cob_spec/public`
+
+Then open [http://localhost:5000/ttt-game](http://localhost:5000/ttt-game) in your web browser.
