@@ -25,6 +25,12 @@ public class ResponseBuilder {
         this.body = body;
     }
 
+    public ResponseBuilder(StatusLine statusLine, ResponseHeader responseHeader, byte[] body) {
+        this.statusLine = statusLine;
+        this.responseHeader = responseHeader;
+        this.body = body;
+    }
+
     public byte[] create(ByteArrayOutputStream out) {
         try {
             return combinedHeadAndBody(status() + responseHeader.create(), body, out);

@@ -12,18 +12,20 @@ public class TicTacToeHtmlGenerator {
         String html = head() + boardHtml.generate() + end();
         return html;
     }
+
     private String head() {
-        return "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "  <meta charset=\"UTF-8\">\n" +
-                "  <title>Tic Tac Toe</title>\n" +
-                "</head>\n" +
+        return "<!DOCTYPE html>" +
+                "<html lang=\"en\">" +
+                "<head>" +
+                "  <meta charset=\"UTF-8\">" +
+                "  <title>Tic Tac Toe</title>" +
+                "  <link rel=\"stylesheet\" href=\"/styles.css\">" +
+                "</head>" +
                 "<body>";
     }
 
     private String end() {
-        return "</body>\n" +
+        return "</body>" +
                 "</html>";
     }
 }

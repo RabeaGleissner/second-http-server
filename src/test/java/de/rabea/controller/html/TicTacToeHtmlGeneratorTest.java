@@ -19,6 +19,7 @@ public class TicTacToeHtmlGeneratorTest {
                 "<head>\n" +
                 "  <meta charset=\"UTF-8\">\n" +
                 "  <title>Tic Tac Toe</title>\n" +
-                "</head>"));
+                "  <link rel=\"stylesheet\" href=\"/styles.css\">" +
+                "</head>\n"));
     }
 }

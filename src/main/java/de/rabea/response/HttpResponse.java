@@ -1,5 +1,6 @@
 package de.rabea.response;
 
+import de.rabea.controller.ContentTypeHeader;
 import de.rabea.response.head.EmptyResponseHeader;
 import de.rabea.response.head.StatusLine;
 
@@ -22,6 +23,11 @@ public class HttpResponse {
 
     public HttpResponse(StatusLine statusLine, byte[] body) {
         this.response = new ResponseBuilder(statusLine, body).create(new ByteArrayOutputStream());
+    }
+
+    public HttpResponse(StatusLine statusLine, ResponseHeader responseHeader, byte[] body) {
+        this.response = new ResponseBuilder(statusLine, responseHeader, body).create(new ByteArrayOutputStream());
+
     }
 
     public byte[] asBytes() {
