@@ -33,7 +33,8 @@ public class BoardHtmlTest {
         GameOverBoard board = new GameOverBoard();
         BoardHtml boardHtml = new BoardHtml(board);
         String html = boardHtml.generate();
-        assertTrue(html.contains("<div class='game-end-message'>Game over!</div>"));
+        assertTrue(html.contains("<div class='game-end-message'>"));
+        assertTrue(html.contains("Game over!"));
     }
 
     private class GameOverBoard extends Board {

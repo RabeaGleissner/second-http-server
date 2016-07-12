@@ -32,7 +32,8 @@ public class BoardHtml {
 
     private String addGameOverMessage(String cells) {
         cells += "<div class='game-end-message'>" +
-                "Game over!" +
+                "<p>Game over!</p>" +
+                "<a class=\"play-again\" href=\"/ttt-game\">Play again</a>" +
                 "</div>";
         return cells;
     }

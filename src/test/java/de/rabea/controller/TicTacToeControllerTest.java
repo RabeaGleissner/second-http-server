@@ -25,6 +25,7 @@ public class TicTacToeControllerTest {
     @Test
     public void returnsResponseToPostRequest() {
         TicTacToeController controller = new TicTacToeController();
+        controller.doGet(new HttpRequest(GET, "/ttt-board"));
         HttpResponse response = controller.doPost(new HttpRequest(POST, "/ttt-board", "move=1"));
         String httpResponse = response.asString();
         assertTrue(httpResponse.contains("<div class='cell full'>X</div>"));

@@ -14,12 +14,9 @@ public class TicTacToeController extends Controller {
 
     private Board board;
 
-    public TicTacToeController() {
-        board = new Board(3);
-    }
-
     @Override
     public HttpResponse doGet(HttpRequest request) {
+        board = new Board(3);
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board)).generate();
         return new HttpResponse(OK, html.getBytes());
     }
