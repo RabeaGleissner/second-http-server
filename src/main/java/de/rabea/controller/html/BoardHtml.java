@@ -7,20 +7,43 @@ import static de.rabea.game.Mark.EMPTY;
 
 public class BoardHtml {
 
-    private Board board;
     private final String PLACE_HOLDER = "&nbsp;";
+    private final Board board;
+    private final int boardDimension;
+    private final Mark[] currentMarks;
 
     public BoardHtml(Board board) {
         this.board = board;
+        this.boardDimension = board.getDimension();
+        this.currentMarks = board.cells();
     }
 
     public String generate() {
-        String cells = "";
-        int dimension = board.getDimension();
-        Mark[] currentMarks = board.cells();
+        String cells = addBoardCssClass();
+        for (int i = 0; i < currentMarks.length; i += boardDimension)  {
+            cells += createRow(boardDimension, currentMarks, i);
+        }
+        cells = addClosingDiv(cells);
+        if (board.gameOver()) {
+           cells = addGameOverMessage(cells);
+        }
+        return cells;
+    }
 
-        for (int i = 0; i < currentMarks.length; i += dimension)  {
-            cells += createRow(dimension, currentMarks, i);
+    private String addGameOverMessage(String cells) {
+        cells += "<div class='game-end-message'>" +
+                "<p>Game over!</p>" +
+                "<a class=\"play-again\" href=\"/ttt-game\">Play again</a>" +
+                "</div>";
+        return cells;
+    }
+
+    private String addBoardCssClass() {
+        String cells;
+        if (board.gameOver()) {
+            cells = "<div class='board disabled'>";
+        } else {
+            cells = "<div class='board'>";
         }
         return cells;
     }
@@ -32,8 +55,13 @@ public class BoardHtml {
                     createCell(cells[i + index], i + index) +
                     "</div>";
         }
-        row += "</div>";
+        row = addClosingDiv(row);
         return row;
+    }
+
+    private String addClosingDiv(String html) {
+        html += "</div>";
+        return html;
     }
 
     private String createCell(Mark cell, int i) {
@@ -48,7 +76,7 @@ public class BoardHtml {
     }
 
     private String formForEmptyCell(int i) {
-        return "<form class=\"cell-form\" method=\"post\" action=\"/move\">\n" +
+        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-game\">\n" +
                 "<input class=\"hidden\" type=\"hidden\" name=\"position\" value="+ i +">\n" +
                 "<button class='cell' type=\"submit\"><div class='empty'>" + PLACE_HOLDER + "</div></button>\n" +
                 "</form>";

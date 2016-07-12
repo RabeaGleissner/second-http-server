@@ -17,13 +17,11 @@ public class TicTacToeHtmlGenerator {
                 "<html lang=\"en\">" +
                 head() +
                 "<body>" +
-                "<h1>Tic Tac Toe</h1>" +
-                "<div class='board'>";
+                "<h1>Tic Tac Toe</h1>";
     }
 
     private String end() {
-        return "</div>" +
-                "</body>" +
+        return "</body>" +
                 "</html>";
     }
 
@@ -34,5 +32,4 @@ public class TicTacToeHtmlGenerator {
                 "  <link rel=\"stylesheet\" href=\"/styles.css\">" +
                 "</head>";
     }
-
 }
