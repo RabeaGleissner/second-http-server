@@ -7,22 +7,33 @@ import static de.rabea.game.Mark.EMPTY;
 
 public class BoardHtml {
 
-    private Board board;
     private final String PLACE_HOLDER = "&nbsp;";
+    private final Board board;
+    private final int boardDimension;
+    private final Mark[] currentMarks;
 
     public BoardHtml(Board board) {
         this.board = board;
+        this.boardDimension = board.getDimension();
+        this.currentMarks = board.cells();
     }
 
     public String generate() {
         String cells = addBoardCssClass();
-        int dimension = board.getDimension();
-        Mark[] currentMarks = board.cells();
-
-        for (int i = 0; i < currentMarks.length; i += dimension)  {
-            cells += createRow(dimension, currentMarks, i);
+        for (int i = 0; i < currentMarks.length; i += boardDimension)  {
+            cells += createRow(boardDimension, currentMarks, i);
         }
         cells = addClosingDiv(cells);
+        if (board.gameOver()) {
+           cells = addGameOverMessage(cells);
+        }
+        return cells;
+    }
+
+    private String addGameOverMessage(String cells) {
+        cells += "<div class='game-end-message'>" +
+                "Game over!" +
+                "</div>";
         return cells;
     }
 

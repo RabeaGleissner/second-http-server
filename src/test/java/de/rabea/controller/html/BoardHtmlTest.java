@@ -28,6 +28,14 @@ public class BoardHtmlTest {
         assertTrue(html.contains("<div class='board disabled'></div>"));
     }
 
+    @Test
+    public void addsGameOverMessageForGameOverBoardState() {
+        GameOverBoard board = new GameOverBoard();
+        BoardHtml boardHtml = new BoardHtml(board);
+        String html = boardHtml.generate();
+        assertTrue(html.contains("<div class='game-end-message'>Game over!</div>"));
+    }
+
     private class GameOverBoard extends Board {
         @Override
         public boolean gameOver() {
