@@ -21,6 +21,12 @@ public class HttpRequest {
         this.requestBody = "";
     }
 
+    public HttpRequest(HttpVerb verb, String path, String requestBody) {
+        this.requestLine = new RequestLine(verb + " " + path + " HTTP/1.1");
+        this.requestHeader = new HashMap<>();
+        this.requestBody = requestBody;
+    }
+
     public Map<String, String> requestHeaders() {
         return requestHeader;
     }

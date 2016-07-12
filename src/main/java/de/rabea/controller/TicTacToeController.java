@@ -4,6 +4,7 @@ import de.rabea.Controller;
 import de.rabea.controller.html.BoardHtml;
 import de.rabea.controller.html.TicTacToeHtmlGenerator;
 import de.rabea.game.Board;
+import de.rabea.request.BodyParser;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 
@@ -25,9 +26,7 @@ public class TicTacToeController extends Controller {
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
-        String requestBody = request.body();
-        int position = Integer.parseInt(requestBody.substring(requestBody.length() - 1));
-        board = board.placeMark(position);
+        board = board.placeMark(Integer.parseInt(new BodyParser(request.body()).content()));
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board)).generate();
         return new HttpResponse(OK, html.getBytes());
     }
