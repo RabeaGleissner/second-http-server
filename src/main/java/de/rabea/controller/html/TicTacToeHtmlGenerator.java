@@ -2,14 +2,14 @@ package de.rabea.controller.html;
 
 public class TicTacToeHtmlGenerator {
 
-    private BoardHtml boardHtml;
+    private InnerHtml innerHtml;
 
-    public TicTacToeHtmlGenerator(BoardHtml boardHtml) {
-        this.boardHtml = boardHtml;
+    public TicTacToeHtmlGenerator(InnerHtml innerHtml) {
+        this.innerHtml = innerHtml;
     }
 
     public String generate() {
-        return header() + boardHtml.generate() + end();
+        return header() + innerHtml.generate() + end();
     }
 
     private String header() {
