@@ -24,6 +24,11 @@ public class HttpResponse {
         this.response = new ResponseBuilder(statusLine, body).create(new ByteArrayOutputStream());
     }
 
+    public HttpResponse(StatusLine statusLine, ResponseHeader responseHeader, byte[] body) {
+        this.response = new ResponseBuilder(statusLine, responseHeader, body).create(new ByteArrayOutputStream());
+
+    }
+
     public byte[] asBytes() {
         return response;
     }

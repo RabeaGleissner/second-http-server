@@ -35,3 +35,11 @@ Then type
 `java -jar fitnesse.jar -p 9090`
 
 The test suite will run on [http://localhost:9090/HttpTestSuite](http://localhost:9090/HttpTestSuite).
+
+## Playing Tic Tac Toe
+
+To see the game in your browser, run the following commands in the root directory of this application.
+
+`java -jar target/second-http-server-1.0-SNAPSHOT.jar -p 5000 -d vendor/cob_spec/public`
+
+Then open [http://localhost:5000/ttt-game](http://localhost:5000/ttt-game) in your web browser.

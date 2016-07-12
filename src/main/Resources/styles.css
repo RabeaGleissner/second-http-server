@@ -1,0 +1,197 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+a {
+  transition: 0.2s;
+}
+
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  color: black;
+  font-size: 18px;
+  margin: 0 0 35px;
+  text-align: center;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 70px;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+.board {
+  width: 90%;
+  max-width: 620px;
+  margin: 0 auto 40px;
+}
+
+.board.disabled button {
+  pointer-events: none;
+  cursor: default;
+}
+
+.row {
+  border-bottom: 1px solid black;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.row:last-child {
+  border: none;
+}
+
+.wrapper {
+  height: 140px;
+  width: 140px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-right: 1px solid black;
+}
+
+.wrapper:last-child {
+  border: none;
+}
+
+.cell {
+  text-decoration: none;
+  border: none;
+}
+
+.empty {
+  margin: 2px auto 0;
+  background-color: #e5e0e0;
+  height: 120px;
+  width: 120px;
+  cursor: pointer;
+  transition: .6s;
+}
+
+.empty:hover {
+  background-color: lightpink;
+}
+
+.full {
+  font-size: 5.5em;
+  margin: 0 auto;
+}
+
+.cell_form {
+  margin: 0 auto;
+}
+
+.game-end-message {
+  width: 300px;
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+
+input {
+  overflow: visible;
+}
+
+h2.menu {
+  margin-bottom: 20px;
+}
+
+.options-form p {
+  width: 290px;
+  margin: 20px auto;
+  text-align: center;
+  background-color: #e5e0e0;
+  padding: 16px 10px;
+}
+
+.options-form p:hover {
+  background-color: lightpink;
+  cursor: pointer;
+}
+
+.options-form label {
+  padding: 10px 26px;
+}
+
+.options-form input:hover, .options-form label:hover {
+  cursor: pointer;
+}
+
+.options-form input[type=radio] {
+  display: none;
+}
+
+.options-form input[type=radio]:checked + label {
+  font-weight: bold;
+  padding: 0;
+}
+.options-form input[type=radio]:checked + label:after {
+  content: " \2714";
+}
+
+button, .play-again, .choose-game-option {
+  font: inherit;
+  overflow: visible;
+  margin: 0;
+  cursor: pointer;
+  -webkit-appearance: button;
+  border: 1px solid grey;
+  background: #fff;
+  padding: 8px 30px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  color: #000000;
+  font-size: 1em;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+button:focus {
+  outline:0;
+}
+
+.play-again {
+  font-size: .8em;
+}
+
+@media only screen and (max-width:520px) {
+  h2 {
+    font-size: 1.2em;
+  }
+
+  .empty {
+    height: 90px;
+    width: 90px;
+    margin: 0;
+  }
+
+  .wrapper {
+    height: 120px;
+    width: 120px;
+  }
+
+  .cell {
+    width: 90px;
+    padding: 15px 0px;
+  }
+
+  .full {
+    margin: -15px auto;
+  }
+}

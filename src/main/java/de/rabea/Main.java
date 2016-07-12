@@ -1,5 +1,6 @@
 package de.rabea;
 
+import de.rabea.communication.ResourceReader;
 import de.rabea.controller.*;
 import de.rabea.logger.ConsoleLogger;
 import de.rabea.logger.FileLogger;
@@ -38,6 +39,8 @@ public class Main {
         router.configure("/parameters", new ParametersController());
         router.configure("/redirect", new RedirectController());
         router.configure("/tea", new TeaController());
+        router.configure("/ttt-game", new TicTacToeController());
+        router.configure("/styles.css", new StyleSheetController(new ResourceReader()));
         router.configure(directory, new AssetController(directory));
 
         HttpServer httpServer = new HttpServer(Executors.newFixedThreadPool(20), serverSocket, router, logger);
