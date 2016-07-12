@@ -1,5 +1,6 @@
 package de.rabea.controller;
 
+import de.rabea.communication.ResourceReader;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import org.junit.Test;
@@ -11,18 +12,17 @@ public class StyleSheetControllerTest {
 
     @Test
     public void returnsResponseForRequestToStyleSheet() {
-        StyleSheetControllerStub controller = new StyleSheetControllerStub();
+        StyleSheetController controller = new StyleSheetController(new ResourceReaderStub());
         HttpResponse response = controller.doGet(new HttpRequest(GET, "/styles.css"));
         assertEquals("HTTP/1.1 200 OK\n" +
                 "Content-Type: text/css\n" +
-                "some styles", response.asString());
+                "styles.css", response.asString());
     }
 
-    private class StyleSheetControllerStub extends StyleSheetController {
-
+    private class ResourceReaderStub extends ResourceReader {
         @Override
-        public byte[] readStylesheetContent() {
-            return "some styles".getBytes();
+        public byte[] read(String fileName) {
+            return fileName.getBytes();
         }
     }
 }
