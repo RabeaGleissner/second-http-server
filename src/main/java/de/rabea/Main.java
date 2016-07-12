@@ -40,6 +40,7 @@ public class Main {
         router.configure("/redirect", new RedirectController());
         router.configure("/tea", new TeaController());
         router.configure("/ttt-game", new TicTacToeController());
+        router.configure("/ttt-menu", new TicTacToeMenuController());
         router.configure("/styles.css", new StyleSheetController(new ResourceReader()));
         router.configure(directory, new AssetController(directory));
 
