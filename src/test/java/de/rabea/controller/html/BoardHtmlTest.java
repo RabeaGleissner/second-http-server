@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 public class BoardHtmlTest {
 
     @Test
-    public void generatesHtmlForCurrentGameState() {
+    public void generatesHtmlForUnfinishedGameState() {
         Board board = new Board(3);
         Board newBoard = board.placeMark(1);
         BoardHtml boardHtml = new BoardHtml(newBoard);
@@ -18,5 +18,20 @@ public class BoardHtmlTest {
                 "<input class=\"hidden\" type=\"hidden\" name=\"position\" value=5>\n" +
                 "<button class='cell' type=\"submit\"><div class='empty'>&nbsp;</div></button>\n" +
                 "</form>"));
+    }
+
+    @Test
+    public void generatesHtmlForGameOverBoard() {
+        GameOverBoard board = new GameOverBoard();
+        BoardHtml boardHtml = new BoardHtml(board);
+        String html = boardHtml.generate();
+        assertTrue(html.contains("<div class='board disabled'></div>"));
+    }
+
+    private class GameOverBoard extends Board {
+        @Override
+        public boolean gameOver() {
+            return true;
+        }
     }
 }

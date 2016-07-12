@@ -15,12 +15,23 @@ public class BoardHtml {
     }
 
     public String generate() {
-        String cells = "";
+        String cells = addBoardCssClass();
         int dimension = board.getDimension();
         Mark[] currentMarks = board.cells();
 
         for (int i = 0; i < currentMarks.length; i += dimension)  {
             cells += createRow(dimension, currentMarks, i);
+        }
+        cells = addClosingDiv(cells);
+        return cells;
+    }
+
+    private String addBoardCssClass() {
+        String cells;
+        if (board.gameOver()) {
+            cells = "<div class='board disabled'>";
+        } else {
+            cells = "<div class='board'>";
         }
         return cells;
     }
@@ -32,8 +43,13 @@ public class BoardHtml {
                     createCell(cells[i + index], i + index) +
                     "</div>";
         }
-        row += "</div>";
+        row = addClosingDiv(row);
         return row;
+    }
+
+    private String addClosingDiv(String html) {
+        html += "</div>";
+        return html;
     }
 
     private String createCell(Mark cell, int i) {
