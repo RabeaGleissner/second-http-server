@@ -1,15 +1,15 @@
 package de.rabea.request;
 
-public class BodyParser {
+public class MoveParser {
 
     private String fullBodyContent;
 
-    public BodyParser(String fullBodyContent) {
+    public MoveParser(String fullBodyContent) {
         this.fullBodyContent = fullBodyContent;
     }
 
-    public String content() {
+    public int move() {
         int index = fullBodyContent.indexOf("=");
-        return fullBodyContent.substring(index + 1);
+        return Integer.parseInt(fullBodyContent.substring(index + 1));
     }
 }

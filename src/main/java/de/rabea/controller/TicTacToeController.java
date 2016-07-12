@@ -4,8 +4,8 @@ import de.rabea.Controller;
 import de.rabea.controller.html.BoardHtml;
 import de.rabea.controller.html.TicTacToeHtmlGenerator;
 import de.rabea.game.Board;
-import de.rabea.request.BodyParser;
 import de.rabea.request.HttpRequest;
+import de.rabea.request.MoveParser;
 import de.rabea.response.HttpResponse;
 
 import static de.rabea.response.head.StatusLine.OK;
@@ -22,7 +22,7 @@ public class TicTacToeController extends Controller {
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
-        board = board.placeMark(Integer.parseInt(new BodyParser(request.body()).content()));
+        board = board.placeMark(new MoveParser(request.body()).move());
         return htmlBoard();
     }
 

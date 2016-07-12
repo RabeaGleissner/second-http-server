@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class BodyParserTest {
+public class MoveParserTest {
 
     @Test
     public void returnsBodyContentAfterEqualsSign() {
-        BodyParser parser = new BodyParser("data=something");
-        assertEquals("something", parser.content());
+        MoveParser parser = new MoveParser("data=1");
+        assertEquals(1, parser.move());
     }
 }
