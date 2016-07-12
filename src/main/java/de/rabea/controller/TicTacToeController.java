@@ -17,13 +17,16 @@ public class TicTacToeController extends Controller {
     @Override
     public HttpResponse doGet(HttpRequest request) {
         board = new Board(3);
-        String html = new TicTacToeHtmlGenerator(new BoardHtml(board)).generate();
-        return new HttpResponse(OK, html.getBytes());
+        return htmlBoard();
     }
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
         board = board.placeMark(Integer.parseInt(new BodyParser(request.body()).content()));
+        return htmlBoard();
+    }
+
+    private HttpResponse htmlBoard() {
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board)).generate();
         return new HttpResponse(OK, html.getBytes());
     }
