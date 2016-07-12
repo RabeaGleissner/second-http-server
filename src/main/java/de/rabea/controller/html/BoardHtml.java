@@ -48,7 +48,7 @@ public class BoardHtml {
     }
 
     private String formForEmptyCell(int i) {
-        return "<form class=\"cell-form\" method=\"post\" action=\"/move\">\n" +
+        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-game\">\n" +
                 "<input class=\"hidden\" type=\"hidden\" name=\"position\" value="+ i +">\n" +
                 "<button class='cell' type=\"submit\"><div class='empty'>" + PLACE_HOLDER + "</div></button>\n" +
                 "</form>";
