@@ -4,6 +4,7 @@ import de.rabea.Controller;
 import de.rabea.controller.html.BoardHtml;
 import de.rabea.controller.html.TicTacToeHtmlGenerator;
 import de.rabea.game.Board;
+import de.rabea.game.GameMode;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.MoveParser;
 import de.rabea.response.HttpResponse;
@@ -27,7 +28,7 @@ public class TttHumanVsHumanController extends Controller {
     }
 
     private HttpResponse htmlBoard() {
-        String html = new TicTacToeHtmlGenerator(new BoardHtml(board)).generate();
+        String html = new TicTacToeHtmlGenerator(new BoardHtml(board, GameMode.HumanVsHuman)).generate();
         return new HttpResponse(OK, html.getBytes());
     }
 }

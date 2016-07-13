@@ -10,11 +10,13 @@ public class BoardHtml implements InnerHtml {
 
     private final String PLACE_HOLDER = "&nbsp;";
     private final Board board;
+    private GameMode gameMode;
     private final int boardDimension;
     private final Mark[] currentMarks;
 
-    public BoardHtml(Board board) {
+    public BoardHtml(Board board, GameMode gameMode) {
         this.board = board;
+        this.gameMode = gameMode;
         this.boardDimension = board.getDimension();
         this.currentMarks = board.cells();
     }
@@ -78,9 +80,16 @@ public class BoardHtml implements InnerHtml {
     }
 
     private String formForEmptyCell(int i) {
-        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-game\">\n" +
+        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-game/" + convertToUrl(gameMode) + "\">\n" +
                 "<input class=\"hidden\" type=\"hidden\" name=\"position\" value="+ i +">\n" +
                 "<button class='cell' type=\"submit\"><div class='empty'>" + PLACE_HOLDER + "</div></button>\n" +
                 "</form>";
+    }
+
+    private String convertToUrl(GameMode gameMode) {
+        if (gameMode == GameMode.HumanVsHuman) {
+            return "hvh";
+        }
+        return "hvc";
     }
 }

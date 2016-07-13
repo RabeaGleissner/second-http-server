@@ -3,13 +3,14 @@ package de.rabea.controller.html;
 import de.rabea.game.Board;
 import org.junit.Test;
 
+import static de.rabea.game.GameMode.HumanVsHuman;
 import static org.junit.Assert.assertTrue;
 
 public class TicTacToeHtmlGeneratorTest {
 
     @Test
     public void createsHtmlPage() {
-        BoardHtml boardHtml = new BoardHtml(new Board(3));
+        BoardHtml boardHtml = new BoardHtml(new Board(3), HumanVsHuman);
         TicTacToeHtmlGenerator generator = new TicTacToeHtmlGenerator(boardHtml);
         String html = generator.generate();
         assertTrue(html.contains("<!DOCTYPE html><html lang=\"en\"><head>  " +
