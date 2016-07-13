@@ -4,10 +4,12 @@ import de.rabea.Controller;
 import de.rabea.controller.html.BoardHtml;
 import de.rabea.controller.html.TicTacToeHtmlGenerator;
 import de.rabea.game.Board;
+import de.rabea.game.UnbeatableComputerPlayer;
 import de.rabea.request.HttpRequest;
 import de.rabea.request.MoveParser;
 import de.rabea.response.HttpResponse;
 
+import static de.rabea.game.Mark.O;
 import static de.rabea.response.head.StatusLine.OK;
 
 public class TttHumanVsComputerController extends Controller {
@@ -23,6 +25,7 @@ public class TttHumanVsComputerController extends Controller {
     @Override
     public HttpResponse doPost(HttpRequest request) {
         board = board.placeMark(new MoveParser(request.body()).move());
+        board = board.placeMark(new UnbeatableComputerPlayer(O).getMove(board));
         return htmlBoard();
     }
 

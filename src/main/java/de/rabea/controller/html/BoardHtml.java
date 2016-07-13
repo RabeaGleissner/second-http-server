@@ -1,6 +1,7 @@
 package de.rabea.controller.html;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameMode;
 import de.rabea.game.Mark;
 
 import static de.rabea.game.Mark.EMPTY;
@@ -34,7 +35,7 @@ public class BoardHtml implements InnerHtml {
     private String addGameOverMessage(String cells) {
         cells += "<div class='game-end-message'>" +
                 "<p>Game over!</p>" +
-                "<a class=\"play-again\" href=\"/ttt-game\">Play again</a>" +
+                "<a class=\"play-again\" href=\"/ttt-menu\">Play again</a>" +
                 "</div>";
         return cells;
     }

@@ -4,6 +4,8 @@ import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import org.junit.Test;
 
+import static de.rabea.game.GameMode.HumanVsComputer;
+import static de.rabea.game.GameMode.HumanVsHuman;
 import static de.rabea.request.HttpVerb.GET;
 import static de.rabea.request.HttpVerb.POST;
 import static org.junit.Assert.assertEquals;
@@ -21,10 +23,18 @@ public class TicTacToeMenuControllerTest {
     }
 
     @Test
-    public void redirectsToGameUrlForPostRequest() {
+    public void redirectsToHvHGameUrlForPostRequestWithHvHChoice() {
         TicTacToeMenuController controller = new TicTacToeMenuController();
-        HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-menu"));
+        HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-menu", HumanVsHuman));
         String httpResponse = response.asString();
-        assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/ttt-game\n", httpResponse);
+        assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/ttt-game/hvh\n", httpResponse);
+    }
+
+    @Test
+    public void redirectsToHvCGameUrlForPostRequestWithHvCChoice() {
+        TicTacToeMenuController controller = new TicTacToeMenuController();
+        HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-menu", HumanVsComputer));
+        String httpResponse = response.asString();
+        assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/ttt-game/hvc\n", httpResponse);
     }
 }

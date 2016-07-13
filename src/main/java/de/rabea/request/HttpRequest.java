@@ -1,5 +1,7 @@
 package de.rabea.request;
 
+import de.rabea.game.GameMode;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +27,12 @@ public class HttpRequest {
         this.requestLine = new RequestLine(verb + " " + path + " HTTP/1.1");
         this.requestHeader = new HashMap<>();
         this.requestBody = requestBody;
+    }
+
+    public HttpRequest(HttpVerb verb, String path, GameMode gameMode) {
+        this.requestLine = new RequestLine(verb + " " + path + " HTTP/1.1");
+        this.requestHeader = new HashMap<>();
+        this.requestBody = gameMode.toString();
     }
 
     public Map<String, String> requestHeaders() {
