@@ -5,7 +5,7 @@ import de.rabea.game.Mark;
 
 import static de.rabea.game.Mark.EMPTY;
 
-public class BoardHtml {
+public class BoardHtml implements InnerHtml {
 
     private final String PLACE_HOLDER = "&nbsp;";
     private final Board board;
@@ -18,6 +18,7 @@ public class BoardHtml {
         this.currentMarks = board.cells();
     }
 
+    @Override
     public String generate() {
         String cells = addBoardCssClass();
         for (int i = 0; i < currentMarks.length; i += boardDimension)  {
