@@ -39,7 +39,8 @@ public class Main {
         router.configure("/parameters", new ParametersController());
         router.configure("/redirect", new RedirectController());
         router.configure("/tea", new TeaController());
-        router.configure("/ttt-game", new TicTacToeController());
+        router.configure("/ttt-game/hvh", new TttHumanVsHumanController());
+        router.configure("/ttt-game/hvc", new TttHumanVsComputerController());
         router.configure("/ttt-menu", new TicTacToeMenuController());
         router.configure("/styles.css", new StyleSheetController(new ResourceReader()));
         router.configure(directory, new AssetController(directory));

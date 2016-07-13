@@ -10,7 +10,7 @@ import de.rabea.response.HttpResponse;
 
 import static de.rabea.response.head.StatusLine.OK;
 
-public class TicTacToeController extends Controller {
+public class TttHumanVsHumanController extends Controller {
 
     private Board board;
 

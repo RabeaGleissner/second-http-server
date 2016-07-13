@@ -20,6 +20,6 @@ public class TicTacToeMenuController extends Controller {
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
-        return new HttpResponse(REDIRECT, new RedirectResponseHeader("http://localhost:5000/ttt-game"));
+        return new HttpResponse(REDIRECT, new RedirectResponseHeader("http://localhost:5000/ttt-game/hvh"));
     }
 }

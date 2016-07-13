@@ -8,11 +8,11 @@ import static de.rabea.request.HttpVerb.GET;
 import static de.rabea.request.HttpVerb.POST;
 import static org.junit.Assert.assertTrue;
 
-public class TicTacToeControllerTest {
+public class TttHumanVsHumanControllerTest {
 
     @Test
     public void returnsHtmlAsResponseForGetRequest() {
-        TicTacToeController controller = new TicTacToeController();
+        TttHumanVsHumanController controller = new TttHumanVsHumanController();
         HttpResponse response = controller.doGet(new HttpRequest(GET, "/ttt-board"));
         String httpResponse = response.asString();
         assertTrue(httpResponse.contains("HTTP/1.1 200 OK\n" +
@@ -24,7 +24,7 @@ public class TicTacToeControllerTest {
 
     @Test
     public void returnsResponseToPostRequest() {
-        TicTacToeController controller = new TicTacToeController();
+        TttHumanVsHumanController controller = new TttHumanVsHumanController();
         controller.doGet(new HttpRequest(GET, "/ttt-board"));
         HttpResponse response = controller.doPost(new HttpRequest(POST, "/ttt-board", "move=1"));
         String httpResponse = response.asString();
