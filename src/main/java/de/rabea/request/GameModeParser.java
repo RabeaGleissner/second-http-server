@@ -2,6 +2,7 @@ package de.rabea.request;
 
 import de.rabea.game.GameMode;
 
+import static de.rabea.game.GameMode.ComputerVsHuman;
 import static de.rabea.game.GameMode.HumanVsComputer;
 import static de.rabea.game.GameMode.HumanVsHuman;
 
@@ -21,6 +22,8 @@ public class GameModeParser {
     private GameMode convertToEnum(String givenGameMode) {
         if (givenGameMode.equals("HumanVsComputer")) {
            return HumanVsComputer;
+        } else if (givenGameMode.equals("ComputerVsHuman")) {
+            return ComputerVsHuman;
         }
         return HumanVsHuman;
     }

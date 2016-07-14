@@ -4,6 +4,7 @@ import de.rabea.game.Board;
 import de.rabea.game.GameMode;
 import de.rabea.game.Mark;
 
+import static de.rabea.game.GameMode.*;
 import static de.rabea.game.Mark.EMPTY;
 
 public class BoardHtml implements InnerHtml {
@@ -87,8 +88,10 @@ public class BoardHtml implements InnerHtml {
     }
 
     private String convertToUrl(GameMode gameMode) {
-        if (gameMode == GameMode.HumanVsHuman) {
+        if (gameMode == HumanVsHuman) {
             return "hvh";
+        } else if (gameMode == ComputerVsHuman) {
+           return "cvh" ;
         }
         return "hvc";
     }

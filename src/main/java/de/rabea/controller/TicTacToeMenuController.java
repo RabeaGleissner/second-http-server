@@ -23,15 +23,16 @@ public class TicTacToeMenuController extends Controller {
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
-        GameMode gameMode = new GameModeParser(request.body()).mode();
-        String redirectUrl = redirectUrl(gameMode);
+        String redirectUrl = redirectUrl(new GameModeParser(request.body()).mode());
         return new HttpResponse(REDIRECT, new RedirectResponseHeader(redirectUrl));
     }
 
     private String redirectUrl(GameMode gameMode) {
         if (gameMode == HumanVsHuman) {
             return "http://localhost:5000/ttt-game/hvh";
+        } else if (gameMode == HumanVsComputer) {
+            return "http://localhost:5000/ttt-game/hvc";
         }
-        return "http://localhost:5000/ttt-game/hvc";
+        return  "http://localhost:5000/ttt-game/cvh";
     }
 }
