@@ -1,5 +1,6 @@
-package de.rabea.controller;
+package de.rabea.controller.tictactoe;
 
+import de.rabea.controller.tictactoe.TttComputerVsHumanController;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import org.junit.Test;

@@ -1,5 +1,6 @@
-package de.rabea.controller.html;
+package de.rabea.controller.tictactoe.html;
 
+import de.rabea.controller.tictactoe.html.BoardHtml;
 import de.rabea.game.Board;
 import org.junit.Test;
 

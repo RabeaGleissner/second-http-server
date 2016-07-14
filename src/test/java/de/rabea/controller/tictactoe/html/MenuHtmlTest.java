@@ -1,5 +1,6 @@
-package de.rabea.controller.html;
+package de.rabea.controller.tictactoe.html;
 
+import de.rabea.controller.tictactoe.html.MenuHtml;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

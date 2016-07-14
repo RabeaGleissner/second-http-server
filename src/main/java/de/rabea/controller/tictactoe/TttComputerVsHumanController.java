@@ -1,8 +1,8 @@
-package de.rabea.controller;
+package de.rabea.controller.tictactoe;
 
 import de.rabea.Controller;
-import de.rabea.controller.html.BoardHtml;
-import de.rabea.controller.html.TicTacToeHtmlGenerator;
+import de.rabea.controller.tictactoe.html.BoardHtml;
+import de.rabea.controller.tictactoe.html.TicTacToeHtmlGenerator;
 import de.rabea.game.Board;
 import de.rabea.game.UnbeatableComputerPlayer;
 import de.rabea.request.HttpRequest;

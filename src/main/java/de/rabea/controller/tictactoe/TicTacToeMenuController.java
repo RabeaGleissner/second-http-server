@@ -1,8 +1,8 @@
-package de.rabea.controller;
+package de.rabea.controller.tictactoe;
 
 import de.rabea.Controller;
-import de.rabea.controller.html.MenuHtml;
-import de.rabea.controller.html.TicTacToeHtmlGenerator;
+import de.rabea.controller.tictactoe.html.MenuHtml;
+import de.rabea.controller.tictactoe.html.TicTacToeHtmlGenerator;
 import de.rabea.game.GameMode;
 import de.rabea.request.GameModeParser;
 import de.rabea.request.HttpRequest;

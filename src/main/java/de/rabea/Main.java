@@ -2,6 +2,10 @@ package de.rabea;
 
 import de.rabea.communication.ResourceReader;
 import de.rabea.controller.*;
+import de.rabea.controller.tictactoe.TicTacToeMenuController;
+import de.rabea.controller.tictactoe.TttComputerVsHumanController;
+import de.rabea.controller.tictactoe.TttHumanVsComputerController;
+import de.rabea.controller.tictactoe.TttHumanVsHumanController;
 import de.rabea.logger.ConsoleLogger;
 import de.rabea.logger.FileLogger;
 import de.rabea.logger.Logger;

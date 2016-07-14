@@ -1,4 +1,4 @@
-package de.rabea.controller.html;
+package de.rabea.controller.tictactoe.html;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameMode;
@@ -69,9 +69,9 @@ public class BoardHtml implements InnerHtml {
         return html;
     }
 
-    private String createCell(Mark cell, int i) {
+    private String createCell(Mark cell, int cellNumber) {
         if (cell == EMPTY) {
-            return formForEmptyCell(i);
+            return formForEmptyCell(cellNumber);
         }
         return displayFullCell(cell);
     }
@@ -80,9 +80,9 @@ public class BoardHtml implements InnerHtml {
         return "<div class='cell full'>"+ cell +"</div>";
     }
 
-    private String formForEmptyCell(int i) {
+    private String formForEmptyCell(int cellNumber) {
         return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-" + convertToUrl(gameMode) + "\">\n" +
-                "<input class=\"hidden\" type=\"hidden\" name=\"position\" value="+ i +">\n" +
+                "<input class=\"hidden\" type=\"hidden\" name=\"position\" value="+ cellNumber +">\n" +
                 "<button class='cell' type=\"submit\"><div class='empty'>" + PLACE_HOLDER + "</div></button>\n" +
                 "</form>";
     }

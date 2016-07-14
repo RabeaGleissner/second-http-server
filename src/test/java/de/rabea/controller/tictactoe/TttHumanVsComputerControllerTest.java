@@ -1,5 +1,6 @@
-package de.rabea.controller;
+package de.rabea.controller.tictactoe;
 
+import de.rabea.controller.tictactoe.TttHumanVsComputerController;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class TttHumanVsComputerControllerTest {
     }
 
     @Test
-    public void placesMarkAndReturnsOKResponseForPostRequest() {
+    public void makesMovesAndReturnsOKResponseForPostRequest() {
         TttHumanVsComputerController controller = new TttHumanVsComputerController();
         controller.dispatch(new HttpRequest(GET, "/ttt-board"));
         HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-board", "move=1"));

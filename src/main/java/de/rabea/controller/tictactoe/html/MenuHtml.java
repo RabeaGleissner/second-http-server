@@ -1,4 +1,4 @@
-package de.rabea.controller.html;
+package de.rabea.controller.tictactoe.html;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

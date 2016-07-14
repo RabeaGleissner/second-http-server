@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class GameModeParserTest {
 
     @Test
-    public void extractsTheGameModeFromBodyContent() {
+    public void extractsGameModeFromBodyContent() {
         GameModeParser parser = new GameModeParser("mode=HumanVsHuman");
         assertEquals(HumanVsHuman, parser.mode());
     }
