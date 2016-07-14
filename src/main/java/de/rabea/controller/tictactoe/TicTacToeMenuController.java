@@ -15,6 +15,9 @@ import static de.rabea.response.head.StatusLine.REDIRECT;
 
 public class TicTacToeMenuController extends Controller {
 
+    private int gameNumber = 0;
+    private final String DOMAIN = "http://localhost:5000/ttt-";
+
     @Override
     public HttpResponse doGet(HttpRequest request) {
         String html = new TicTacToeHtmlGenerator(new MenuHtml()).generate();
@@ -28,11 +31,16 @@ public class TicTacToeMenuController extends Controller {
     }
 
     private String redirectUrl(GameMode gameMode) {
+        gameNumber++;
         if (gameMode == HumanVsHuman) {
-            return "http://localhost:5000/ttt-hvh";
+            return url("hvh");
         } else if (gameMode == HumanVsComputer) {
-            return "http://localhost:5000/ttt-hvc";
+            return url("hvc");
         }
-        return  "http://localhost:5000/ttt-cvh";
+        return  url("cvh");
+    }
+
+    private String url(String gameMode) {
+        return  DOMAIN + gameMode + "?game-number=" + gameNumber;
     }
 }
