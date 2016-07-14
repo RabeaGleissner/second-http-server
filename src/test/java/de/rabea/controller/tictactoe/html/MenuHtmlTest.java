@@ -1,9 +1,8 @@
 package de.rabea.controller.tictactoe.html;
 
-import de.rabea.controller.tictactoe.html.MenuHtml;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class MenuHtmlTest {
 

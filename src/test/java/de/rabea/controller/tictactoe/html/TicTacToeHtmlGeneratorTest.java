@@ -1,7 +1,5 @@
 package de.rabea.controller.tictactoe.html;
 
-import de.rabea.controller.tictactoe.html.BoardHtml;
-import de.rabea.controller.tictactoe.html.TicTacToeHtmlGenerator;
 import de.rabea.game.Board;
 import org.junit.Test;
 
