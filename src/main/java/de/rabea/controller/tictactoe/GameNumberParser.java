@@ -6,8 +6,7 @@ public class GameNumberParser {
 
     public int parse(String route) {
         String parameters = new ParameterParser().parse(route);
-        int index = parameters.indexOf("=");
-        String sub = parameters.substring((index + 2), (index + 3));
-        return Integer.parseInt(parameters.substring((index + 2), (index + 3)));
+        int locationOfNumber = parameters.indexOf("=") + 2;
+        return Integer.parseInt(parameters.substring(locationOfNumber));
     }
 }

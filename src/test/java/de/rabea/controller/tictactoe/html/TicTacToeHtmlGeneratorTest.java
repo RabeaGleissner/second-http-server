@@ -10,7 +10,7 @@ public class TicTacToeHtmlGeneratorTest {
 
     @Test
     public void createsHtmlPage() {
-        BoardHtml boardHtml = new BoardHtml(new Board(3), HumanVsHuman);
+        BoardHtml boardHtml = new BoardHtml(new Board(3), HumanVsHuman, 1);
         TicTacToeHtmlGenerator generator = new TicTacToeHtmlGenerator(boardHtml);
         String html = generator.generate();
         assertTrue(html.contains("<!DOCTYPE html><html lang=\"en\"><head>  " +

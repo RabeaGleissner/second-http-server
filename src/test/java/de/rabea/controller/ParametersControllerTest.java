@@ -22,6 +22,6 @@ public class ParametersControllerTest {
         HttpRequest httpRequest = new HttpRequest(HttpVerb.GET, "/parameters?some=params");
         ParametersController controller = new ParametersController();
         String response = controller.dispatch(httpRequest).asString();
-        assertEquals("HTTP/1.1 200 OK\n\nsome = params\n\n", response);
+        assertEquals("HTTP/1.1 200 OK\n\nsome = params", response);
     }
 }

@@ -13,7 +13,7 @@ public class TttHumanVsHumanControllerTest {
     @Test
     public void returnsHtmlAsResponseForGetRequest() {
         TttHumanVsHumanController controller = new TttHumanVsHumanController();
-        HttpResponse response = controller.doGet(new HttpRequest(GET, "/ttt-board"));
+        HttpResponse response = controller.doGet(new HttpRequest(GET, "/ttt-hvh?game-number=1"));
         String httpResponse = response.asString();
         assertTrue(httpResponse.contains("HTTP/1.1 200 OK\n" +
                 "\n" +
@@ -25,8 +25,8 @@ public class TttHumanVsHumanControllerTest {
     @Test
     public void returnsResponseToPostRequest() {
         TttHumanVsHumanController controller = new TttHumanVsHumanController();
-        controller.doGet(new HttpRequest(GET, "/ttt-board"));
-        HttpResponse response = controller.doPost(new HttpRequest(POST, "/ttt-board", "move=1"));
+        controller.doGet(new HttpRequest(GET, "/ttt-hvh?game-number=1"));
+        HttpResponse response = controller.doPost(new HttpRequest(POST, "/ttt-hvh?game-number=1", "move=1"));
         String httpResponse = response.asString();
         assertTrue(httpResponse.contains("<div class='cell full'>X</div>"));
     }

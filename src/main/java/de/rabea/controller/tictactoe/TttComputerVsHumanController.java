@@ -26,13 +26,14 @@ public class TttComputerVsHumanController extends Controller {
         if (!board.gameOver()) {
             board = board.placeMark(new UnbeatableComputerPlayer(O).getMove(board));
         }
-        return htmlBoard();
+        return htmlBoard(request);
     }
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
         board = board.placeMark(new MoveParser(request.body()).move());
-        return new HttpResponse(REDIRECT, new RedirectResponseHeader("http://localhost:5000/ttt-cvh"));
+        return new HttpResponse(REDIRECT,
+                new RedirectResponseHeader("http://localhost:5000/ttt-cvh?game-number=" + gameNumber(request)));
     }
 
     private Board createNewBoard() {
@@ -43,9 +44,13 @@ public class TttComputerVsHumanController extends Controller {
         return board;
     }
 
-
-    private HttpResponse htmlBoard() {
-        String html = new TicTacToeHtmlGenerator(new BoardHtml(board, ComputerVsHuman)).generate();
+    private HttpResponse htmlBoard(HttpRequest request) {
+        int gameNumber = gameNumber(request);
+        String html = new TicTacToeHtmlGenerator(new BoardHtml(board, ComputerVsHuman, gameNumber)).generate();
         return new HttpResponse(OK, html.getBytes());
+    }
+
+    private int gameNumber(HttpRequest request) {
+        return new GameNumberParser().parse(request.requestLine().uri());
     }
 }

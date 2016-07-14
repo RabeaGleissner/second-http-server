@@ -20,7 +20,7 @@ public class TttHumanVsComputerController extends Controller {
     @Override
     public HttpResponse doGet(HttpRequest request) {
         board = new Board(3);
-        return htmlBoard();
+        return htmlBoard(request);
     }
 
     @Override
@@ -29,11 +29,12 @@ public class TttHumanVsComputerController extends Controller {
         if (!board.gameOver()) {
             board = board.placeMark(new UnbeatableComputerPlayer(O).getMove(board));
         }
-        return htmlBoard();
+        return htmlBoard(request);
     }
 
-    private HttpResponse htmlBoard() {
-        String html = new TicTacToeHtmlGenerator(new BoardHtml(board, HumanVsComputer)).generate();
+    private HttpResponse htmlBoard(HttpRequest request) {
+        int gameNumber = new GameNumberParser().parse(request.requestLine().uri());
+        String html = new TicTacToeHtmlGenerator(new BoardHtml(board, HumanVsComputer, gameNumber)).generate();
         return new HttpResponse(OK, html.getBytes());
     }
 }

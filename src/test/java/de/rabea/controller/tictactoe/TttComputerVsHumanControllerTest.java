@@ -13,8 +13,10 @@ public class TttComputerVsHumanControllerTest {
     @Test
     public void makesMoveAndReturnsHtmlAsResponseForGetRequest() {
         TttComputerVsHumanController controller = new TttComputerVsHumanController();
-        HttpResponse response = controller.dispatch(new HttpRequest(GET, "/ttt-board"));
+
+        HttpResponse response = controller.dispatch(new HttpRequest(GET, "/ttt-cvh?game-number=1"));
         String httpResponse = response.asString();
+
         assertTrue(httpResponse.contains("HTTP/1.1 200 OK\n" +
                 "\n" +
                 "<!DOCTYPE html><html lang=\"en\"><head>  " +
@@ -26,10 +28,25 @@ public class TttComputerVsHumanControllerTest {
     @Test
     public void returnsRedirectResponseForPostRequest() {
         TttComputerVsHumanController controller = new TttComputerVsHumanController();
-        controller.dispatch(new HttpRequest(GET, "/ttt-board"));
-        HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-board", "move=1"));
+        controller.dispatch(new HttpRequest(GET, "/ttt-cvh?game-number=1"));
+
+        HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-cvh?game-number=1", "move=1"));
         String httpResponse = response.asString();
+
         assertTrue(httpResponse.contains("HTTP/1.1 302 Found\n" +
                 "Location: http://localhost:5000/ttt-cvh"));
+    }
+
+    @Test
+    public void addsAnotherMarkToExistingBoardWithMarks() {
+        TttComputerVsHumanController controller = new TttComputerVsHumanController();
+        controller.dispatch(new HttpRequest(GET, "/ttt-cvh?game-number=1"));
+        controller.dispatch(new HttpRequest(POST, "/ttt-cvh?game-number=1", "move=3"));
+
+        HttpResponse response = controller.dispatch(new HttpRequest(GET, "/ttt-cvh?game-number=1"));
+        String httpResponse = response.asString();
+
+        assertTrue(httpResponse.contains("<div class='cell full'>X</div>"));
+        assertTrue(httpResponse.contains("<div class='cell full'>O</div>"));
     }
 }

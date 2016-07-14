@@ -12,12 +12,14 @@ public class BoardHtml implements InnerHtml {
     private final String PLACE_HOLDER = "&nbsp;";
     private final Board board;
     private GameMode gameMode;
+    private int gameNumber;
     private final int boardDimension;
     private final Mark[] currentMarks;
 
-    public BoardHtml(Board board, GameMode gameMode) {
+    public BoardHtml(Board board, GameMode gameMode, int gameNumber) {
         this.board = board;
         this.gameMode = gameMode;
+        this.gameNumber = gameNumber;
         this.boardDimension = board.getDimension();
         this.currentMarks = board.cells();
     }
@@ -81,10 +83,14 @@ public class BoardHtml implements InnerHtml {
     }
 
     private String formForEmptyCell(int cellNumber) {
-        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-" + convertToUrl(gameMode) + "\">\n" +
+        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-" + convertToUrl(gameMode) + addGameNumber() +  "\">\n" +
                 "<input class=\"hidden\" type=\"hidden\" name=\"position\" value="+ cellNumber +">\n" +
                 "<button class='cell' type=\"submit\"><div class='empty'>" + PLACE_HOLDER + "</div></button>\n" +
                 "</form>";
+    }
+
+    private String addGameNumber() {
+        return "?game-number=" + gameNumber;
     }
 
     private String convertToUrl(GameMode gameMode) {

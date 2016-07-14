@@ -18,7 +18,7 @@ public class ParameterParser {
                 throw new UrlDecodingException();
             }
         }
-        return parsed;
+        return removeLastNewLines(parsed);
     }
 
     public List<String> split(String requestUri) {
@@ -39,4 +39,9 @@ public class ParameterParser {
             super("Apologies, but unfortunately there was a problem with decoding the URL!");
         }
     }
+
+    private String removeLastNewLines(String parsed) {
+        return parsed.substring(0, parsed.length() - 2);
+    }
+
 }
