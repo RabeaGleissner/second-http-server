@@ -81,7 +81,7 @@ public class BoardHtml implements InnerHtml {
     }
 
     private String formForEmptyCell(int i) {
-        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-game/" + convertToUrl(gameMode) + "\">\n" +
+        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-" + convertToUrl(gameMode) + "\">\n" +
                 "<input class=\"hidden\" type=\"hidden\" name=\"position\" value="+ i +">\n" +
                 "<button class='cell' type=\"submit\"><div class='empty'>" + PLACE_HOLDER + "</div></button>\n" +
                 "</form>";

@@ -26,7 +26,7 @@ public class TicTacToeMenuControllerTest {
         TicTacToeMenuController controller = new TicTacToeMenuController();
         HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-menu", HumanVsHuman));
         String httpResponse = response.asString();
-        assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/ttt-game/hvh\n", httpResponse);
+        assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/ttt-hvh\n", httpResponse);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class TicTacToeMenuControllerTest {
         TicTacToeMenuController controller = new TicTacToeMenuController();
         HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-menu", HumanVsComputer));
         String httpResponse = response.asString();
-        assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/ttt-game/hvc\n", httpResponse);
+        assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/ttt-hvc\n", httpResponse);
     }
 
     @Test
@@ -42,6 +42,6 @@ public class TicTacToeMenuControllerTest {
         TicTacToeMenuController controller = new TicTacToeMenuController();
         HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-menu", ComputerVsHuman));
         String httpResponse = response.asString();
-        assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/ttt-game/cvh\n", httpResponse);
+        assertEquals("HTTP/1.1 302 Found\nLocation: http://localhost:5000/ttt-cvh\n", httpResponse);
     }
 }

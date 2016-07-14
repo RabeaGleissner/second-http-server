@@ -32,7 +32,7 @@ public class TttComputerVsHumanController extends Controller {
     @Override
     public HttpResponse doPost(HttpRequest request) {
         board = board.placeMark(new MoveParser(request.body()).move());
-        return new HttpResponse(REDIRECT, new RedirectResponseHeader("http://localhost:5000/ttt-game/cvh"));
+        return new HttpResponse(REDIRECT, new RedirectResponseHeader("http://localhost:5000/ttt-cvh"));
     }
 
     private Board createNewBoard() {

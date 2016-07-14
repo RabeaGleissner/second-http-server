@@ -29,10 +29,10 @@ public class TicTacToeMenuController extends Controller {
 
     private String redirectUrl(GameMode gameMode) {
         if (gameMode == HumanVsHuman) {
-            return "http://localhost:5000/ttt-game/hvh";
+            return "http://localhost:5000/ttt-hvh";
         } else if (gameMode == HumanVsComputer) {
-            return "http://localhost:5000/ttt-game/hvc";
+            return "http://localhost:5000/ttt-hvc";
         }
-        return  "http://localhost:5000/ttt-game/cvh";
+        return  "http://localhost:5000/ttt-cvh";
     }
 }

@@ -1,12 +1,9 @@
 package de.rabea.controller.html;
 
 import de.rabea.game.Board;
-import de.rabea.game.GameMode;
 import org.junit.Test;
 
-import static de.rabea.game.GameMode.ComputerVsHuman;
-import static de.rabea.game.GameMode.HumanVsComputer;
-import static de.rabea.game.GameMode.HumanVsHuman;
+import static de.rabea.game.GameMode.*;
 import static org.junit.Assert.assertTrue;
 
 public class BoardHtmlTest {
@@ -18,7 +15,7 @@ public class BoardHtmlTest {
         BoardHtml boardHtml = new BoardHtml(newBoard, HumanVsHuman);
         String html = boardHtml.generate();
         assertTrue(html.contains("<div class='cell full'>X</div>"));
-        assertTrue(html.contains("<form class=\"cell-form\" method=\"post\" action=\"/ttt-game/hvh\">\n" +
+        assertTrue(html.contains("<form class=\"cell-form\" method=\"post\" action=\"/ttt-hvh\">\n" +
                 "<input class=\"hidden\" type=\"hidden\" name=\"position\" value=5>\n" +
                 "<button class='cell' type=\"submit\"><div class='empty'>&nbsp;</div></button>\n" +
                 "</form>"));
@@ -30,7 +27,7 @@ public class BoardHtmlTest {
         Board newBoard = board.placeMark(1);
         BoardHtml boardHtml = new BoardHtml(newBoard, HumanVsComputer);
         String html = boardHtml.generate();
-        assertTrue(html.contains("<form class=\"cell-form\" method=\"post\" action=\"/ttt-game/hvc\">\n"));
+        assertTrue(html.contains("<form class=\"cell-form\" method=\"post\" action=\"/ttt-hvc\">\n"));
     }
 
     @Test
@@ -39,7 +36,7 @@ public class BoardHtmlTest {
         Board newBoard = board.placeMark(1);
         BoardHtml boardHtml = new BoardHtml(newBoard, ComputerVsHuman);
         String html = boardHtml.generate();
-        assertTrue(html.contains("<form class=\"cell-form\" method=\"post\" action=\"/ttt-game/cvh\">\n"));
+        assertTrue(html.contains("<form class=\"cell-form\" method=\"post\" action=\"/ttt-cvh\">\n"));
     }
 
     @Test

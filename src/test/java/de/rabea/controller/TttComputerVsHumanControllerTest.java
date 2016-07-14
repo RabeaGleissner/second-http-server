@@ -30,6 +30,6 @@ public class TttComputerVsHumanControllerTest {
         HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-board", "move=1"));
         String httpResponse = response.asString();
         assertTrue(httpResponse.contains("HTTP/1.1 302 Found\n" +
-                "Location: http://localhost:5000/ttt-game/cvh"));
+                "Location: http://localhost:5000/ttt-cvh"));
     }
 }
