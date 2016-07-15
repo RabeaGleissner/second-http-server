@@ -2,10 +2,7 @@ package de.rabea;
 
 import de.rabea.communication.ResourceReader;
 import de.rabea.controller.*;
-import de.rabea.controller.tictactoe.TicTacToeMenuController;
-import de.rabea.controller.tictactoe.TttComputerVsHumanController;
-import de.rabea.controller.tictactoe.TttHumanVsComputerController;
-import de.rabea.controller.tictactoe.TttHumanVsHumanController;
+import de.rabea.controller.tictactoe.*;
 import de.rabea.logger.ConsoleLogger;
 import de.rabea.logger.FileLogger;
 import de.rabea.logger.Logger;
@@ -43,7 +40,7 @@ public class Main {
         router.configure("/parameters", new ParametersController());
         router.configure("/redirect", new RedirectController());
         router.configure("/tea", new TeaController());
-        router.configure("/ttt-hvh", new TttHumanVsHumanController());
+        router.configure("/ttt-hvh", new TttHumanVsHumanController(new GameTracker()));
         router.configure("/ttt-hvc", new TttHumanVsComputerController());
         router.configure("/ttt-cvh", new TttComputerVsHumanController());
         router.configure("/ttt-menu", new TicTacToeMenuController());

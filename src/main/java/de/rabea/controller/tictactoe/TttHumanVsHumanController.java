@@ -13,23 +13,37 @@ import static de.rabea.response.head.StatusLine.OK;
 
 public class TttHumanVsHumanController extends Controller {
 
-    private Board board;
+    private final GameNumberParser gameNumberParser = new GameNumberParser();
+    private GameTracker gameTracker;
+
+    public TttHumanVsHumanController(GameTracker gameTracker) {
+        this.gameTracker = gameTracker;
+    }
 
     @Override
     public HttpResponse doGet(HttpRequest request) {
-        board = new Board(3);
-        return htmlBoard(request);
+        int gameNumber = gameNumber(request);
+        Board board = gameTracker.boardForNumber(gameNumber);
+        gameTracker.updateGameState(board, gameNumber);
+        return boardHtml(request, board);
     }
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
-        board = board.placeMark(new MoveParser(request.body()).move());
-        return htmlBoard(request);
+        int gameNumber = gameNumber(request);
+        Board board = gameTracker.boardForNumber(gameNumber);
+        Board nextBoard = board.placeMark(new MoveParser(request.body()).move());
+        gameTracker.updateGameState(nextBoard, gameNumber);
+        return boardHtml(request, nextBoard);
     }
 
-    private HttpResponse htmlBoard(HttpRequest request) {
-        int gameNumber = new GameNumberParser().parse(request.requestLine().uri());
+    private HttpResponse boardHtml(HttpRequest request, Board board) {
+        int gameNumber = gameNumber(request) ;
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board, HumanVsHuman, gameNumber)).generate();
         return new HttpResponse(OK, html.getBytes());
+    }
+
+    private int gameNumber(HttpRequest request) {
+        return gameNumberParser.parse(request.requestLine().uri());
     }
 }
