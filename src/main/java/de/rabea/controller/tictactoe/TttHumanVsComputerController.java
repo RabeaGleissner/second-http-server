@@ -15,26 +15,42 @@ import static de.rabea.response.head.StatusLine.OK;
 
 public class TttHumanVsComputerController extends Controller {
 
-    private Board board;
+    private GameTracker gameTracker;
+    private final GameNumberParser gameNumberParser = new GameNumberParser();
+
+    public TttHumanVsComputerController(GameTracker gameTracker) {
+        this.gameTracker = gameTracker;
+    }
 
     @Override
     public HttpResponse doGet(HttpRequest request) {
-        board = new Board(3);
-        return htmlBoard(request);
+        int gameNumber = gameNumber(request);
+        Board board = gameTracker.boardForNumber(gameNumber);
+        gameTracker.updateGameState(board, gameNumber);
+        return boardHtml(request, board);
     }
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
-        board = board.placeMark(new MoveParser(request.body()).move());
-        if (!board.gameOver()) {
-            board = board.placeMark(new UnbeatableComputerPlayer(O).getMove(board));
+        int gameNumber = gameNumber(request);
+        Board board = gameTracker.boardForNumber(gameNumber);
+        Board nextBoard = board.placeMark(new MoveParser(request.body()).move());
+        gameTracker.updateGameState(nextBoard, gameNumber);
+        if (!nextBoard.gameOver()) {
+            Board newBoard = nextBoard.placeMark(new UnbeatableComputerPlayer(O).getMove(nextBoard));
+            gameTracker.updateGameState(newBoard, gameNumber);
+            return boardHtml(request, newBoard);
         }
-        return htmlBoard(request);
+        return boardHtml(request, nextBoard);
     }
 
-    private HttpResponse htmlBoard(HttpRequest request) {
+    private HttpResponse boardHtml(HttpRequest request, Board board) {
         int gameNumber = new GameNumberParser().parse(request.requestLine().uri());
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board, HumanVsComputer, gameNumber)).generate();
         return new HttpResponse(OK, html.getBytes());
+    }
+
+    private int gameNumber(HttpRequest request) {
+        return gameNumberParser.parse(request.requestLine().uri());
     }
 }

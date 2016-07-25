@@ -12,7 +12,7 @@ public class TttHumanVsComputerControllerTest {
 
     @Test
     public void returnsHtmlAsResponseForGetRequest() {
-        TttHumanVsComputerController controller = new TttHumanVsComputerController();
+        TttHumanVsComputerController controller = new TttHumanVsComputerController(new GameTracker());
         HttpResponse response = controller.dispatch(new HttpRequest(GET, "/ttt-hvc?game-number=1"));
         String httpResponse = response.asString();
         assertTrue(httpResponse.contains("HTTP/1.1 200 OK\n" +
@@ -24,7 +24,7 @@ public class TttHumanVsComputerControllerTest {
 
     @Test
     public void makesMovesAndReturnsOKResponseForPostRequest() {
-        TttHumanVsComputerController controller = new TttHumanVsComputerController();
+        TttHumanVsComputerController controller = new TttHumanVsComputerController(new GameTracker());
         controller.dispatch(new HttpRequest(GET, "/ttt-hvc?game-number=1"));
         HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-hvc?game-number=1", "move=1"));
         String httpResponse = response.asString();
