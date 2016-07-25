@@ -13,7 +13,7 @@ public class GameTracker {
        games.put(gameNumber, board) ;
     }
 
-    public Board boardForNumber(int gameNumber) {
+    public Board boardFor(int gameNumber) {
         if (gameExists(gameNumber)) {
             return games.get(gameNumber);
         }

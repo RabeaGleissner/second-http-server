@@ -41,7 +41,7 @@ public class TttComputerVsHumanController extends Controller {
     }
 
     private Board currentBoard(int gameNumber) {
-        return gameTracker.boardForNumber(gameNumber);
+        return gameTracker.boardFor(gameNumber);
     }
 
     private int gameNumber(HttpRequest request) {

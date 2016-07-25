@@ -29,7 +29,7 @@ public class TttHumanVsComputerController extends Controller {
     }
 
     private Board currentBoard(int gameNumber) {
-        return gameTracker.boardForNumber(gameNumber);
+        return gameTracker.boardFor(gameNumber);
     }
 
     @Override

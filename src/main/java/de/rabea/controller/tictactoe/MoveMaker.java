@@ -28,6 +28,6 @@ public class MoveMaker {
     }
 
     private Board currentBoard(int gameNumber) {
-        return gameTracker.boardForNumber(gameNumber);
+        return gameTracker.boardFor(gameNumber);
     }
 }

@@ -17,14 +17,14 @@ public class GameTrackerTest {
 
         tracker.updateGameState(nextBoard, gameNumber);
 
-        assertEquals(8, tracker.boardForNumber(gameNumber).emptyCells().size());
+        assertEquals(8, tracker.boardFor(gameNumber).emptyCells().size());
     }
 
     @Test
     public void returnsNewBoardIfBoardDoesNotExistForGameNumber() {
         int gameNumber = 1;
         GameTracker tracker = new GameTracker();
-        assertEquals(9, tracker.boardForNumber(gameNumber).emptyCells().size());
+        assertEquals(9, tracker.boardFor(gameNumber).emptyCells().size());
     }
 
     @Test
@@ -36,6 +36,6 @@ public class GameTrackerTest {
         Board nextBoard = board.placeMark(move);
         tracker.games.put(gameNumber, nextBoard);
 
-        assertFalse(tracker.boardForNumber(gameNumber).isPositionAvailable(move));
+        assertFalse(tracker.boardFor(gameNumber).isPositionAvailable(move));
     }
 }
