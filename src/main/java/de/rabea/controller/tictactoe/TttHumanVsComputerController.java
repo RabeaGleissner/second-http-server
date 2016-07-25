@@ -1,39 +1,48 @@
 package de.rabea.controller.tictactoe;
 
 import de.rabea.Controller;
-import de.rabea.controller.tictactoe.html.BoardHtml;
-import de.rabea.controller.tictactoe.html.TicTacToeHtmlGenerator;
+import de.rabea.controller.tictactoe.html.TicTacToeHtml;
 import de.rabea.game.Board;
-import de.rabea.game.UnbeatableComputerPlayer;
 import de.rabea.request.HttpRequest;
-import de.rabea.request.MoveParser;
 import de.rabea.response.HttpResponse;
 
 import static de.rabea.game.GameMode.HumanVsComputer;
-import static de.rabea.game.Mark.O;
-import static de.rabea.response.head.StatusLine.OK;
 
 public class TttHumanVsComputerController extends Controller {
 
-    private Board board;
+    private final GameTracker gameTracker;
+    private final GameNumberParser gameNumberParser = new GameNumberParser();
+    private final TicTacToeHtml ticTacToeHtml = new TicTacToeHtml();
+    private final MoveMaker moveMaker;
+
+    public TttHumanVsComputerController(GameTracker gameTracker) {
+        this.gameTracker = gameTracker;
+        this.moveMaker = new MoveMaker(gameTracker);
+    }
 
     @Override
     public HttpResponse doGet(HttpRequest request) {
-        board = new Board(3);
-        return htmlBoard();
+        int gameNumber = gameNumber(request);
+        Board board = currentBoard(gameNumber);
+        gameTracker.updateGameState(board, gameNumber);
+        return ticTacToeHtml.generateBoard(board, gameNumber(request), HumanVsComputer);
+    }
+
+    private Board currentBoard(int gameNumber) {
+        return gameTracker.boardFor(gameNumber);
     }
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
-        board = board.placeMark(new MoveParser(request.body()).move());
-        if (!board.gameOver()) {
-            board = board.placeMark(new UnbeatableComputerPlayer(O).getMove(board));
+        int gameNumber = gameNumber(request);
+        Board nextBoard = moveMaker.playHumanMove(request, gameNumber);
+        if (!nextBoard.gameOver()) {
+            return ticTacToeHtml.generateBoard(moveMaker.playComputerMove(gameNumber, nextBoard), gameNumber, HumanVsComputer);
         }
-        return htmlBoard();
+        return ticTacToeHtml.generateBoard(nextBoard, gameNumber, HumanVsComputer);
     }
 
-    private HttpResponse htmlBoard() {
-        String html = new TicTacToeHtmlGenerator(new BoardHtml(board, HumanVsComputer)).generate();
-        return new HttpResponse(OK, html.getBytes());
+    private int gameNumber(HttpRequest request) {
+        return gameNumberParser.parse(request.requestLine().uri());
     }
 }
