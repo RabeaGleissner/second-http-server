@@ -1,19 +1,23 @@
-package de.rabea.controller.html;
+package de.rabea.controller.tictactoe.html;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameMode;
 import de.rabea.game.Mark;
 
+import static de.rabea.game.GameMode.*;
 import static de.rabea.game.Mark.EMPTY;
 
 public class BoardHtml implements InnerHtml {
 
     private final String PLACE_HOLDER = "&nbsp;";
     private final Board board;
+    private GameMode gameMode;
     private final int boardDimension;
     private final Mark[] currentMarks;
 
-    public BoardHtml(Board board) {
+    public BoardHtml(Board board, GameMode gameMode) {
         this.board = board;
+        this.gameMode = gameMode;
         this.boardDimension = board.getDimension();
         this.currentMarks = board.cells();
     }
@@ -34,7 +38,7 @@ public class BoardHtml implements InnerHtml {
     private String addGameOverMessage(String cells) {
         cells += "<div class='game-end-message'>" +
                 "<p>Game over!</p>" +
-                "<a class=\"play-again\" href=\"/ttt-game\">Play again</a>" +
+                "<a class=\"play-again\" href=\"/ttt-menu\">Play again</a>" +
                 "</div>";
         return cells;
     }
@@ -65,9 +69,9 @@ public class BoardHtml implements InnerHtml {
         return html;
     }
 
-    private String createCell(Mark cell, int i) {
+    private String createCell(Mark cell, int cellNumber) {
         if (cell == EMPTY) {
-            return formForEmptyCell(i);
+            return formForEmptyCell(cellNumber);
         }
         return displayFullCell(cell);
     }
@@ -76,10 +80,19 @@ public class BoardHtml implements InnerHtml {
         return "<div class='cell full'>"+ cell +"</div>";
     }
 
-    private String formForEmptyCell(int i) {
-        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-game\">\n" +
-                "<input class=\"hidden\" type=\"hidden\" name=\"position\" value="+ i +">\n" +
+    private String formForEmptyCell(int cellNumber) {
+        return "<form class=\"cell-form\" method=\"post\" action=\"/ttt-" + convertToUrl(gameMode) + "\">\n" +
+                "<input class=\"hidden\" type=\"hidden\" name=\"position\" value="+ cellNumber +">\n" +
                 "<button class='cell' type=\"submit\"><div class='empty'>" + PLACE_HOLDER + "</div></button>\n" +
                 "</form>";
+    }
+
+    private String convertToUrl(GameMode gameMode) {
+        if (gameMode == HumanVsHuman) {
+            return "hvh";
+        } else if (gameMode == ComputerVsHuman) {
+           return "cvh" ;
+        }
+        return "hvc";
     }
 }

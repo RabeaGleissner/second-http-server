@@ -1,4 +1,4 @@
-package de.rabea.controller.html;
+package de.rabea.controller.tictactoe.html;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,9 +13,9 @@ public class MenuHtml implements InnerHtml {
 
     private Map<String, String> addMenuOptions() {
         menuOptions = new LinkedHashMap<>();
-        menuOptions.put("human-vs-human", "Human vs Human");
-        menuOptions.put("human-vs-computer", "Human vs Computer");
-        menuOptions.put("computer-vs-human", "Computer vs Human");
+        menuOptions.put("HumanVsHuman", "Human vs Human");
+        menuOptions.put("HumanVsComputer", "Human vs Computer");
+        menuOptions.put("ComputerVsHuman", "Computer vs Human");
         return menuOptions;
     }
 

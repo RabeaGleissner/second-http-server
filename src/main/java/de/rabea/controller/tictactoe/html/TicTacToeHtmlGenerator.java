@@ -1,4 +1,4 @@
-package de.rabea.controller.html;
+package de.rabea.controller.tictactoe.html;
 
 public class TicTacToeHtmlGenerator {
 

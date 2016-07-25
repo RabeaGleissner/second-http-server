@@ -1,4 +1,4 @@
-package de.rabea.controller;
+package de.rabea.controller.tictactoe;
 
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
@@ -8,12 +8,12 @@ import static de.rabea.request.HttpVerb.GET;
 import static de.rabea.request.HttpVerb.POST;
 import static org.junit.Assert.assertTrue;
 
-public class TicTacToeControllerTest {
+public class TttHumanVsComputerControllerTest {
 
     @Test
     public void returnsHtmlAsResponseForGetRequest() {
-        TicTacToeController controller = new TicTacToeController();
-        HttpResponse response = controller.doGet(new HttpRequest(GET, "/ttt-board"));
+        TttHumanVsComputerController controller = new TttHumanVsComputerController();
+        HttpResponse response = controller.dispatch(new HttpRequest(GET, "/ttt-board"));
         String httpResponse = response.asString();
         assertTrue(httpResponse.contains("HTTP/1.1 200 OK\n" +
                 "\n" +
@@ -23,11 +23,12 @@ public class TicTacToeControllerTest {
     }
 
     @Test
-    public void returnsResponseToPostRequest() {
-        TicTacToeController controller = new TicTacToeController();
-        controller.doGet(new HttpRequest(GET, "/ttt-board"));
-        HttpResponse response = controller.doPost(new HttpRequest(POST, "/ttt-board", "move=1"));
+    public void makesMovesAndReturnsOKResponseForPostRequest() {
+        TttHumanVsComputerController controller = new TttHumanVsComputerController();
+        controller.dispatch(new HttpRequest(GET, "/ttt-board"));
+        HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-board", "move=1"));
         String httpResponse = response.asString();
         assertTrue(httpResponse.contains("<div class='cell full'>X</div>"));
+        assertTrue(httpResponse.contains("<div class='cell full'>O</div>"));
     }
 }
