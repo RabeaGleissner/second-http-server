@@ -25,27 +25,39 @@ public class TttHumanVsComputerController extends Controller {
     @Override
     public HttpResponse doGet(HttpRequest request) {
         int gameNumber = gameNumber(request);
-        Board board = gameTracker.boardForNumber(gameNumber);
+        Board board = currentBoard(gameNumber);
         gameTracker.updateGameState(board, gameNumber);
         return boardHtml(request, board);
+    }
+
+    private Board currentBoard(int gameNumber) {
+        return gameTracker.boardForNumber(gameNumber);
     }
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
         int gameNumber = gameNumber(request);
-        Board board = gameTracker.boardForNumber(gameNumber);
-        Board nextBoard = board.placeMark(new MoveParser(request.body()).move());
-        gameTracker.updateGameState(nextBoard, gameNumber);
+        Board nextBoard = playHumanMove(request, gameNumber);
         if (!nextBoard.gameOver()) {
-            Board newBoard = nextBoard.placeMark(new UnbeatableComputerPlayer(O).getMove(nextBoard));
-            gameTracker.updateGameState(newBoard, gameNumber);
-            return boardHtml(request, newBoard);
+            return boardHtml(request, playComputerMove(gameNumber, nextBoard));
         }
         return boardHtml(request, nextBoard);
     }
 
+    private Board playHumanMove(HttpRequest request, int gameNumber) {
+        Board nextBoard = currentBoard(gameNumber).placeMark(new MoveParser(request.body()).move());
+        gameTracker.updateGameState(nextBoard, gameNumber);
+        return nextBoard;
+    }
+
+    private Board playComputerMove(int gameNumber, Board nextBoard) {
+        Board newBoard = nextBoard.placeMark(new UnbeatableComputerPlayer(O).getMove(nextBoard));
+        gameTracker.updateGameState(newBoard, gameNumber);
+        return newBoard;
+    }
+
     private HttpResponse boardHtml(HttpRequest request, Board board) {
-        int gameNumber = new GameNumberParser().parse(request.requestLine().uri());
+        int gameNumber = gameNumber(request);
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board, HumanVsComputer, gameNumber)).generate();
         return new HttpResponse(OK, html.getBytes());
     }

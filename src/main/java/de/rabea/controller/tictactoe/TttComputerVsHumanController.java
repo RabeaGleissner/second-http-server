@@ -27,11 +27,9 @@ public class TttComputerVsHumanController extends Controller {
     @Override
     public HttpResponse doGet(HttpRequest request) {
         int gameNumber = gameNumber(request);
-        Board board = gameTracker.boardForNumber(gameNumber);
+        Board board = currentBoard(gameNumber);
         if (!board.gameOver()) {
-            Board nextBoard = board.placeMark(new UnbeatableComputerPlayer(O).getMove(board));
-            gameTracker.updateGameState(nextBoard, gameNumber);
-            return boardHtml(request, nextBoard);
+            return boardHtml(request, playComputerMove(gameNumber, board));
         }
         return boardHtml(request, board);
     }
@@ -39,17 +37,31 @@ public class TttComputerVsHumanController extends Controller {
     @Override
     public HttpResponse doPost(HttpRequest request) {
         int gameNumber = gameNumber(request);
-        Board board = gameTracker.boardForNumber(gameNumber);
+        playHumanMove(request, gameNumber);
+        return new HttpResponse(REDIRECT,
+                new RedirectResponseHeader("http://localhost:5000/ttt-cvh?game-number=" + gameNumber));
+    }
+
+    private void playHumanMove(HttpRequest request, int gameNumber) {
+        Board board = currentBoard(gameNumber);
         Board nextBoard = board.placeMark(new MoveParser(request.body()).move());
         gameTracker.updateGameState(nextBoard, gameNumber);
-        return new HttpResponse(REDIRECT,
-                new RedirectResponseHeader("http://localhost:5000/ttt-cvh?game-number=" + gameNumber(request)));
+    }
+
+    private Board playComputerMove(int gameNumber, Board board) {
+        Board nextBoard = board.placeMark(new UnbeatableComputerPlayer(O).getMove(board));
+        gameTracker.updateGameState(nextBoard, gameNumber);
+        return nextBoard;
     }
 
     private HttpResponse boardHtml(HttpRequest request, Board board) {
         int gameNumber = gameNumber(request);
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board, ComputerVsHuman, gameNumber)).generate();
         return new HttpResponse(OK, html.getBytes());
+    }
+
+    private Board currentBoard(int gameNumber) {
+        return gameTracker.boardForNumber(gameNumber);
     }
 
     private int gameNumber(HttpRequest request) {

@@ -23,7 +23,7 @@ public class TttHumanVsHumanController extends Controller {
     @Override
     public HttpResponse doGet(HttpRequest request) {
         int gameNumber = gameNumber(request);
-        Board board = gameTracker.boardForNumber(gameNumber);
+        Board board = currentBoard(gameNumber);
         gameTracker.updateGameState(board, gameNumber);
         return boardHtml(request, board);
     }
@@ -31,16 +31,22 @@ public class TttHumanVsHumanController extends Controller {
     @Override
     public HttpResponse doPost(HttpRequest request) {
         int gameNumber = gameNumber(request);
-        Board board = gameTracker.boardForNumber(gameNumber);
-        Board nextBoard = board.placeMark(new MoveParser(request.body()).move());
+        return boardHtml(request, playMove(request, gameNumber));
+    }
+
+    private Board playMove(HttpRequest request, int gameNumber) {
+        Board nextBoard = currentBoard(gameNumber).placeMark(new MoveParser(request.body()).move());
         gameTracker.updateGameState(nextBoard, gameNumber);
-        return boardHtml(request, nextBoard);
+        return nextBoard;
     }
 
     private HttpResponse boardHtml(HttpRequest request, Board board) {
-        int gameNumber = gameNumber(request) ;
-        String html = new TicTacToeHtmlGenerator(new BoardHtml(board, HumanVsHuman, gameNumber)).generate();
+        String html = new TicTacToeHtmlGenerator(new BoardHtml(board, HumanVsHuman, gameNumber(request))).generate();
         return new HttpResponse(OK, html.getBytes());
+    }
+
+    private Board currentBoard(int gameNumber) {
+        return gameTracker.boardForNumber(gameNumber);
     }
 
     private int gameNumber(HttpRequest request) {
