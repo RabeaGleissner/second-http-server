@@ -17,40 +17,42 @@ import static de.rabea.response.head.StatusLine.REDIRECT;
 
 public class TttComputerVsHumanController extends Controller {
 
-    private Board board;
-    private boolean boardCreated = false;
+    private GameTracker gameTracker;
+    private final GameNumberParser gameNumberParser = new GameNumberParser();
+
+    public TttComputerVsHumanController(GameTracker gameTracker) {
+       this.gameTracker = gameTracker;
+    }
 
     @Override
     public HttpResponse doGet(HttpRequest request) {
-        board = createNewBoard();
+        int gameNumber = gameNumber(request);
+        Board board = gameTracker.boardForNumber(gameNumber);
         if (!board.gameOver()) {
-            board = board.placeMark(new UnbeatableComputerPlayer(O).getMove(board));
+            Board nextBoard = board.placeMark(new UnbeatableComputerPlayer(O).getMove(board));
+            gameTracker.updateGameState(nextBoard, gameNumber);
+            return boardHtml(request, nextBoard);
         }
-        return htmlBoard(request);
+        return boardHtml(request, board);
     }
 
     @Override
     public HttpResponse doPost(HttpRequest request) {
-        board = board.placeMark(new MoveParser(request.body()).move());
+        int gameNumber = gameNumber(request);
+        Board board = gameTracker.boardForNumber(gameNumber);
+        Board nextBoard = board.placeMark(new MoveParser(request.body()).move());
+        gameTracker.updateGameState(nextBoard, gameNumber);
         return new HttpResponse(REDIRECT,
                 new RedirectResponseHeader("http://localhost:5000/ttt-cvh?game-number=" + gameNumber(request)));
     }
 
-    private Board createNewBoard() {
-        if (!boardCreated) {
-            boardCreated = true;
-            return new Board(3);
-        }
-        return board;
-    }
-
-    private HttpResponse htmlBoard(HttpRequest request) {
+    private HttpResponse boardHtml(HttpRequest request, Board board) {
         int gameNumber = gameNumber(request);
         String html = new TicTacToeHtmlGenerator(new BoardHtml(board, ComputerVsHuman, gameNumber)).generate();
         return new HttpResponse(OK, html.getBytes());
     }
 
     private int gameNumber(HttpRequest request) {
-        return new GameNumberParser().parse(request.requestLine().uri());
+        return gameNumberParser.parse(request.requestLine().uri());
     }
 }

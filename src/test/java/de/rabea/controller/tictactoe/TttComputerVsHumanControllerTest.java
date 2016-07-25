@@ -12,7 +12,7 @@ public class TttComputerVsHumanControllerTest {
 
     @Test
     public void makesMoveAndReturnsHtmlAsResponseForGetRequest() {
-        TttComputerVsHumanController controller = new TttComputerVsHumanController();
+        TttComputerVsHumanController controller = new TttComputerVsHumanController(new GameTracker());
 
         HttpResponse response = controller.dispatch(new HttpRequest(GET, "/ttt-cvh?game-number=1"));
         String httpResponse = response.asString();
@@ -27,7 +27,7 @@ public class TttComputerVsHumanControllerTest {
 
     @Test
     public void returnsRedirectResponseForPostRequest() {
-        TttComputerVsHumanController controller = new TttComputerVsHumanController();
+        TttComputerVsHumanController controller = new TttComputerVsHumanController(new GameTracker());
         controller.dispatch(new HttpRequest(GET, "/ttt-cvh?game-number=1"));
 
         HttpResponse response = controller.dispatch(new HttpRequest(POST, "/ttt-cvh?game-number=1", "move=1"));
@@ -39,7 +39,7 @@ public class TttComputerVsHumanControllerTest {
 
     @Test
     public void addsAnotherMarkToExistingBoardWithMarks() {
-        TttComputerVsHumanController controller = new TttComputerVsHumanController();
+        TttComputerVsHumanController controller = new TttComputerVsHumanController(new GameTracker());
         controller.dispatch(new HttpRequest(GET, "/ttt-cvh?game-number=1"));
         controller.dispatch(new HttpRequest(POST, "/ttt-cvh?game-number=1", "move=3"));
 

@@ -42,7 +42,7 @@ public class Main {
         router.configure("/tea", new TeaController());
         router.configure("/ttt-hvh", new TttHumanVsHumanController(new GameTracker()));
         router.configure("/ttt-hvc", new TttHumanVsComputerController(new GameTracker()));
-        router.configure("/ttt-cvh", new TttComputerVsHumanController());
+        router.configure("/ttt-cvh", new TttComputerVsHumanController(new GameTracker()));
         router.configure("/ttt-menu", new TicTacToeMenuController());
         router.configure("/styles.css", new StyleSheetController(new ResourceReader()));
         router.configure(directory, new AssetController(directory));
