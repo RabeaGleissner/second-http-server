@@ -1,21 +1,20 @@
 package de.rabea.controller.tictactoe;
 
 import de.rabea.Controller;
-import de.rabea.controller.tictactoe.html.BoardHtml;
-import de.rabea.controller.tictactoe.html.TicTacToeHtmlGenerator;
+import de.rabea.controller.tictactoe.html.TicTacToeHtml;
 import de.rabea.game.Board;
 import de.rabea.request.HttpRequest;
 import de.rabea.response.HttpResponse;
 import de.rabea.response.head.RedirectResponseHeader;
 
 import static de.rabea.game.GameMode.ComputerVsHuman;
-import static de.rabea.response.head.StatusLine.OK;
 import static de.rabea.response.head.StatusLine.REDIRECT;
 
 public class TttComputerVsHumanController extends Controller {
 
-    private GameTracker gameTracker;
+    private final GameTracker gameTracker;
     private final GameNumberParser gameNumberParser = new GameNumberParser();
+    private final TicTacToeHtml ticTacToeHtml = new TicTacToeHtml();
     private final MoveMaker moveMaker;
 
     public TttComputerVsHumanController(GameTracker gameTracker) {
@@ -28,9 +27,9 @@ public class TttComputerVsHumanController extends Controller {
         int gameNumber = gameNumber(request);
         Board board = currentBoard(gameNumber);
         if (!board.gameOver()) {
-            return boardHtml(request, moveMaker.playComputerMove(gameNumber, board));
+            return ticTacToeHtml.generateBoard(moveMaker.playComputerMove(gameNumber, board), gameNumber, ComputerVsHuman);
         }
-        return boardHtml(request, board);
+        return ticTacToeHtml.generateBoard(board, gameNumber, ComputerVsHuman);
     }
 
     @Override
@@ -39,12 +38,6 @@ public class TttComputerVsHumanController extends Controller {
         moveMaker.playHumanMove(request, gameNumber);
         return new HttpResponse(REDIRECT,
                 new RedirectResponseHeader("http://localhost:5000/ttt-cvh?game-number=" + gameNumber));
-    }
-
-    private HttpResponse boardHtml(HttpRequest request, Board board) {
-        int gameNumber = gameNumber(request);
-        String html = new TicTacToeHtmlGenerator(new BoardHtml(board, ComputerVsHuman, gameNumber)).generate();
-        return new HttpResponse(OK, html.getBytes());
     }
 
     private Board currentBoard(int gameNumber) {

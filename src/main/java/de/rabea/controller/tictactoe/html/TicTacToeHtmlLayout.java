@@ -1,10 +1,10 @@
 package de.rabea.controller.tictactoe.html;
 
-public class TicTacToeHtmlGenerator {
+public class TicTacToeHtmlLayout {
 
     private InnerHtml innerHtml;
 
-    public TicTacToeHtmlGenerator(InnerHtml innerHtml) {
+    public TicTacToeHtmlLayout(InnerHtml innerHtml) {
         this.innerHtml = innerHtml;
     }
 
